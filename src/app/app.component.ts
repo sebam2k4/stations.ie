@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ApiService, RailStation } from  './api.service';
-
-
+import { ApiService, RailStation, RailStationData } from  './api.service';
 
 
 @Component({
@@ -12,23 +10,36 @@ import { ApiService, RailStation } from  './api.service';
 })
 export class AppComponent implements OnInit {
   title = 'stations';
-  railStations:Array<RailStation>;
-  selectedStation: string;
+  public railStationsList: Array<RailStation>;
+  public selectedStation: string = "";
+  public railStationData: Array<RailStationData>;
+
 
 
   constructor(private apiService: ApiService) {
 
   }
   ngOnInit() {
-    this.fetchData();
+    this.fetchRailStations();
   }
 
-  fetchData() {
-    this.apiService.getData().subscribe((data:Array<RailStation>) => {
-      this.railStations = data;
-      console.log(this.railStations)
+  fetchStationData(stationCode) {
+    console.log(stationCode)
+    this.apiService.getStationData(stationCode).subscribe( (data:Array<RailStationData>) => {
+      this.railStationData = data;
+      console.log(this.railStationData);
     }, (error) => {
       console.error(error);
     })
   }
+
+  fetchRailStations() {
+    this.apiService.getStations().subscribe( (data:Array<RailStation>) => {
+      this.railStationsList = data;
+      console.log(this.railStationsList)
+    }, (error) => {
+      console.error(error);
+    })
+  }
+
 }

@@ -11,7 +11,7 @@
     <mat-card-content>
       <mat-form-field>
         <mat-select placeholder="Station Name" [(ngModel)]="selectedStation" name="item">
-          <mat-option *ngFor="let rs of railStations" [value]="rs.StationCode">
+          <mat-option *ngFor="let rs of railStationsList" [value]="rs.StationCode">
             {{rs.StationDesc}} ({{rs.StationCode}})
           </mat-option>
         </mat-select>
@@ -19,7 +19,23 @@
       <p>Selected Station: {{selectedStation}}</p>
     </mat-card-content>
     <mat-card-actions>
-      <a mat-raised-button href="#"  color="primary">Go</a>
+      <button mat-raised-button (click)="fetchStationData(selectedStation)" color="primary">Go</button>
     </mat-card-actions>
   </mat-card>
+
+  <div *ngIf="railStationData">
+  <!-- <div *ngIf="railStationData"> -->
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{railStationData[0].Stationfullname}}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card *ngFor="let item of railStationData">
+        <mat-card-content>
+          DEST: {{item.Destination}} | ORIGIN: {{item.Origin}} | 
+        </mat-card-content>
+      </mat-card>
+
+    </mat-card>
+  </div>
 </main>

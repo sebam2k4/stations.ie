@@ -12,17 +12,46 @@ export interface RailStation {
   StationLongiture: string;
 }
 
+export interface RailStationData {
+  Destination:string,
+  Destinationtime:string,
+  Direction:string,
+  Duein:string,
+  Exparrival:string,
+  Expdepart:string,
+  Lastlocation:string,
+  Late:string,
+  Locationtype:string,
+  Origin:string,
+  Origintime:string,
+  Querytime:string,
+  Scharrival:string,
+  Schdepart:string,
+  Servertime:string,
+  Stationcode:string,
+  Stationfullname:string,
+  Status:string,
+  Traincode:string,
+  Traindate:string,
+  Traintype:string
+}
+
 
 @Injectable({
   providedIn:  'root'
 })
 
 export  class  ApiService {
-  private  dataURL:  string  = "http://127.0.0.1:5000/rail-data";
+  private railStationsURL:string  = "http://127.0.0.1:5000/stations";
+  private railStationURL:string = "http://127.0.0.1:5000/station-data";
 
   constructor(private httpClient: HttpClient) {}
 
-  getData():Observable<RailStation[]>{
-    return <Observable<RailStation[]>>this.httpClient.get(this.dataURL);
+  getStations():Observable<RailStation[]>{
+    return <Observable<RailStation[]>>this.httpClient.get(this.railStationsURL);
+  }
+
+  getStationData(stationCode):Observable<RailStationData[]> {
+    return <Observable<RailStationData[]>>this.httpClient.get(`${this.railStationURL}/${stationCode}`);
   }
 }
