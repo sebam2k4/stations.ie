@@ -3,6 +3,8 @@ import { HttpClient } from  '@angular/common/http';
 import { Observable } from  'rxjs';
 import { map } from 'rxjs/operators';
 
+import { environment } from './../environments/environment';
+
 export interface RailStation {
   StationAlias: string;
   StationCode: string;
@@ -43,13 +45,8 @@ export interface RailStationData {
 
 export  class  ApiService {
 
-  // For testing locally:
-  // private railStationsURL:string  = "http://127.0.0.1:5000/api/stations";
-  // private railStationURL:string = "http://127.0.0.1:5000/api/station-data";
-
-  // production (free pythonanywhere account):
-  private railStationsURL:string  = "https://sebam2k4.pythonanywhere.com/api/stations";
-  private railStationURL:string = "https://sebam2k4.pythonanywhere.com/api/station-data";
+  private railStationsURL:string  = environment.IrishRailAPI_Stations;
+  private railStationURL:string = environment.IrishRailAPI_StationData;
 
   constructor(private httpClient: HttpClient) {}
 
