@@ -5,37 +5,90 @@
 </mat-toolbar>
 <main>
   <mat-card>
-    <mat-card-header>
+    <!-- <mat-card-header>
       <mat-card-title>Select Station</mat-card-title>
-    </mat-card-header>
+    </mat-card-header> -->
     <mat-card-content>
       <mat-form-field>
-        <mat-select placeholder="Station Name" [(ngModel)]="selectedStation" name="item">
-          <mat-option *ngFor="let rs of railStationsList" [value]="rs.StationCode">
-            {{rs.StationDesc}} ({{rs.StationCode}})
+        <mat-select
+          placeholder="Station Name"
+          name="railStation"
+          [(ngModel)]="selectedStation"
+          (selectionChange)="fetchStationData($event.value)">
+
+          <mat-option *ngFor="let railStation of railStationsList" [value]="railStation.StationCode">
+            {{railStation.StationDesc}} ({{railStation.StationCode}})
           </mat-option>
         </mat-select>
       </mat-form-field>
       <p>Selected Station: {{selectedStation}}</p>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button (click)="fetchStationData(selectedStation)" color="primary">Go</button>
-    </mat-card-actions>
   </mat-card>
 
-  <div *ngIf="railStationData">
-  <!-- <div *ngIf="railStationData"> -->
+<mat-card *ngIf="railStationData.length > 0">
+  <mat-card-header>
+    <mat-card-title>
+      <h2>{{railStationData[0].Stationfullname}}</h2>
+      <button mat-flat-button (click)="fetchStationData(selectedStation)">
+        Refresh
+      </button>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="railStationData">
+      <ng-container matColumnDef="destination">
+        <th mat-header-cell *matHeaderCellDef> DEST </th>
+        <td mat-cell *matCellDef="let row"> {{row.Destination}} </td>
+      </ng-container>
+      <ng-container matColumnDef="origin">
+        <th mat-header-cell *matHeaderCellDef> ORIGIN </th>
+        <td mat-cell *matCellDef="let row"> {{row.Origin}} </td>
+      </ng-container>
+      <ng-container matColumnDef="scharrival">
+        <th mat-header-cell *matHeaderCellDef> SCHEDULED ARRIVAL </th>
+        <td mat-cell *matCellDef="let row"> {{row.Scharrival}} </td>
+      </ng-container>
+      <ng-container matColumnDef="late">
+        <th mat-header-cell *matHeaderCellDef> LATE </th>
+        <td mat-cell *matCellDef="let row"> {{row.Late}} min.</td>
+      </ng-container>
+      <ng-container matColumnDef="exparrival">
+        <th mat-header-cell *matHeaderCellDef> EXPECTED ARRIVAL </th>
+        <td mat-cell *matCellDef="let row"> {{row.Exparrival}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+</mat-card>
+
+  <!--<div *ngIf="railStationData.length > 0">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{railStationData[0].Stationfullname}}</mat-card-title>
+        <mat-card-title>
+          {{railStationData[0].Stationfullname}}
+          <button mat-flat-button (click)="fetchStationData(selectedStation)">
+            Refresh
+          </button>
+        </mat-card-title>
       </mat-card-header>
 
-      <mat-card *ngFor="let item of railStationData">
+      <mat-card *ngFor="let item of railStationData" >
         <mat-card-content>
           DEST: {{item.Destination}} | ORIGIN: {{item.Origin}} | 
         </mat-card-content>
       </mat-card>
 
     </mat-card>
-  </div>
+  </div> -->
+
+  <mat-card *ngIf="notFound">
+
+    <mat-card>
+      <mat-card-content>
+        Not Found
+      </mat-card-content>
+    </mat-card>
+
+  </mat-card>
 </main>

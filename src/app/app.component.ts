@@ -11,9 +11,10 @@ import { ApiService, RailStation, RailStationData } from  './api.service';
 export class AppComponent implements OnInit {
   title = 'stations';
   public railStationsList: Array<RailStation>;
-  public selectedStation: string = "";
-  public railStationData: Array<RailStationData>;
-
+  public selectedStation: string;
+  public railStationData: Array<RailStationData> = [];
+  public notFound: boolean;
+  public displayedColumns: string[] = ["destination", "origin", "scharrival", "late", "exparrival"]
 
 
   constructor(private apiService: ApiService) {
@@ -24,12 +25,17 @@ export class AppComponent implements OnInit {
   }
 
   fetchStationData(stationCode) {
+    this.railStationData = [];
     console.log(stationCode)
     this.apiService.getStationData(stationCode).subscribe( (data:Array<RailStationData>) => {
       this.railStationData = data;
       console.log(this.railStationData);
+      this.notFound = false;
     }, (error) => {
       console.error(error);
+      if (error.status === 404){
+        this.notFound = true;
+      }
     })
   }
 

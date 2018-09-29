@@ -1,0 +1,11 @@
+th.mat-header-cell,
+td.mat-cell {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+
+th.mat-header-cell:nth-of-type(odd),
+td.mat-cell:nth-of-type(odd) {
+  background-color: aliceblue;
+}

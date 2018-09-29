@@ -13,6 +13,7 @@ import { MatToolbarModule } from  '@angular/material/toolbar';
 import { MatCardModule } from  '@angular/material/card';
 import { MatButtonModule } from  '@angular/material/button';
 import { MatSelectModule } from  '@angular/material/select';
+import { MatTableModule } from  '@angular/material/table';
 
 // PWA
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -30,6 +31,7 @@ import { environment } from '../environments/environment';
     MatCardModule,
     MatButtonModule,
     MatSelectModule,
+    MatTableModule,
     FormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],

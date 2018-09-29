@@ -42,8 +42,8 @@ export interface RailStationData {
 })
 
 export  class  ApiService {
-  private railStationsURL:string  = "http://127.0.0.1:5000/stations";
-  private railStationURL:string = "http://127.0.0.1:5000/station-data";
+  private railStationsURL:string  = "http://127.0.0.1:5000/api/stations";
+  private railStationURL:string = "http://127.0.0.1:5000/api/station-data";
 
   constructor(private httpClient: HttpClient) {}
 
