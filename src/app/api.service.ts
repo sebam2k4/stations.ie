@@ -42,8 +42,14 @@ export interface RailStationData {
 })
 
 export  class  ApiService {
-  private railStationsURL:string  = "http://127.0.0.1:5000/api/stations";
-  private railStationURL:string = "http://127.0.0.1:5000/api/station-data";
+
+  // For testing locally:
+  // private railStationsURL:string  = "http://127.0.0.1:5000/api/stations";
+  // private railStationURL:string = "http://127.0.0.1:5000/api/station-data";
+
+  // production (free pythonanywhere account):
+  private railStationsURL:string  = "https://sebam2k4.pythonanywhere.com/api/stations";
+  private railStationURL:string = "https://sebam2k4.pythonanywhere.com/api/station-data";
 
   constructor(private httpClient: HttpClient) {}
 
