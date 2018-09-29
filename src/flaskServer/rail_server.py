@@ -9,7 +9,7 @@ import xmltodict
 
 app = Flask(__name__)
 
-cors = CORS(app, resources={r"/api/*": {"origins": ["http://localhost:4200"]}})
+cors = CORS(app, resources={r"/api/*": {"origins": ["http://localhost:4200", "https://stations.netlify.com/"]}})
 
 
 @app.route('/api/stations', methods=['GET', 'POST'])
