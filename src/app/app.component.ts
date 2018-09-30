@@ -26,11 +26,15 @@ export class AppComponent implements OnInit {
     
     this.matIconRegistry.addSvgIcon(
       `rail`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/train.svg`)
+      this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/rail.svg`)
     );
     this.matIconRegistry.addSvgIcon(
       `bus`,
       this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/bus.svg`)
+    );
+    this.matIconRegistry.addSvgIcon(
+      `lua`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/lua.svg`)
     );
 
   }
