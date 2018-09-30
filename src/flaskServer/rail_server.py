@@ -26,7 +26,7 @@ def get_stations_data():
 @app.route('/api/station-data/<station_code>', methods=['GET'])
 # @app.route('/station-data', methods=['GET'])
 def get_station_info(station_code):
-    station_xml_api = "http://api.irishrail.ie/realtime/realtime.asmx/getStationDataByCodeXML_WithNumMins?StationCode={0}&NumMins=90".format(station_code)
+    station_xml_api = "http://api.irishrail.ie/realtime/realtime.asmx/getStationDataByCodeXML?StationCode={0}".format(station_code)
     req = requests.get(station_xml_api)
     data = xmltodict.parse(req.content)
     try:
