@@ -9,11 +9,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 
 // Angular Material
-import { MatToolbarModule } from  '@angular/material/toolbar';
-import { MatCardModule } from  '@angular/material/card';
-import { MatButtonModule } from  '@angular/material/button';
-import { MatSelectModule } from  '@angular/material/select';
-import { MatTableModule } from  '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 // PWA
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -33,6 +34,7 @@ import { environment } from '../environments/environment';
     MatSelectModule,
     MatTableModule,
     FormsModule,
+    MatIconModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],

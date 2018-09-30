@@ -1,3 +1,29 @@
+header {
+  margin-top: 17%;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+header h1 {
+  font-weight: 300;
+}
+
+.mat-form-field {
+  
+}
+.station-selects {
+  max-width: 30rem;
+  padding: 0 1.5rem;
+  margin: auto;
+}
+.mat-form-field {
+  display: block;
+  
+}
+
+
+
+
 th.mat-header-cell,
 td.mat-cell {
   padding-left: 1rem;

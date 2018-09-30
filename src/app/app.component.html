@@ -1,29 +1,39 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span>Stations</span>
-  </mat-toolbar-row>
-</mat-toolbar>
 <main>
-  <mat-card>
-    <!-- <mat-card-header>
-      <mat-card-title>Select Station</mat-card-title>
-    </mat-card-header> -->
-    <mat-card-content>
-      <mat-form-field>
-        <mat-select
-          placeholder="Station Name"
-          name="railStation"
-          [(ngModel)]="selectedStation"
-          (selectionChange)="fetchStationData($event.value)">
 
-          <mat-option *ngFor="let railStation of railStationsList" [value]="railStation.StationCode">
-            {{railStation.StationDesc}} ({{railStation.StationCode}})
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <p>Selected Station: {{selectedStation}}</p>
-    </mat-card-content>
-  </mat-card>
+  <header>
+    <h1>Stations.ie</h1>
+    <h5>Select your station...</h5>
+  </header>
+
+  <div class="station-selects">
+
+    <mat-form-field class="rail-select" appearance="outline">
+      <mat-select
+        placeholder="Rail Station"
+        name="railStation"
+        [(ngModel)]="selectedStation"
+        (selectionChange)="fetchStationData($event.value)">
+
+        <mat-option *ngFor="let railStation of railStationsList" [value]="railStation.StationCode">
+          {{railStation.StationDesc}} ({{railStation.StationCode}})
+        </mat-option>
+      </mat-select>
+      <mat-label style="position:relative;top:-20px;"><mat-icon svgIcon="rail" style="font-size: 2.25rem;position:relative;top:13px;"></mat-icon>&nbsp;&nbsp;<i>Rail Station</i></mat-label>
+    </mat-form-field>
+
+    <mat-form-field class="bus-select" appearance="outline">
+      <mat-select
+        name="busStation"
+        disabled>
+        <mat-option *ngFor="let railStation of railStationsList" [value]="railStation.StationCode">
+          {{railStation.StationDesc}} ({{railStation.StationCode}})
+        </mat-option>
+      </mat-select>
+      <mat-label style="position:relative;top:-20px;"><mat-icon svgIcon="bus" style="font-size:2.25rem;position:relative;top:13px;"></mat-icon>&nbsp;&nbsp;<i>Available Soon</i></mat-label>
+    </mat-form-field>
+  </div>
+  
+
 
 <mat-card *ngIf="railStationData.length > 0">
   <mat-card-header>
@@ -62,33 +72,10 @@
   </mat-card-content>
 </mat-card>
 
-  <!--<div *ngIf="railStationData.length > 0">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>
-          {{railStationData[0].Stationfullname}}
-          <button mat-flat-button (click)="fetchStationData(selectedStation)">
-            Refresh
-          </button>
-        </mat-card-title>
-      </mat-card-header>
-
-      <mat-card *ngFor="let item of railStationData" >
-        <mat-card-content>
-          DEST: {{item.Destination}} | ORIGIN: {{item.Origin}} | 
-        </mat-card-content>
-      </mat-card>
-
-    </mat-card>
-  </div> -->
-
   <mat-card *ngIf="notFound">
-
-    <mat-card>
-      <mat-card-content>
-        Not Found
-      </mat-card-content>
-    </mat-card>
-
+    <mat-card-content>
+      Not Found
+    </mat-card-content>
   </mat-card>
+
 </main>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
 
 import { ApiService, RailStation, RailStationData } from  './api.service';
 
@@ -17,7 +19,19 @@ export class AppComponent implements OnInit {
   public displayedColumns: string[] = ["destination", "origin", "scharrival", "late", "exparrival"]
 
 
-  constructor(private apiService: ApiService) {
+  constructor(
+      private apiService: ApiService,
+      private matIconRegistry: MatIconRegistry,
+      private domSanitizer: DomSanitizer) {
+    
+    this.matIconRegistry.addSvgIcon(
+      `rail`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/train.svg`)
+    );
+    this.matIconRegistry.addSvgIcon(
+      `bus`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/bus.svg`)
+    );
 
   }
   ngOnInit() {
