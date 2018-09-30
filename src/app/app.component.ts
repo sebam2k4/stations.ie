@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   public railStationData: Array<RailStationData> = [];
   public notFound: boolean;
   public displayedColumns: string[] = ["destination", "origin", "scharrival", "late", "exparrival"]
+  public loading: boolean;
 
 
   constructor(
@@ -43,17 +44,19 @@ export class AppComponent implements OnInit {
   }
 
   fetchStationData(stationCode) {
-    this.railStationData = [];
+    this.loading = true;
     console.log(stationCode)
     this.apiService.getStationData(stationCode).subscribe( (data:Array<RailStationData>) => {
       this.railStationData = data;
       console.log(this.railStationData);
       this.notFound = false;
+      this.loading = false;
     }, (error) => {
       console.error(error);
       if (error.status === 404){
         this.notFound = true;
       }
+      this.loading = false;
     })
   }
 
