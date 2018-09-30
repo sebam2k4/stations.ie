@@ -17,10 +17,12 @@ def get_stations_data():
     stations_xml_api = "http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML"
     req = requests.get(stations_xml_api)
     data = xmltodict.parse(req.content)
-    stations_data = data["ArrayOfObjStation"]["objStation"]
-    if stations_data is not None:
-        return make_response(jsonify(stations_data), 200)
-    return make_response(jsonify({'error': 'Train stations data currently unavailable'}), 404)
+    try:
+        stations_data = data["ArrayOfObjStation"]["objStation"]
+    except KeyError:
+        print "No train stations data available at this time"
+        abort(404)
+    return make_response(jsonify(stations_data), 200)
     
   
 @app.route('/api/station-data/<station_code>', methods=['GET'])
@@ -31,16 +33,16 @@ def get_station_info(station_code):
     data = xmltodict.parse(req.content)
     try:
         station_data = data["ArrayOfObjStationData"]["objStationData"] # returns a list
-        # when data contains only 1 it returns a dict so need to put it in a list
-        if isinstance(station_data, dict):
-            a = station_data
-            station_data = []
-            station_data.append(a)
-        return make_response(jsonify(station_data), 200)
+        
     except KeyError:
         print "No trains expected in the next 90 minutes at this station"
-        return make_response(jsonify({'info': 'Nothing found'}), 404)
-        
+        abort(404)
+    # when data contains only 1 result it returns a dict so need to put it in a list
+    if isinstance(station_data, dict):
+        a = station_data
+        station_data = []
+        station_data.append(a)
+    return make_response(jsonify(station_data), 200)    
     
 
 @app.errorhandler(404)
