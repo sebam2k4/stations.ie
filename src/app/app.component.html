@@ -35,15 +35,13 @@
   
 
 
-<mat-card *ngIf="railStationData.length > 0">
-  <mat-card-header>
-    <mat-card-title>
-      <h2>{{railStationData[0].Stationfullname}}</h2>
-      <button mat-flat-button (click)="fetchStationData(selectedStation)">
-        Refresh
-      </button>
-    </mat-card-title>
-  </mat-card-header>
+<mat-card *ngIf="railStationData.length > 0" class="tables">
+  <div class="card-header">
+    <h2>{{railStationData[0].Stationfullname}}</h2>
+    <button mat-flat-button (click)="fetchStationData(selectedStation)">
+      Refresh
+    </button>
+  </div>
   <mat-card-content>
     <table mat-table [dataSource]="railStationData">
       <ng-container matColumnDef="destination">
@@ -55,7 +53,7 @@
         <td mat-cell *matCellDef="let row"> {{row.Origin}} </td>
       </ng-container>
       <ng-container matColumnDef="scharrival">
-        <th mat-header-cell *matHeaderCellDef> SCHEDULED ARRIVAL </th>
+        <th mat-header-cell *matHeaderCellDef> SCHEDULED </th>
         <td mat-cell *matCellDef="let row"> {{row.Scharrival}} </td>
       </ng-container>
       <ng-container matColumnDef="late">
@@ -63,7 +61,7 @@
         <td mat-cell *matCellDef="let row"> {{row.Late}} min.</td>
       </ng-container>
       <ng-container matColumnDef="exparrival">
-        <th mat-header-cell *matHeaderCellDef> EXPECTED ARRIVAL </th>
+        <th mat-header-cell *matHeaderCellDef> ETA </th>
         <td mat-cell *matCellDef="let row"> {{row.Exparrival}} </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -74,8 +72,18 @@
 
   <mat-card *ngIf="notFound">
     <mat-card-content>
-      Not Found
+      No trains are due to serve this station in the next 90 minutes
     </mat-card-content>
   </mat-card>
 
+  <div class="footer-info">
+    <p class="beta-statement">This app is in Beta meaning that some features are not yet implemented and that some might not work as expected.</p>
+    <p class="association-info">
+      Train data is provided by Irish Rail.<br/>
+      Stations.ie has no association with Irish Rail or any of its partners.
+    </p>
+    <p class="data-info">We do not collect any data from you. We may start collecting some analytics data in the future</p>
+    <p class="data-info">If you have suggestions or comments, email: info@stations.ie</p>
+    <p class="data-info">Being developed by <a href="https://www.sebastiankulig.com" target="_blank">Sebastian Kulig</a></p>
+  </div>
 </main>

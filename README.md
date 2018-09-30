@@ -1,5 +1,11 @@
 # Stations
 
+### TODO:
+- [ ] Handle Trains departing origin stations - show expected departure time
+- [ ] Seperate rail stations into commuter+intercity and Dart.
+- [ ] Add expressway bus stations.
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
 
 ## Development server

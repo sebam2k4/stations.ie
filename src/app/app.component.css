@@ -5,7 +5,15 @@ header {
 }
 
 header h1 {
+  margin-left: 26px;
   font-weight: 300;
+}
+
+header h1::after {
+  content: " beta";
+  color: #aaa;
+  font-style: italic;
+  font-size: .825rem;
 }
 
 .mat-form-field {
@@ -25,13 +33,44 @@ header h1 {
 
 
 th.mat-header-cell,
-td.mat-cell {
-  padding-left: 1rem;
-  padding-right: 1rem;
+td.mat-cell,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type,
+th.mat-header-cell:first-of-type,
+td.mat-cell:last-of-type,
+td.mat-footer-cell:last-of-type,
+th.mat-header-cell:last-of-type {
+  padding-left: .5rem;
+  padding-right: .5rem;
 }
 
 
 th.mat-header-cell:nth-of-type(odd),
 td.mat-cell:nth-of-type(odd) {
-  background-color: aliceblue;
+  background-color: #eee;
+}
+
+.mat-card.tables {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.mat-table {
+  margin: auto;
+}
+
+
+.card-header {
+  max-width: 10rem;
+  margin: 1.5rem auto;
+  text-align: center;
+}
+
+.footer-info {
+  margin-top: 3rem;
+  padding: 1rem;
+  color: #aaa;
+  font-style: italic;
+  font-size: .825rem;
+  text-align: center;
 }
