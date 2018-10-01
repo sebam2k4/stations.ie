@@ -3,6 +3,7 @@ from flask import abort
 from flask import make_response
 from flask import request
 from flask_cors import CORS
+import operator
 
 import requests
 import xmltodict
@@ -14,7 +15,7 @@ cors = CORS(app, resources={r"/api/*": {"origins": ["http://localhost:4200", "ht
 
 @app.route('/api/stations', methods=['GET', 'POST'])
 def get_stations_data():
-    stations_xml_api = "http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML"
+    stations_xml_api = "http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML_WithStationType?StationType=A"
     req = requests.get(stations_xml_api)
     data = xmltodict.parse(req.content)
     try:
@@ -22,6 +23,34 @@ def get_stations_data():
     except KeyError:
         print "No train stations data available at this time"
         abort(404)
+    dart = "http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML_WithStationType?StationType=D"
+    dart_req = requests.get(dart)
+    data2 = xmltodict.parse(dart_req.content)
+    try:
+        dart_data = data2["ArrayOfObjStation"]["objStation"]
+    except KeyError:
+        print "No train stations data available at this time"
+        abort(404)
+    suburban = "http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML_WithStationType?StationType=D"
+    suburban_req = requests.get(suburban)
+    data3 = xmltodict.parse(suburban_req.content)
+    try:
+        suburban_data = data3["ArrayOfObjStation"]["objStation"]
+    except KeyError:
+        print "No train stations data available at this time"
+        abort(404)
+    
+    for d1 in stations_data:
+        for d2 in dart_data:
+            if d1["StationId"] == d2["StationId"]:
+                stations_data.remove(d1)
+
+    for d1 in stations_data:
+        for d2 in suburban_data:
+            if d1["StationId"] == d2["StationId"]:
+                stations_data.remove(d1)
+
+    stations_data.sort(key=operator.itemgetter('StationDesc'))
     return make_response(jsonify(stations_data), 200)
     
   
