@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   public selectedStation: string;
   public railStationData: Array<RailStationData> = [];
   public notFound: boolean;
+  public offline: boolean;
   public displayedColumns: string[] = ["destination", "origin", "scharrival", "late", "exparrival"]
   public loading: boolean;
 
@@ -24,7 +25,7 @@ export class AppComponent implements OnInit {
       private apiService: ApiService,
       private matIconRegistry: MatIconRegistry,
       private domSanitizer: DomSanitizer) {
-    
+
     this.matIconRegistry.addSvgIcon(
       `rail`,
       this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/rail.svg`)
@@ -50,11 +51,16 @@ export class AppComponent implements OnInit {
       this.railStationData = data;
       console.log(this.railStationData);
       this.notFound = false;
+      this.offline = false;
       this.loading = false;
     }, (error) => {
+      this.railStationData = []
       console.error(error);
       if (error.status === 404){
         this.notFound = true;
+      }
+      if (error.status === 504){
+        this.offline = true;
       }
       this.loading = false;
     })
@@ -63,9 +69,14 @@ export class AppComponent implements OnInit {
   fetchRailStations() {
     this.apiService.getStations().subscribe( (data:Array<RailStation>) => {
       this.railStationsList = data;
+      this.offline = false;
       console.log(this.railStationsList)
     }, (error) => {
       console.error(error);
+      this.railStationData = [];
+      if (error.status === 504){
+        this.offline = true;
+      }
     })
   }
 

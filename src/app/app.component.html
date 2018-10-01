@@ -76,6 +76,12 @@
     </mat-card-content>
   </mat-card>
 
+  <mat-card *ngIf="offline" [class.loading-fix]="!loading">
+    <mat-card-content>
+      Can't connect to our server. Please check your internet connection or try again later.
+    </mat-card-content>
+  </mat-card>
+
   <div class="footer-info">
     <p class="beta-statement">This app is in Beta meaning that some features are not yet implemented and that some might not work as expected.</p>
     <p class="association-info">
