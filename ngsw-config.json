@@ -22,5 +22,17 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "rail-stations",
+      "urls": ["https://sebam2k4.pythonanywhere.com/api/stations"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 20,
+        "maxAge": "6h",
+        "timeout": "10s"
+      }
+    }
   ]
 }
