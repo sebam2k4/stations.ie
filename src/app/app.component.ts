@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
+
+import { NgcCookieConsentService, NgcInitializeEvent, NgcStatusChangeEvent, NgcNoCookieLawEvent } from 'ngx-cookieconsent';
+import { Subscription } from 'rxjs';
 
 import { ApiService, RailStation, RailStationData } from  './api.service';
 
@@ -11,6 +14,15 @@ import { ApiService, RailStation, RailStationData } from  './api.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+  //keep refs to subscriptions to be able to unsubscribe later
+  private popupOpenSubscription: Subscription;
+  private popupCloseSubscription: Subscription;
+  private initializeSubscription: Subscription;
+  private statusChangeSubscription: Subscription;
+  private revokeChoiceSubscription: Subscription;
+  private noCookieLawSubscription: Subscription;
+
   title = 'stations';
   public railStationsList: Array<RailStation>;
   public selectedStation: string;
@@ -24,7 +36,8 @@ export class AppComponent implements OnInit {
   constructor(
       private apiService: ApiService,
       private matIconRegistry: MatIconRegistry,
-      private domSanitizer: DomSanitizer) {
+      private domSanitizer: DomSanitizer,
+      private ccService: NgcCookieConsentService) {
 
     this.matIconRegistry.addSvgIcon(
       `rail`,
@@ -42,6 +55,39 @@ export class AppComponent implements OnInit {
   }
   ngOnInit() {
     this.fetchRailStations();
+
+    // subscribe to cookieconsent observables to react to main events
+    this.popupOpenSubscription = this.ccService.popupOpen$.subscribe(
+      () => {
+        // you can use this.ccService.getConfig() to do stuff...
+        console.log(this.ccService.getConfig())
+      });
+ 
+    this.popupCloseSubscription = this.ccService.popupClose$.subscribe(
+      () => {
+        // you can use this.ccService.getConfig() to do stuff...
+      });
+ 
+    this.initializeSubscription = this.ccService.initialize$.subscribe(
+      (event: NgcInitializeEvent) => {
+        // you can use this.ccService.getConfig() to do stuff...
+      });
+ 
+    this.statusChangeSubscription = this.ccService.statusChange$.subscribe(
+      (event: NgcStatusChangeEvent) => {
+        // you can use this.ccService.getConfig() to do stuff...
+      });
+ 
+    this.revokeChoiceSubscription = this.ccService.revokeChoice$.subscribe(
+      () => {
+        // you can use this.ccService.getConfig() to do stuff...
+      });
+ 
+      this.noCookieLawSubscription = this.ccService.noCookieLaw$.subscribe(
+      (event: NgcNoCookieLawEvent) => {
+        // you can use this.ccService.getConfig() to do stuff...
+      });
+  
   }
 
   fetchStationData(stationCode) {
@@ -80,4 +126,14 @@ export class AppComponent implements OnInit {
     })
   }
 
+
+  OnDestroy() {
+    // unsubscribe to cookieconsent observables to prevent memory leaks
+    this.popupOpenSubscription.unsubscribe();
+    this.popupCloseSubscription.unsubscribe();
+    this.initializeSubscription.unsubscribe();
+    this.statusChangeSubscription.unsubscribe();
+    this.revokeChoiceSubscription.unsubscribe();
+    this.noCookieLawSubscription.unsubscribe();
+  }
 }
