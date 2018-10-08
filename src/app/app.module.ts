@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientModule } from  '@angular/common/http';
@@ -21,6 +22,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
+import { StationsComponent } from './stations/stations.component';
 
 const cookieConfig:NgcCookieConsentConfig = {
   cookie: {
@@ -50,12 +52,14 @@ const cookieConfig:NgcCookieConsentConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StationsComponent
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),
     BrowserModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     HttpClientModule,
     MatToolbarModule,
     MatCardModule,

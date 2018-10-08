@@ -1,11 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
 
 import { NgcCookieConsentService, NgcInitializeEvent, NgcStatusChangeEvent, NgcNoCookieLawEvent } from 'ngx-cookieconsent';
 import { Subscription } from 'rxjs';
-
-import { ApiService, RailStation, RailStationData } from  './api.service';
 
 
 @Component({
@@ -23,39 +19,13 @@ export class AppComponent implements OnInit {
   private revokeChoiceSubscription: Subscription;
   private noCookieLawSubscription: Subscription;
 
-  title = 'stations';
-  public railStationsList: Array<RailStation>;
-  public selectedStation: string;
-  public railStationData: Array<RailStationData> = [];
-  public notFound: boolean;
-  public offline: boolean;
-  public displayedColumns: string[] = ["destination", "origin", "scharrival", "late", "exparrival"]
-  public loading: boolean;
+  constructor(private ccService: NgcCookieConsentService) { }
 
-
-  constructor(
-      private apiService: ApiService,
-      private matIconRegistry: MatIconRegistry,
-      private domSanitizer: DomSanitizer,
-      private ccService: NgcCookieConsentService) {
-
-    this.matIconRegistry.addSvgIcon(
-      `rail`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/rail.svg`)
-    );
-    this.matIconRegistry.addSvgIcon(
-      `bus`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/bus.svg`)
-    );
-    this.matIconRegistry.addSvgIcon(
-      `lua`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/lua.svg`)
-    );
-
-  }
   ngOnInit() {
-    this.fetchRailStations();
+    this.cookieConsent();
+  }
 
+  cookieConsent() {
     // subscribe to cookieconsent observables to react to main events
     this.popupOpenSubscription = this.ccService.popupOpen$.subscribe(
       () => {
@@ -87,46 +57,8 @@ export class AppComponent implements OnInit {
       (event: NgcNoCookieLawEvent) => {
         // you can use this.ccService.getConfig() to do stuff...
       });
+  }
   
-  }
-
-  fetchStationData(stationCode) {
-    this.loading = true;
-    console.log(stationCode)
-    this.apiService.getStationData(stationCode).subscribe( (data:Array<RailStationData>) => {
-      this.railStationData = data;
-      console.log(this.railStationData);
-      this.notFound = false;
-      this.offline = false;
-      this.loading = false;
-    }, (error) => {
-      this.railStationData = []
-      console.error(error);
-      if (error.status === 404){
-        this.notFound = true;
-      }
-      if (error.status === 504){
-        this.offline = true;
-      }
-      this.loading = false;
-    })
-  }
-
-  fetchRailStations() {
-    this.apiService.getStations().subscribe( (data:Array<RailStation>) => {
-      this.railStationsList = data;
-      this.offline = false;
-      console.log(this.railStationsList)
-    }, (error) => {
-      console.error(error);
-      this.railStationData = [];
-      if (error.status === 504){
-        this.offline = true;
-      }
-    })
-  }
-
-
   OnDestroy() {
     // unsubscribe to cookieconsent observables to prevent memory leaks
     this.popupOpenSubscription.unsubscribe();
