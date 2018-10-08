@@ -66,14 +66,7 @@ td.mat-cell:nth-of-type(odd) {
   text-align: center;
 }
 
-.footer-info {
-  margin-top: 3rem;
-  padding: 1rem;
-  color: #aaa;
-  font-style: italic;
-  font-size: .825rem;
-  text-align: center;
-}
+
 
 .loading-fix {
   margin-top: 9px;

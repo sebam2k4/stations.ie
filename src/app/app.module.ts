@@ -23,6 +23,7 @@ import { environment } from '../environments/environment';
 
 import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
 import { StationsComponent } from './stations/stations.component';
+import { PrivacyComponent } from './privacy/privacy.component';
 
 const cookieConfig:NgcCookieConsentConfig = {
   cookie: {
@@ -53,7 +54,8 @@ const cookieConfig:NgcCookieConsentConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    StationsComponent
+    StationsComponent,
+    PrivacyComponent
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),
