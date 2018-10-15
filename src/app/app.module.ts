@@ -21,35 +21,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
-import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
 import { StationsComponent } from './stations/stations.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 
-const cookieConfig:NgcCookieConsentConfig = {
-  cookie: {
-    domain: environment.CookieDomain
-  },
-  palette: {
-    popup: {
-      background: '#000'
-    },
-    button: {
-      background: "#f1d600",
-      text: "#000000",
-      border: "transparent"
-    }
-  },
-  position: "bottom",
-  theme: 'edgeless',
-  type: 'opt-out',
-  content: {
-    message: "This app uses Google Analytics that uses Cookies to measure user interactions on websites - it helps us see how the app is performing. Some data we collect: your browser type, system info, time you visited, device info, country, city, language, etc. We do not ask or store any personal information about you.",
-    dismiss: "Got it!",
-    deny: "Refuse cookies",
-    link: "Learn more",
-    href: "https://cookiesandyou.com"
-  }
-};
 
 @NgModule({
   declarations: [
@@ -58,7 +32,6 @@ const cookieConfig:NgcCookieConsentConfig = {
     PrivacyComponent
   ],
   imports: [
-    NgcCookieConsentModule.forRoot(cookieConfig),
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

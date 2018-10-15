@@ -4,6 +4,8 @@
 - [ ] Handle Trains departing origin stations - show expected departure time
 - [ ] Seperate rail stations into commuter+intercity and Dart.
 - [ ] Add expressway bus stations.
+- [ ] Cookie Consent - don't load cookies until user opts-in or do opt-out.
+- [ ] Add Privacy Policy.
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.

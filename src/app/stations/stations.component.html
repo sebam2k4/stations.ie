@@ -24,8 +24,8 @@
       <mat-select
         name="busStation"
         disabled>
-        <mat-option *ngFor="let railStation of railStationsList" [value]="railStation.StationCode">
-          {{railStation.StationDesc}} ({{railStation.StationCode}})
+        <mat-option *ngFor="let railStation of railStationsList" [value]="">
+          station name (code)
         </mat-option>
       </mat-select>
       <mat-label style="position:relative;top:-20px;"><mat-icon svgIcon="bus" style="font-size:2.25rem;position:relative;top:13px;"></mat-icon>&nbsp;&nbsp;<i>Available Soon</i></mat-label>
