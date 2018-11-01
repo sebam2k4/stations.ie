@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
 
 
   constructor() {
-    window['ga-disable-UA-127095084-1'] = true;
+
    }
 
   ngOnInit() {
