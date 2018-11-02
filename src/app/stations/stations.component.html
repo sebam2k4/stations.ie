@@ -34,7 +34,7 @@
   
 
   <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-  <mat-card *ngIf="railStationData.length > 0 && !notFound" class="tables" [class.loading-fix]="!loading">
+  <mat-card *ngIf="railStationData.length > 0 && !error" class="tables" [class.loading-fix]="!loading">
     <div class="card-header">
       <h2>{{railStationData[0].Stationfullname}}</h2>
       <button mat-flat-button (click)="fetchStationData(selectedStation)">
@@ -69,16 +69,22 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-card *ngIf="notFound" [class.loading-fix]="!loading">
+  <mat-card *ngIf="error" [class.loading-fix]="!loading">
     <mat-card-content>
-      No trains are due to serve this station in the next 90 minutes
+      {{ error }}
     </mat-card-content>
   </mat-card>
 
-  <mat-card *ngIf="offline" [class.loading-fix]="!loading">
+  <!-- <mat-card *ngIf="notFound" [class.loading-fix]="!loading">
+    <mat-card-content>
+      No trains are due to serve this station in the next 90 minutes
+    </mat-card-content>
+  </mat-card> -->
+
+  <!-- <mat-card *ngIf="offline" [class.loading-fix]="!loading">
     <mat-card-content>
       Can't connect to our server. Please check your internet connection or try again later.
     </mat-card-content>
-  </mat-card>
+  </mat-card> -->
 
   

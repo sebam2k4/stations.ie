@@ -4,7 +4,8 @@ import { DomSanitizer } from "@angular/platform-browser";
 
 import { Subscription } from 'rxjs';
 
-import { ApiService, RailStation, RailStationData } from  '../api.service';
+import { ApiService } from  '../api.service';
+import { RailStation, RailStationData } from '../../models/railModel';
 
 @Component({
   selector: 'app-stations',
@@ -17,9 +18,13 @@ export class StationsComponent implements OnInit {
   public selectedStation: string;
   public railStationData: Array<RailStationData> = [];
   public notFound: boolean;
-  public offline: boolean;
+  // public offline: boolean;
+  public error: string;
+
   public displayedColumns: string[] = ["destination", "origin", "scharrival", "late", "exparrival"]
   public loading: boolean;
+
+  public headers: any;
 
   constructor(
       private apiService: ApiService,
@@ -47,37 +52,45 @@ export class StationsComponent implements OnInit {
   fetchStationData(stationCode) {
     this.loading = true;
     console.log(stationCode)
-    this.apiService.getStationData(stationCode).subscribe( (data:Array<RailStationData>) => {
-      this.railStationData = data;
-      console.log(this.railStationData);
-      this.notFound = false;
-      this.offline = false;
-      this.loading = false;
-    }, (error) => {
-      this.railStationData = []
-      console.error(error);
-      if (error.status === 404){
-        this.notFound = true;
-      }
-      if (error.status === 504){
-        this.offline = true;
-      }
-      this.loading = false;
-    })
+    this.apiService.getStationData(stationCode)
+      .subscribe( (resp) => {
+        console.log("resopnse:", resp)
+        this.error = "";
+        if ('notFound' in resp.body) {
+          this.error = resp.body['notFound'];
+        } else {
+          this.railStationData = resp.body;
+        }
+        this.loading = false;
+      }, (error) => {
+        console.error(error);
+        this.showErrorMessage(error);
+        this.loading = false;
+      })
   }
 
   fetchRailStations() {
-    this.apiService.getStations().subscribe( (data:Array<RailStation>) => {
-      this.railStationsList = data;
-      this.offline = false;
-      console.log(this.railStationsList)
-    }, (error) => {
-      console.error(error);
-      this.railStationData = [];
-      if (error.status === 504){
-        this.offline = true;
-      }
-    })
+    this.loading = true;
+    this.apiService.getStations()
+      .subscribe( (resp) => {
+        this.error = "";
+        console.log("resopnse:", resp)
+        this.railStationsList = resp.body;
+        this.loading = false;
+        // const keys = resp.headers.keys();
+        // console.log("header keys", keys)
+        // this.headers = keys.map(key =>
+        //   `${key}: ${resp.headers.get(key)}`);
+        // console.log("headers", this.headers)
+      }, (error) => {
+        console.error(error);
+        this.showErrorMessage(error);
+        this.loading = false;
+      })
+  }
+
+  showErrorMessage(error) {
+    this.error = error;
   }
 
 }

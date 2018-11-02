@@ -10,7 +10,7 @@ import xmltodict
 
 app = Flask(__name__)
 
-cors = CORS(app, resources={r"/api/*": {"origins": ["http://localhost:4200", "https://stations.netlify.com"]}})
+cors = CORS(app, resources={r"/api/*": {"origins": ["http://localhost:4200", "http://127.0.0.1:8080/", "https://stations.ie", "https://www.stations.ie"]}})
 
 
 @app.route('/api/stations', methods=['GET', 'POST'])
@@ -64,8 +64,10 @@ def get_station_info(station_code):
         station_data = data["ArrayOfObjStationData"]["objStationData"] # returns a list
         
     except KeyError:
-        print "No trains expected in the next 90 minutes at this station"
-        abort(404)
+        message = "No trains expected in the next 90 minutes at this station"
+        print message
+        # abort(404)
+        return make_response(jsonify({"notFound": message}), 200)
     # when data contains only 1 result it returns a dict so need to put it in a list
     if isinstance(station_data, dict):
         a = station_data
