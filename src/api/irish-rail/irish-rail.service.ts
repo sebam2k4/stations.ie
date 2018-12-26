@@ -3,16 +3,16 @@ import { HttpClient, HttpResponse, HttpErrorResponse } from  '@angular/common/ht
 import { Observable, throwError } from  'rxjs';
 import { catchError, retry, retryWhen, delay, take, concat} from 'rxjs/operators';
 
-import { environment } from './../environments/environment';
+import { environment } from '../../core/environments/environment';
 
-import { RailStation, RailStationData } from '../models/railModel';
+import { IrishRailStation, IrishRailStationData } from './irish-rail.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class ApiService {
+export class IrishRailService {
 
   private railStationsURL:string = environment.IrishRailAPI_Stations;
   private railStationURL:string = environment.IrishRailAPI_StationData;
@@ -21,22 +21,22 @@ export class ApiService {
 
   }
 
-  getStations():Observable<HttpResponse<Array<RailStation>>> {
-    return this.httpClient.get<Array<RailStation>>(this.railStationsURL, {observe: 'response'})
+  getStations():Observable<HttpResponse<Array<IrishRailStation>>> {
+    return this.httpClient.get<Array<IrishRailStation>>(this.railStationsURL, {observe: 'response'})
     .pipe(
       retryWhen(error => 
         error.pipe(
           delay(1000),
           take(5),
-          concat(throwError('failed connecting to server. Refresh the app or try again later'))
+          concat(throwError('failed connecting to server. Refresh the app or try again later')),
         )
       )
     );
   }
 
 
-  getStationData(stationCode):Observable<HttpResponse<Array<RailStationData>>> {
-    return this.httpClient.get<Array<RailStationData>>(`${this.railStationURL}/${stationCode}`, {observe: 'response'})
+  getStationData(stationCode):Observable<HttpResponse<Array<IrishRailStationData>>> {
+    return this.httpClient.get<Array<IrishRailStationData>>(`${this.railStationURL}/${stationCode}`, {observe: 'response'})
     .pipe(
       catchError(error => this.handleError(error)) // then handle the error
     );

@@ -4,19 +4,20 @@ import { DomSanitizer } from "@angular/platform-browser";
 
 import { Subscription } from 'rxjs';
 
-import { ApiService } from  '../api.service';
-import { RailStation, RailStationData } from '../../models/railModel';
+import { IrishRailService } from  '../../../api/irish-rail/irish-rail.service';
+import { IrishRailStation, IrishRailStationData } from '../../../api/irish-rail/irish-rail.model';
+import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-stations',
-  templateUrl: './stations.component.html',
-  styleUrls: ['./stations.component.scss']
+  selector: 'stations-view',
+  templateUrl: './stations-view.component.html',
+  styleUrls: ['./stations-view.component.scss']
 })
-export class StationsComponent implements OnInit {
+export class StationsViewComponent implements OnInit {
   title = 'stations';
-  public railStationsList: Array<RailStation>;
+  public railStationsList: Array<IrishRailStation>;
   public selectedStation: string;
-  public railStationData: Array<RailStationData> = [];
+  public railStationData: Array<IrishRailStationData> = [];
   public notFound: boolean;
   // public offline: boolean;
   public error: string;
@@ -27,7 +28,7 @@ export class StationsComponent implements OnInit {
   public headers: any;
 
   constructor(
-      private apiService: ApiService,
+      private irishRailService: IrishRailService,
       private matIconRegistry: MatIconRegistry,
       private domSanitizer: DomSanitizer) { 
     this.matIconRegistry.addSvgIcon(
@@ -52,7 +53,8 @@ export class StationsComponent implements OnInit {
   fetchStationData(stationCode) {
     this.loading = true;
     console.log(stationCode)
-    this.apiService.getStationData(stationCode)
+    this.irishRailService.getStationData(stationCode)
+      .pipe(take(1))
       .subscribe( (resp) => {
         console.log("resopnse:", resp)
         this.error = "";
@@ -71,7 +73,8 @@ export class StationsComponent implements OnInit {
 
   fetchRailStations() {
     this.loading = true;
-    this.apiService.getStations()
+    this.irishRailService.getStations()
+      .pipe(take(1))
       .subscribe( (resp) => {
         this.error = "";
         console.log("resopnse:", resp)

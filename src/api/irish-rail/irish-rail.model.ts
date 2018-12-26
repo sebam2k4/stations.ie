@@ -1,4 +1,4 @@
-export interface RailStation {
+export interface IrishRailStation {
   StationAlias: string;
   StationCode: string;
   StationDesc: string;
@@ -7,7 +7,7 @@ export interface RailStation {
   StationLongiture: string;
 }
 
-export interface RailStationData {
+export interface IrishRailStationData {
   Destination:string,
   Destinationtime:string,
   Direction:string,
