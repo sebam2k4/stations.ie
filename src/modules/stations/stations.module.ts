@@ -36,4 +36,4 @@ import { StationsViewComponent } from './stations-view/stations-view.component';
   ]
 })
 
-export default class StationsModule { }
+export class StationsModule { }

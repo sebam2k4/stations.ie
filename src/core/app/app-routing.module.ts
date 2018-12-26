@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
     {
         path: '',
-        loadChildren: '../../modules/stations/stations.module'
+        loadChildren: '../../modules/stations/stations.module#StationsModule'
     }
 ];
 
