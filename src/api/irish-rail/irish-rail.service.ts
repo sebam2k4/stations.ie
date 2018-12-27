@@ -1,11 +1,17 @@
 import { Injectable } from  '@angular/core';
 import { HttpClient, HttpResponse, HttpErrorResponse } from  '@angular/common/http';
 import { Observable, throwError } from  'rxjs';
-import { catchError, retry, retryWhen, delay, take, concat} from 'rxjs/operators';
-
+import { catchError, retry, retryWhen, delay, take, concat, map} from 'rxjs/operators';
 import { environment } from '../../core/environments/environment';
-
 import { IrishRailStation, IrishRailStationData } from './irish-rail.model';
+
+export interface ApiIrishRailStationsList {
+  irishRailStations: IrishRailStation[];
+}
+
+export interface ApiIrishRailStationData {
+  irishRailStationData: IrishRailStationData[];
+}
 
 
 @Injectable({
@@ -14,50 +20,48 @@ import { IrishRailStation, IrishRailStationData } from './irish-rail.model';
 
 export class IrishRailService {
 
-  private railStationsURL:string = environment.IrishRailAPI_Stations;
-  private railStationURL:string = environment.IrishRailAPI_StationData;
+  private readonly railStationsURL:string = environment.IrishRailAPI_Stations;
+  private readonly railStationURL:string = environment.IrishRailAPI_StationData;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient) { }
 
-  }
-
-  getStations():Observable<HttpResponse<Array<IrishRailStation>>> {
-    return this.httpClient.get<Array<IrishRailStation>>(this.railStationsURL, {observe: 'response'})
+  public getAll():Observable<IrishRailStation[]> {
+    return this.httpClient.get<ApiIrishRailStationsList>(this.railStationsURL)
     .pipe(
-      retryWhen(error => 
-        error.pipe(
-          delay(1000),
-          take(5),
-          concat(throwError('failed connecting to server. Refresh the app or try again later')),
-        )
-      )
+      map(body => body.irishRailStations),
+      map(body => body.map(station => new IrishRailStation(station)))
     );
   }
 
-
-  getStationData(stationCode):Observable<HttpResponse<Array<IrishRailStationData>>> {
-    return this.httpClient.get<Array<IrishRailStationData>>(`${this.railStationURL}/${stationCode}`, {observe: 'response'})
+  public get(stationCode):Observable<IrishRailStationData[]> {
+    return this.httpClient.get<ApiIrishRailStationData>(`${this.railStationURL}/${stationCode}`)
     .pipe(
-      catchError(error => this.handleError(error)) // then handle the error
+      map(body => body.irishRailStationData),
+      map(body => {
+        if (body) {
+        return body.map(stationData => new IrishRailStationData(stationData))
+        }
+      }), // errors when no body ( can't .map of undefined, below doesn't handle it)
+      // catchError(error => this.handleError(error)), // then handle the error
     );
   }
 
 
   // Error Handler
   // returns an observable with a user-facing error message
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred
-      console.error('A client-side error occurred:', error.error.message);
-      return throwError(`Error: ${error.error.message}`);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // can check against different error.status here
-      console.error("ERROR:", error);
-      return throwError(
-        `Error connecting to server: ${error.status}`);
-    }
-  };
+  // private handleError(error: HttpErrorResponse) {
+  //   if (error.error instanceof ErrorEvent) {
+  //     // A client-side or network error occurred
+  //     console.error('A client-side error occurred:', error.error.message);
+  //     return throwError(`Error: ${error.error.message}`);
+  //   } else {
+  //     // The backend returned an unsuccessful response code.
+  //     // can check against different error.status here
+  //     console.error("ERROR:", error);
+  //     return throwError(
+  //       `Error connecting to server: ${error.status}`);
+  //   }
+  // };
 
 
 }

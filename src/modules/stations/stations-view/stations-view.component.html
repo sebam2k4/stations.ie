@@ -9,12 +9,12 @@
     <mat-form-field class="rail-select" appearance="outline">
       <mat-select
         placeholder="Rail Station"
-        name="railStation"
-        [(ngModel)]="selectedStation"
+        name="irishRailStation"
+        [(ngModel)]="selectedStationCode"
         (selectionChange)="fetchStationData($event.value)">
 
-        <mat-option *ngFor="let railStation of railStationsList" [value]="railStation.StationCode">
-          {{railStation.StationDesc}} ({{railStation.StationCode}})
+        <mat-option *ngFor="let station of irishRailStationsList" [value]="station.StationCode">
+          {{station.StationDesc}} ({{station.StationCode}})
         </mat-option>
       </mat-select>
       <mat-label style="position:relative;top:-20px;"><mat-icon svgIcon="rail" style="font-size: 2.25rem;position:relative;top:13px;"></mat-icon>&nbsp;&nbsp;<i>Rail Station</i></mat-label>
@@ -24,7 +24,7 @@
       <mat-select
         name="busStation"
         disabled>
-        <mat-option *ngFor="let railStation of railStationsList" [value]="">
+        <mat-option *ngFor="let station of irishRailStationsList" [value]="">
           station name (code)
         </mat-option>
       </mat-select>
@@ -34,15 +34,15 @@
   
 
   <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-  <mat-card *ngIf="railStationData.length > 0 && !error" class="tables" [class.loading-fix]="!loading">
+  <mat-card *ngIf="irishRailStationData && !error" class="tables" [class.loading-fix]="!loading">
     <div class="card-header">
-      <h2>{{railStationData[0].Stationfullname}}</h2>
-      <button mat-flat-button (click)="fetchStationData(selectedStation)">
+      <h2>{{irishRailStationData[0].Stationfullname}}</h2>
+      <button mat-flat-button (click)="fetchStationData(selectedStationCode)">
         Refresh
       </button>
     </div>
     <mat-card-content>
-      <table mat-table [dataSource]="railStationData">
+      <table mat-table [dataSource]="irishRailStationData">
         <ng-container matColumnDef="destination">
           <th mat-header-cell *matHeaderCellDef> DEST </th>
           <td mat-cell *matCellDef="let row"> {{row.Destination}} </td>
