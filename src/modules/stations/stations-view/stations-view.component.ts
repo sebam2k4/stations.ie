@@ -15,9 +15,12 @@ import { take } from 'rxjs/operators';
 })
 export class StationsViewComponent implements OnInit {
   title = 'stations';
-  public railStationsList: Array<IrishRailStation>;
-  public selectedStation: string;
-  public railStationData: Array<IrishRailStationData> = [];
+
+  public irishRailStationsList: IrishRailStation[];
+  public irishRailStationData: IrishRailStationData[];
+
+  public selectedStationCode: string;
+  
   public notFound: boolean;
   // public offline: boolean;
   public error: string;
@@ -50,50 +53,24 @@ export class StationsViewComponent implements OnInit {
     this.fetchRailStations();
   }
 
-  fetchStationData(stationCode) {
+  async fetchStationData(stationCode) {
+    this.error = '';
     this.loading = true;
-    console.log(stationCode)
-    this.irishRailService.getStationData(stationCode)
-      .pipe(take(1))
-      .subscribe( (resp) => {
-        console.log("resopnse:", resp)
-        this.error = "";
-        if ('notFound' in resp.body) {
-          this.error = resp.body['notFound'];
-        } else {
-          this.railStationData = resp.body;
-        }
-        this.loading = false;
-      }, (error) => {
-        console.error(error);
-        this.showErrorMessage(error);
-        this.loading = false;
-      })
+    this.irishRailStationData = await this.irishRailService.get(stationCode).toPromise();
+    console.log(this.irishRailStationData)
+    this.loading = false;
   }
 
-  fetchRailStations() {
+  async fetchRailStations() {
+    this.error = '';
     this.loading = true;
-    this.irishRailService.getStations()
-      .pipe(take(1))
-      .subscribe( (resp) => {
-        this.error = "";
-        console.log("resopnse:", resp)
-        this.railStationsList = resp.body;
-        this.loading = false;
-        // const keys = resp.headers.keys();
-        // console.log("header keys", keys)
-        // this.headers = keys.map(key =>
-        //   `${key}: ${resp.headers.get(key)}`);
-        // console.log("headers", this.headers)
-      }, (error) => {
-        console.error(error);
-        this.showErrorMessage(error);
-        this.loading = false;
-      })
+    this.irishRailStationsList = await this.irishRailService.getAll().toPromise();
+    console.log(this.irishRailStationsList)
+    this.loading = false;
   }
 
-  showErrorMessage(error) {
-    this.error = error;
-  }
+  // showErrorMessage(error) {
+  //   this.error = error;
+  // }
 
 }
