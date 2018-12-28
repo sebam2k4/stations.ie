@@ -19,27 +19,27 @@ def get_stations_data():
     req = requests.get(stations_xml_api)
     data = xmltodict.parse(req.content)
     try:
-        stations_data = data["ArrayOfObjStation"]["objStation"]
+        stations = data["ArrayOfObjStation"]["objStation"]
     except KeyError:
         print "No train stations data available at this time"
         abort(404)
-    dart = "http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML_WithStationType?StationType=D"
-    dart_req = requests.get(dart)
-    data2 = xmltodict.parse(dart_req.content)
+    dart_xml_api = "http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML_WithStationType?StationType=D"
+    dart_req = requests.get(dart_xml_api)
+    data_dart = xmltodict.parse(dart_req.content)
     try:
-        dart_data = data2["ArrayOfObjStation"]["objStation"]
+        stations_dart = data_dart["ArrayOfObjStation"]["objStation"]
     except KeyError:
         print "No train stations data available at this time"
         abort(404)
     
-    for d1 in dart_data:
+    for d1 in stations_dart:
         if d1["StationId"] != '100': # Don't remove Dublin Connolly station
-            for d2 in stations_data:
+            for d2 in stations:
                 if d2["StationId"] == d1["StationId"]:
-                    stations_data.remove(d1)
+                    stations.remove(d1)
 
-    stations_data.sort(key=operator.itemgetter('StationDesc'))
-    return make_response(jsonify({'irishRailStations': stations_data}), 200)
+    stations.sort(key=operator.itemgetter('StationDesc'))
+    return make_response(jsonify({'irishRailStations': stations}), 200)
 
 
 @app.route('/api/station-data/<station_code>', methods=['GET'])
@@ -49,7 +49,7 @@ def get_station_info(station_code):
     req = requests.get(station_xml_api)
     data = xmltodict.parse(req.content)
     try:
-        station_data = data["ArrayOfObjStationData"]["objStationData"] # returns a list
+        station_journeys = data["ArrayOfObjStationData"]["objStationData"] # returns a list
         
     except KeyError:
         message = "No trains expected in the next 90 minutes at this station"
@@ -57,11 +57,11 @@ def get_station_info(station_code):
         # abort(404)
         return make_response(jsonify({"notFound": message}), 200)
     # when data contains only 1 result it returns a dict so need to put it in a list
-    if isinstance(station_data, dict):
-        a = station_data
-        station_data = []
-        station_data.append(a)
-    return make_response(jsonify({'irishRailStationData': station_data}), 200)    
+    if isinstance(station_journeys, dict):
+        temp_dict = station_journeys
+        station_journeys = []
+        station_journeys.append(temp_dict)
+    return make_response(jsonify({'irishRailStationJourneys': station_journeys}), 200)    
     
 
 @app.errorhandler(404)

@@ -11,7 +11,7 @@
         placeholder="Rail Station"
         name="irishRailStation"
         [(ngModel)]="selectedStationCode"
-        (selectionChange)="fetchStationData($event.value)">
+        (selectionChange)="fetchIrishRailStationJourneys($event.value)">
 
         <mat-option *ngFor="let station of irishRailStationsList" [value]="station.StationCode">
           {{station.StationDesc}} ({{station.StationCode}})
@@ -34,15 +34,15 @@
   
 
   <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-  <mat-card *ngIf="irishRailStationData && !error" class="tables" [class.loading-fix]="!loading">
+  <mat-card *ngIf="irishRailStationJourneysList && !error" class="tables" [class.loading-fix]="!loading">
     <div class="card-header">
-      <h2>{{irishRailStationData[0].Stationfullname}}</h2>
-      <button mat-flat-button (click)="fetchStationData(selectedStationCode)">
+      <h2>{{irishRailStationJourneysList[0].Stationfullname}}</h2>
+      <button mat-flat-button (click)="fetchIrishRailStationJourneys(selectedStationCode)">
         Refresh
       </button>
     </div>
     <mat-card-content>
-      <table mat-table [dataSource]="irishRailStationData">
+      <table mat-table [dataSource]="irishRailStationJourneysList">
         <ng-container matColumnDef="destination">
           <th mat-header-cell *matHeaderCellDef> DEST </th>
           <td mat-cell *matCellDef="let row"> {{row.Destination}} </td>
