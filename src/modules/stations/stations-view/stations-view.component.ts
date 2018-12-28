@@ -5,7 +5,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { Subscription } from 'rxjs';
 
 import { IrishRailService } from  '../../../api/irish-rail/irish-rail.service';
-import { IrishRailStation, IrishRailStationData } from '../../../api/irish-rail/irish-rail.model';
+import { IrishRailStation, IrishRailStationJourney } from '../../../api/irish-rail/irish-rail.model';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -17,18 +17,16 @@ export class StationsViewComponent implements OnInit {
   title = 'stations';
 
   public irishRailStationsList: IrishRailStation[];
-  public irishRailStationData: IrishRailStationData[];
+  public irishRailStationJourneysList: IrishRailStationJourney[];
 
   public selectedStationCode: string;
-  
-  public notFound: boolean;
+  public loading: boolean;
+  // public notFound: boolean;
   // public offline: boolean;
   public error: string;
 
   public displayedColumns: string[] = ["destination", "origin", "scharrival", "late", "exparrival"]
-  public loading: boolean;
-
-  public headers: any;
+  
 
   constructor(
       private irishRailService: IrishRailService,
@@ -50,18 +48,18 @@ export class StationsViewComponent implements OnInit {
 
       
   ngOnInit() {
-    this.fetchRailStations();
+    this.fetchIrishRailStations();
   }
 
-  async fetchStationData(stationCode) {
+  async fetchIrishRailStationJourneys(stationCode) {
     this.error = '';
     this.loading = true;
-    this.irishRailStationData = await this.irishRailService.get(stationCode).toPromise();
-    console.log(this.irishRailStationData)
+    this.irishRailStationJourneysList = await this.irishRailService.get(stationCode).toPromise();
+    console.log(this.irishRailStationJourneysList)
     this.loading = false;
   }
 
-  async fetchRailStations() {
+  async fetchIrishRailStations() {
     this.error = '';
     this.loading = true;
     this.irishRailStationsList = await this.irishRailService.getAll().toPromise();

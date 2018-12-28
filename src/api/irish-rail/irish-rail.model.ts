@@ -16,7 +16,7 @@ export class IrishRailStation {
   }
 }
 
-export class IrishRailStationData {
+export class IrishRailStationJourney {
   public Destination:string;
   public Destinationtime:string;
   public Direction:string;
@@ -39,27 +39,27 @@ export class IrishRailStationData {
   public Traindate:string;
   public Traintype:string
 
-  constructor(IrishRailStationData: any) {
-    this.Destination = IrishRailStationData.Destination;
-    this.Destinationtime = IrishRailStationData.Destinationtime;
-    this.Direction = IrishRailStationData.Direction;
-    this.Duein = IrishRailStationData.Duein;
-    this.Exparrival = IrishRailStationData.Exparrival;
-    this.Expdepart = IrishRailStationData.Expdepart;
-    this.Lastlocation = IrishRailStationData.Lastlocation;
-    this.Late = IrishRailStationData.Late;
-    this.Locationtype = IrishRailStationData.Locationtype;
-    this.Origin = IrishRailStationData.Origin;
-    this.Origintime = IrishRailStationData.Origintime;
-    this.Querytime = IrishRailStationData.Querytime;
-    this.Scharrival = IrishRailStationData.Scharrival;
-    this.Schdepart = IrishRailStationData.Schdepart;
-    this.Servertime = IrishRailStationData.Servertime;
-    this.Stationcode = IrishRailStationData.Stationcode;
-    this.Stationfullname = IrishRailStationData.Stationfullname;
-    this.Status = IrishRailStationData.Status;
-    this.Traincode = IrishRailStationData.Traincode;
-    this.Traindate = IrishRailStationData.Traindate;
-    this.Traintype = IrishRailStationData.Traintype
+  constructor(IrishRailStationJourney: any) {
+    this.Destination = IrishRailStationJourney.Destination;
+    this.Destinationtime = IrishRailStationJourney.Destinationtime;
+    this.Direction = IrishRailStationJourney.Direction;
+    this.Duein = IrishRailStationJourney.Duein;
+    this.Exparrival = IrishRailStationJourney.Exparrival;
+    this.Expdepart = IrishRailStationJourney.Expdepart;
+    this.Lastlocation = IrishRailStationJourney.Lastlocation;
+    this.Late = IrishRailStationJourney.Late;
+    this.Locationtype = IrishRailStationJourney.Locationtype;
+    this.Origin = IrishRailStationJourney.Origin;
+    this.Origintime = IrishRailStationJourney.Origintime;
+    this.Querytime = IrishRailStationJourney.Querytime;
+    this.Scharrival = IrishRailStationJourney.Scharrival;
+    this.Schdepart = IrishRailStationJourney.Schdepart;
+    this.Servertime = IrishRailStationJourney.Servertime;
+    this.Stationcode = IrishRailStationJourney.Stationcode;
+    this.Stationfullname = IrishRailStationJourney.Stationfullname;
+    this.Status = IrishRailStationJourney.Status;
+    this.Traincode = IrishRailStationJourney.Traincode;
+    this.Traindate = IrishRailStationJourney.Traindate;
+    this.Traintype = IrishRailStationJourney.Traintype
   }
 }

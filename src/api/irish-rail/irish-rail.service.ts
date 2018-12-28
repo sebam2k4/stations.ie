@@ -3,14 +3,14 @@ import { HttpClient, HttpResponse, HttpErrorResponse } from  '@angular/common/ht
 import { Observable, throwError } from  'rxjs';
 import { catchError, retry, retryWhen, delay, take, concat, map} from 'rxjs/operators';
 import { environment } from '../../core/environments/environment';
-import { IrishRailStation, IrishRailStationData } from './irish-rail.model';
+import { IrishRailStation, IrishRailStationJourney } from './irish-rail.model';
 
 export interface ApiIrishRailStationsList {
   irishRailStations: IrishRailStation[];
 }
 
-export interface ApiIrishRailStationData {
-  irishRailStationData: IrishRailStationData[];
+export interface ApiIrishRailStationJourneysList {
+  irishRailStationJourneys: IrishRailStationJourney[];
 }
 
 
@@ -33,13 +33,13 @@ export class IrishRailService {
     );
   }
 
-  public get(stationCode):Observable<IrishRailStationData[]> {
-    return this.httpClient.get<ApiIrishRailStationData>(`${this.railStationURL}/${stationCode}`)
+  public get(stationCode):Observable<IrishRailStationJourney[]> {
+    return this.httpClient.get<ApiIrishRailStationJourneysList>(`${this.railStationURL}/${stationCode}`)
     .pipe(
-      map(body => body.irishRailStationData),
+      map(body => body.irishRailStationJourneys),
       map(body => {
         if (body) {
-        return body.map(stationData => new IrishRailStationData(stationData))
+        return body.map(stationJourney => new IrishRailStationJourney(stationJourney))
         }
       }), // errors when no body ( can't .map of undefined, below doesn't handle it)
       // catchError(error => this.handleError(error)), // then handle the error
