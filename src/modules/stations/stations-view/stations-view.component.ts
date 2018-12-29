@@ -17,7 +17,7 @@ export class StationsViewComponent implements OnInit {
   title = 'stations';
 
   public irishRailStationsList: IrishRailStation[];
-  public irishRailStationJourneysList: IrishRailStationJourney[];
+  public irishRailStationJourneysList: IrishRailStationJourney[] = [];
 
   public selectedStationCode: string;
   public loading: boolean;

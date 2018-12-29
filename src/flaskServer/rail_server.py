@@ -50,12 +50,12 @@ def get_station_info(station_code):
     data = xmltodict.parse(req.content)
     try:
         station_journeys = data["ArrayOfObjStationData"]["objStationData"] # returns a list
-        
+
     except KeyError:
         message = "No trains expected in the next 90 minutes at this station"
         print message
         # abort(404)
-        return make_response(jsonify({"notFound": message}), 200)
+        station_journeys = []
     # when data contains only 1 result it returns a dict so need to put it in a list
     if isinstance(station_journeys, dict):
         temp_dict = station_journeys

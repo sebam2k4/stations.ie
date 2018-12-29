@@ -4,6 +4,7 @@ import { Observable, throwError } from  'rxjs';
 import { catchError, retry, retryWhen, delay, take, concat, map} from 'rxjs/operators';
 import { environment } from '../../core/environments/environment';
 import { IrishRailStation, IrishRailStationJourney } from './irish-rail.model';
+import { irishRailStationJourneyMapping, IrishRailStationMapping } from './irish-rail.mapping';
 
 export interface ApiIrishRailStationsList {
   irishRailStations: IrishRailStation[];
@@ -28,7 +29,7 @@ export class IrishRailService {
   public getAll():Observable<IrishRailStation[]> {
     return this.httpClient.get<ApiIrishRailStationsList>(this.railStationsURL)
     .pipe(
-      map(body => body.irishRailStations),
+      map(body => this.convertProperties(body.irishRailStations, IrishRailStationMapping)),
       map(body => body.map(station => new IrishRailStation(station)))
     );
   }
@@ -36,15 +37,30 @@ export class IrishRailService {
   public get(stationCode):Observable<IrishRailStationJourney[]> {
     return this.httpClient.get<ApiIrishRailStationJourneysList>(`${this.railStationURL}/${stationCode}`)
     .pipe(
-      map(body => body.irishRailStationJourneys),
-      map(body => {
-        if (body) {
-        return body.map(stationJourney => new IrishRailStationJourney(stationJourney))
-        }
-      }), // errors when no body ( can't .map of undefined, below doesn't handle it)
-      // catchError(error => this.handleError(error)), // then handle the error
+      map(body => this.convertProperties(body.irishRailStationJourneys, irishRailStationJourneyMapping)),
+      map(body => body.map(stationJourney => new IrishRailStationJourney(stationJourney)))
     );
   }
+
+  private convertProperties(objList, mapping) {
+    const convertedList = [];
+    
+    objList.forEach(obj => {
+      convertedList.push(this.renameKeys(mapping, obj))
+    });
+
+    return convertedList;
+  }
+
+  // https://medium.com/front-end-weekly/30-seconds-of-code-rename-many-object-keys-in-javascript-268f279c7bfa
+  private renameKeys = (keysMap, obj) => {
+    return Object
+      .keys(obj)
+      .reduce((acc, key) => ({
+        ...acc,
+        ...{ [keysMap[key] || key]: obj[key] }
+      }), {});
+    }
 
 
   // Error Handler
@@ -62,6 +78,5 @@ export class IrishRailService {
   //       `Error connecting to server: ${error.status}`);
   //   }
   // };
-
 
 }
