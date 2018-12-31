@@ -26,7 +26,7 @@ export class IrishRailService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getAll():Observable<IrishRailStation[]> {
+  public getAllStations():Observable<IrishRailStation[]> {
     return this.httpClient.get<ApiIrishRailStationsList>(this.railStationsURL)
     .pipe(
       map(body => this.convertProperties(body.irishRailStations, IrishRailStationMapping)),
@@ -34,7 +34,7 @@ export class IrishRailService {
     );
   }
 
-  public get(stationCode):Observable<IrishRailStationJourney[]> {
+  public getAllJourneys(stationCode):Observable<IrishRailStationJourney[]> {
     return this.httpClient.get<ApiIrishRailStationJourneysList>(`${this.railStationURL}/${stationCode}`)
     .pipe(
       map(body => this.convertProperties(body.irishRailStationJourneys, irishRailStationJourneyMapping)),

@@ -54,7 +54,7 @@ export class StationsViewComponent implements OnInit {
   async fetchIrishRailStationJourneys(stationCode) {
     this.error = '';
     this.loading = true;
-    this.irishRailStationJourneysList = await this.irishRailService.get(stationCode).toPromise();
+    this.irishRailStationJourneysList = await this.irishRailService.getAllJourneys(stationCode).toPromise();
     console.log(this.irishRailStationJourneysList)
     this.loading = false;
   }
@@ -62,7 +62,7 @@ export class StationsViewComponent implements OnInit {
   async fetchIrishRailStations() {
     this.error = '';
     this.loading = true;
-    this.irishRailStationsList = await this.irishRailService.getAll().toPromise();
+    this.irishRailStationsList = await this.irishRailService.getAllStations().toPromise();
     console.log(this.irishRailStationsList)
     this.loading = false;
   }
