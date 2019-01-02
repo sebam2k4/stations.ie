@@ -5,7 +5,7 @@ export const IrishRailStationMapping = {
   StationId: 'stationId',
   StationLatitude: 'stationLatitude',
   StationLongitude: 'stationLongitude'
-}
+};
 
 export const irishRailStationJourneyMapping = {
   Destination: 'destination',
@@ -29,4 +29,4 @@ export const irishRailStationJourneyMapping = {
   Traincode: 'trainCode',
   Traindate: 'trainDate',
   Traintype: 'trainType'
-}
+};

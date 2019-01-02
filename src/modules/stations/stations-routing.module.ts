@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { StationsViewComponent } from './stations-view/stations-view.component';
 
 
-//This is my case 
+// This is my case
 const routes: Routes = [
     {
         path: '',
