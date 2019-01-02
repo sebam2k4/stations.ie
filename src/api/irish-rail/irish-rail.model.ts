@@ -4,7 +4,7 @@ export class IrishRailStation {
   public stationFullName: string;
   public stationId: string;
   public stationLatitude: string;
-  public stationLongitude: string
+  public stationLongitude: string;
 
   constructor(IrishRailStation: any) {
   this.stationAlias = IrishRailStation.stationAlias;
@@ -17,27 +17,27 @@ export class IrishRailStation {
 }
 
 export class IrishRailStationJourney {
-  public destination:string;
-  public destinationTime:string;
-  public direction:string;
-  public dueIn:string;
-  public expectedArrival:string;
-  public expectedDeparture:string;
-  public lastLocation:string;
-  public late:string;
-  public locationType:string;
-  public origin:string;
-  public originTime:string;
-  public queryTime:string;
-  public scheduledArrival:string;
-  public scheduledDeparture:string;
-  public serverTime:string;
-  public stationCode:string;
-  public stationFullName:string;
-  public status:string;
-  public trainCode:string;
-  public trainDate:string;
-  public trainType:string;
+  public destination: string;
+  public destinationTime: string;
+  public direction: string;
+  public dueIn: string;
+  public expectedArrival: string;
+  public expectedDeparture: string;
+  public lastLocation: string;
+  public late: string;
+  public locationType: string;
+  public origin: string;
+  public originTime: string;
+  public queryTime: string;
+  public scheduledArrival: string;
+  public scheduledDeparture: string;
+  public serverTime: string;
+  public stationCode: string;
+  public stationFullName: string;
+  public status: string;
+  public trainCode: string;
+  public trainDate: string;
+  public trainType: string;
 
   constructor(IrishRailStationJourney: any) {
     this.destination = IrishRailStationJourney.destination;

@@ -17,7 +17,7 @@ describe('AppComponent', () => {
       ]
     }).compileComponents();
   }));
-  
+
   describe('#constructor', () => {
     it('should create the app', async(() => {
       const fixture = TestBed.createComponent(AppComponent);

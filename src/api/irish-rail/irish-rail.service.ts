@@ -1,6 +1,6 @@
-import { Injectable } from  '@angular/core';
-import { HttpClient, HttpResponse, HttpErrorResponse } from  '@angular/common/http';
-import { Observable, throwError } from  'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { catchError, retry, retryWhen, delay, take, concat, map} from 'rxjs/operators';
 import { environment } from '../../core/environments/environment';
 import { IrishRailStation, IrishRailStationJourney } from './irish-rail.model';
@@ -21,12 +21,12 @@ export interface ApiIrishRailStationJourneysList {
 
 export class IrishRailService {
 
-  private readonly railStationsURL:string = environment.IrishRailAPI_Stations;
-  private readonly railStationURL:string = environment.IrishRailAPI_StationData;
+  private readonly railStationsURL: string = environment.IrishRailAPI_Stations;
+  private readonly railStationURL: string = environment.IrishRailAPI_StationData;
 
   constructor(private httpClient: HttpClient) { }
 
-  public getAllStations():Observable<IrishRailStation[]> {
+  public getAllStations(): Observable<IrishRailStation[]> {
     return this.httpClient.get<ApiIrishRailStationsList>(this.railStationsURL)
     .pipe(
       map(body => this.convertProperties(body.irishRailStations, IrishRailStationMapping)),
@@ -34,7 +34,7 @@ export class IrishRailService {
     );
   }
 
-  public getAllJourneys(stationCode):Observable<IrishRailStationJourney[]> {
+  public getAllJourneys(stationCode): Observable<IrishRailStationJourney[]> {
     return this.httpClient.get<ApiIrishRailStationJourneysList>(`${this.railStationURL}/${stationCode}`)
     .pipe(
       map(body => this.convertProperties(body.irishRailStationJourneys, irishRailStationJourneyMapping)),
@@ -44,9 +44,9 @@ export class IrishRailService {
 
   private convertProperties(objList, mapping) {
     const convertedList = [];
-    
+
     objList.forEach(obj => {
-      convertedList.push(this.renameKeys(mapping, obj))
+      convertedList.push(this.renameKeys(mapping, obj));
     });
 
     return convertedList;

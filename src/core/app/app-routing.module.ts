@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
-//This is my case 
+// This is my case
 const routes: Routes = [
     {
         path: '',

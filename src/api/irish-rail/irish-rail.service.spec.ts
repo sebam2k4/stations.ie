@@ -52,10 +52,10 @@ describe('IrishRailService', () => {
         url: 'http://127.0.0.1:5000/api/stations',
       });
 
-      expect(mockRequest.request.method).toBe("GET");
+      expect(mockRequest.request.method).toBe('GET');
 
       mockRequest.flush(mockResponseBody);
-    }))
+    }));
   });
 
   describe('#getAllJourneys', () => {
@@ -75,9 +75,9 @@ describe('IrishRailService', () => {
         url: `http://127.0.0.1:5000/api/station-data/${stationCode}`,
       });
 
-      expect(mockRequest.request.method).toBe("GET");
+      expect(mockRequest.request.method).toBe('GET');
 
       mockRequest.flush(mockResponseBody);
-    }))
+    }));
   });
 });

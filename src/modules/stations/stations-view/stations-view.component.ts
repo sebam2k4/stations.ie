@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { Subscription } from 'rxjs';
 
-import { IrishRailService } from  '../../../api/irish-rail/irish-rail.service';
+import { IrishRailService } from '../../../api/irish-rail/irish-rail.service';
 import { IrishRailStation, IrishRailStationJourney } from '../../../api/irish-rail/irish-rail.model';
 import { take } from 'rxjs/operators';
 
@@ -25,13 +25,13 @@ export class StationsViewComponent implements OnInit {
   // public offline: boolean;
   public error: string;
 
-  public displayedColumns: string[] = ["destination", "origin", "scharrival", "late", "exparrival"]
-  
+  public displayedColumns: string[] = ['destination', 'origin', 'scharrival', 'late', 'exparrival'];
+
 
   constructor(
       private irishRailService: IrishRailService,
       private matIconRegistry: MatIconRegistry,
-      private domSanitizer: DomSanitizer) { 
+      private domSanitizer: DomSanitizer) {
     this.matIconRegistry.addSvgIcon(
       `rail`,
       this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/rail.svg`)
@@ -46,7 +46,7 @@ export class StationsViewComponent implements OnInit {
     );
   }
 
-      
+
   ngOnInit() {
     this.fetchIrishRailStations();
   }
@@ -55,7 +55,7 @@ export class StationsViewComponent implements OnInit {
     this.error = '';
     this.loading = true;
     this.irishRailStationJourneysList = await this.irishRailService.getAllJourneys(stationCode).toPromise();
-    console.log(this.irishRailStationJourneysList)
+    console.log(this.irishRailStationJourneysList);
     this.loading = false;
   }
 
@@ -63,7 +63,7 @@ export class StationsViewComponent implements OnInit {
     this.error = '';
     this.loading = true;
     this.irishRailStationsList = await this.irishRailService.getAllStations().toPromise();
-    console.log(this.irishRailStationsList)
+    console.log(this.irishRailStationsList);
     this.loading = false;
   }
 
