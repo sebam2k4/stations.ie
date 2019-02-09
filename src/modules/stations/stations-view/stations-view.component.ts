@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
-
-import { Subscription } from 'rxjs';
 
 import { IrishRailService } from '../../../api/irish-rail/irish-rail.service';
 import { IrishRailStation, IrishRailStationJourney } from '../../../api/irish-rail/irish-rail.model';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'stations-view',
@@ -21,54 +16,50 @@ export class StationsViewComponent implements OnInit {
 
   public selectedStationCode: string;
   public loading: boolean;
-  // public notFound: boolean;
-  // public offline: boolean;
-  public error: string;
+  public error = null;
 
   public displayedColumns: string[] = ['destination', 'origin', 'scharrival', 'late', 'exparrival'];
 
 
-  constructor(
-      private irishRailService: IrishRailService,
-      private matIconRegistry: MatIconRegistry,
-      private domSanitizer: DomSanitizer) {
-    this.matIconRegistry.addSvgIcon(
-      `rail`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/rail.svg`)
-    );
-    this.matIconRegistry.addSvgIcon(
-      `bus`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/bus.svg`)
-    );
-    this.matIconRegistry.addSvgIcon(
-      `lua`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl(`../assets/lua.svg`)
-    );
-  }
-
+  constructor(private irishRailService: IrishRailService) { }
 
   ngOnInit() {
     this.fetchIrishRailStations();
   }
 
-  async fetchIrishRailStationJourneys(stationCode) {
-    this.error = '';
+  fetchIrishRailStationJourneys(stationCode) {
     this.loading = true;
-    this.irishRailStationJourneysList = await this.irishRailService.getAllJourneys(stationCode).toPromise();
-    console.log(this.irishRailStationJourneysList);
-    this.loading = false;
+    this.irishRailService.getAllJourneys(stationCode)
+      .toPromise()
+      .then((stationJourneys: IrishRailStationJourney[]) => {
+        this.irishRailStationJourneysList = stationJourneys;
+        this.error = null;
+        this.loading = false;
+        console.log(this.irishRailStationJourneysList);
+      })
+      .catch((error) => {
+        this.irishRailStationJourneysList = [];
+        this.error = error;
+        this.loading = false;
+        console.log(this.error);
+      });
   }
 
-  async fetchIrishRailStations() {
-    this.error = '';
+  fetchIrishRailStations() {
     this.loading = true;
-    this.irishRailStationsList = await this.irishRailService.getAllStations().toPromise();
-    console.log(this.irishRailStationsList);
-    this.loading = false;
+    this.irishRailService.getAllStations()
+      .toPromise()
+      .then((stations: IrishRailStation[]) => {
+        this.irishRailStationsList = stations;
+        this.error = null;
+        this.loading = false;
+        console.log(this.irishRailStationsList);
+      })
+      .catch(error => {
+        this.irishRailStationsList = [];
+        this.error = error;
+        this.loading = false;
+        console.log(this.error);
+      });
   }
-
-  // showErrorMessage(error) {
-  //   this.error = error;
-  // }
-
 }

@@ -1,0 +1,15 @@
+<mat-form-field class="rail-select" appearance="outline">
+  <mat-select
+    name="title"
+    [(ngModel)]="selectedStationCode"
+    (selectionChange)="getStationCode($event.value)"
+    [disabled]="!stationsList || !stationsList.length">
+
+    <mat-option *ngFor="let station of stationsList" [value]="station.stationCode">
+      {{station.stationFullName}} ({{station.stationCode}})
+    </mat-option>
+  </mat-select>
+  <mat-label style="position:relative;top:-20px;">
+    <mat-icon svgIcon={{icon}} style="font-size: 2.25rem;position:relative;top:13px;"></mat-icon>&nbsp;&nbsp;<i>{{title}}</i>
+  </mat-label>
+</mat-form-field>

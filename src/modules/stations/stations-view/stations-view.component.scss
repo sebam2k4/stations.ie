@@ -16,21 +16,11 @@ header h1::after {
   font-size: .825rem;
 }
 
-.mat-form-field {
-  
-}
 .station-selects {
   max-width: 30rem;
   padding: 0 1.5rem;
   margin: auto;
 }
-.mat-form-field {
-  display: block;
-  
-}
-
-
-
 
 th.mat-header-cell,
 td.mat-cell,
@@ -43,7 +33,6 @@ th.mat-header-cell:last-of-type {
   padding-left: .5rem;
   padding-right: .5rem;
 }
-
 
 th.mat-header-cell:nth-of-type(odd),
 td.mat-cell:nth-of-type(odd) {
@@ -59,14 +48,11 @@ td.mat-cell:nth-of-type(odd) {
   margin: auto;
 }
 
-
 .card-header {
   max-width: 10rem;
   margin: 1.5rem auto;
   text-align: center;
 }
-
-
 
 .loading-fix {
   margin-top: 9px;

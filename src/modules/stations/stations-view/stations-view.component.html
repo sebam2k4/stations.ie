@@ -6,32 +6,19 @@
 
   <div class="station-selects">
 
-    <mat-form-field class="rail-select" appearance="outline">
-      <mat-select
-        placeholder="Rail Station"
-        name="irishRailStation"
-        [(ngModel)]="selectedStationCode"
-        (selectionChange)="fetchIrishRailStationJourneys($event.value)">
+    <stations-select
+      icon="rail"
+      title="Rail Station"
+      [stationsList]="irishRailStationsList"
+      (changeStation)="fetchIrishRailStationJourneys($event)">
+    </stations-select>
 
-        <mat-option *ngFor="let station of irishRailStationsList" [value]="station.stationCode">
-          {{station.stationFullName}} ({{station.stationCode}})
-        </mat-option>
-      </mat-select>
-      <mat-label style="position:relative;top:-20px;"><mat-icon svgIcon="rail" style="font-size: 2.25rem;position:relative;top:13px;"></mat-icon>&nbsp;&nbsp;<i>Rail Station</i></mat-label>
-    </mat-form-field>
-
-    <mat-form-field class="bus-select" appearance="outline">
-      <mat-select
-        name="busStation"
-        disabled>
-        <mat-option *ngFor="let station of irishRailStationsList" [value]="">
-          station name (code)
-        </mat-option>
-      </mat-select>
-      <mat-label style="position:relative;top:-20px;"><mat-icon svgIcon="bus" style="font-size:2.25rem;position:relative;top:13px;"></mat-icon>&nbsp;&nbsp;<i>Available Soon</i></mat-label>
-    </mat-form-field>
-  </div>
-  
+    <stations-select
+      icon="bus"
+      title="Availabe Soon"
+      [stationsList]=""
+      (changeStation)="fetchIrishRailStationJourneys($event)">
+    </stations-select>
 
   <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
   <mat-card *ngIf="irishRailStationJourneysList.length > 0 && !error" class="tables" [class.loading-fix]="!loading">
@@ -74,17 +61,4 @@
       {{ error }}
     </mat-card-content>
   </mat-card>
-
-  <!-- <mat-card *ngIf="notFound" [class.loading-fix]="!loading">
-    <mat-card-content>
-      No trains are due to serve this station in the next 90 minutes
-    </mat-card-content>
-  </mat-card> -->
-
-  <!-- <mat-card *ngIf="offline" [class.loading-fix]="!loading">
-    <mat-card-content>
-      Can't connect to our server. Please check your internet connection or try again later.
-    </mat-card-content>
-  </mat-card> -->
-
   

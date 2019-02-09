@@ -16,6 +16,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { StationsRoutingModule } from './stations-routing.module';
 import { StationsViewComponent } from './stations-view/stations-view.component';
+import { StationsSelectComponent } from './stations-view/select/stations-select.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { StationsViewComponent } from './stations-view/stations-view.component';
     StationsRoutingModule
   ],
   declarations: [
-    StationsViewComponent
+    StationsViewComponent,
+    StationsSelectComponent
   ]
 })
 
