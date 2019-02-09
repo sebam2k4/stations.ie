@@ -4,7 +4,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { FormsModule } from '@angular/forms';
 
-
 // Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
@@ -13,17 +12,18 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
 import { StationsViewComponent } from './stations-view.component';
 import { IrishRailService } from '../../../api/Irish-rail/irish-rail.service';
 import { ApiIrishRailModule } from '../../../api/Irish-rail/irish-rail.module';
+
+import { StationsSelectComponent } from './select/stations-select.component';
 
 describe('StationsViewComponent', () => {
   let component: StationsViewComponent;
   let fixture: ComponentFixture<StationsViewComponent>;
   let irishRailService: IrishRailService;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
@@ -36,17 +36,18 @@ describe('StationsViewComponent', () => {
         MatProgressBarModule,
         ApiIrishRailModule,
         HttpClientTestingModule,
-        RouterTestingModule
+        RouterTestingModule,
       ],
       declarations: [
-        StationsViewComponent
+        StationsViewComponent,
+        StationsSelectComponent
       ],
       providers: [
         IrishRailService
       ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(StationsViewComponent);
