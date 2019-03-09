@@ -48,6 +48,14 @@
               "vendorChunk": false,
               "buildOptimizer": true,
               "serviceWorker": true
+            },
+            "mock": {
+              "fileReplacements": [
+                {
+                  "replace": "src/core/environments/environment.ts",
+                  "with": "src/core/environments/environment.mock.ts"
+                }
+              ]
             }
           }
         },
@@ -59,6 +67,9 @@
           "configurations": {
             "production": {
               "browserTarget": "stations:build:production"
+            },
+            "mock": {
+              "browserTarget": "stations:build:mock"
             }
           }
         },

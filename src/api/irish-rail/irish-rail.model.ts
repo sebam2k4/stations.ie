@@ -63,3 +63,11 @@ export class IrishRailStationJourney {
     this.trainType = IrishRailStationJourney.trainType;
   }
 }
+
+export interface ApiIrishRailStationsList {
+  irishRailStations: IrishRailStation[];
+}
+
+export interface ApiIrishRailStationJourneysList {
+  irishRailStationJourneys: IrishRailStationJourney[];
+}
