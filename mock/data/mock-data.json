@@ -24,8 +24,19 @@
         "StationId": "1", 
         "StationLatitude": "53.3464", 
         "StationLongitude": "-6.29461"
+      },
+      {
+        "StationAlias": null, 
+        "StationCode": "EMPTY", 
+        "StationDesc": "Empty", 
+        "StationId": "0", 
+        "StationLatitude": "10", 
+        "StationLongitude": "-10"
       }
     ]
+  },
+  "EMPTY": {
+    "irishRailStationJourneys": []
   },
   "CLBAR": {
     "irishRailStationJourneys": [

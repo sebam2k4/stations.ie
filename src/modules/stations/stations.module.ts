@@ -1,9 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
-import { ApiIrishRailModule } from '../../api/irish-rail/irish-rail.module';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -14,9 +11,15 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
+// Stations
+import { ApiIrishRailModule } from '../../api/irish-rail/irish-rail.module';
 import { StationsRoutingModule } from './stations-routing.module';
 import { StationsViewComponent } from './stations-view/stations-view.component';
 import { StationsSelectComponent } from './stations-view/select/stations-select.component';
+import { MatFormFieldModule } from '@angular/material';
+
+// Libraries
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   imports: [
@@ -30,7 +33,10 @@ import { StationsSelectComponent } from './stations-view/select/stations-select.
     MatIconModule,
     MatProgressBarModule,
     ApiIrishRailModule,
-    StationsRoutingModule
+    StationsRoutingModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    NgxMatSelectSearchModule
   ],
   declarations: [
     StationsViewComponent,
