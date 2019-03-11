@@ -1,14 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -17,6 +16,8 @@ import { IrishRailService } from '../../../api/Irish-rail/irish-rail.service';
 import { ApiIrishRailModule } from '../../../api/Irish-rail/irish-rail.module';
 
 import { StationsSelectComponent } from './select/stations-select.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { MatInputModule, MatSelectModule } from '@angular/material';
 
 describe('StationsViewComponent', () => {
   let component: StationsViewComponent;
@@ -30,20 +31,23 @@ describe('StationsViewComponent', () => {
         MatToolbarModule,
         MatCardModule,
         MatButtonModule,
-        MatSelectModule,
         MatTableModule,
         MatIconModule,
         MatProgressBarModule,
         ApiIrishRailModule,
         HttpClientTestingModule,
         RouterTestingModule,
+        NgxMatSelectSearchModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatInputModule
       ],
       declarations: [
         StationsViewComponent,
         StationsSelectComponent
       ],
       providers: [
-        IrishRailService
+        IrishRailService,
       ]
     })
     .compileComponents();

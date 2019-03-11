@@ -21,15 +21,16 @@
     </stations-select>
 
   <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-  <mat-card *ngIf="irishRailStationJourneysList.length > 0 && !error" class="tables" [class.loading-fix]="!loading">
+
+  <mat-card *ngIf="selectedStation" class="tables" [class.loading-fix]="!loading">
     <div class="card-header">
-      <h2>{{irishRailStationJourneysList[0].stationFullName}}</h2>
-      <button mat-flat-button (click)="fetchIrishRailStationJourneys(selectedStationCode)">
+      <h2>{{selectedStation.stationFullName}}</h2>
+      <button mat-flat-button (click)="fetchIrishRailStationJourneys(selectedStation)">
         Refresh
       </button>
     </div>
     <mat-card-content>
-      <table mat-table [dataSource]="irishRailStationJourneysList">
+      <table *ngIf="irishRailStationJourneysList.length > 0 && !error" mat-table [dataSource]="irishRailStationJourneysList">
         <ng-container matColumnDef="destination">
           <th mat-header-cell *matHeaderCellDef> DEST </th>
           <td mat-cell *matCellDef="let row"> {{row.destination}} </td>
@@ -54,6 +55,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </mat-card-content>
+    <p style="text-align:center;" *ngIf="irishRailStationJourneysList.length === 0">No Journeys found in the next 90 minutes</p>
   </mat-card>
 
   <mat-card *ngIf="error" [class.loading-fix]="!loading">

@@ -2,5 +2,6 @@
   "/api/stations": "/stations",
   "/api/station-data/CLBAR": "/CLBAR",
   "/api/station-data/HSTON": "/HSTON",
-  "/api/station-data/GALWY": "/GALWY"
+  "/api/station-data/GALWY": "/GALWY",
+  "/api/station-data/EMPTY": "/EMPTY"
 }

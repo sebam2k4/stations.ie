@@ -1,11 +1,20 @@
 <mat-form-field class="rail-select" appearance="outline">
   <mat-select
     name="title"
-    [(ngModel)]="selectedStationCode"
-    (selectionChange)="getStationCode($event.value)"
-    [disabled]="!stationsList || !stationsList.length">
+    (selectionChange)="getStation($event.value)"
+    [disabled]="!stationsList || !stationsList.length"
+    [formControl]="stationFormCtrl"
+    #singleSelect>
 
-    <mat-option *ngFor="let station of stationsList" [value]="station.stationCode">
+    <mat-option>
+      <ngx-mat-select-search
+        [formControl]="stationFilterCtrl"
+        [placeholderLabel]="'Search'"
+        [noEntriesFoundLabel]="'No stations found'">
+
+      </ngx-mat-select-search>
+    </mat-option>
+    <mat-option *ngFor="let station of filteredStations | async" [value]="station">
       {{station.stationFullName}} ({{station.stationCode}})
     </mat-option>
   </mat-select>

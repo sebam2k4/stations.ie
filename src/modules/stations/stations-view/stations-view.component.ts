@@ -9,17 +9,12 @@ import { IrishRailStation, IrishRailStationJourney } from '../../../api/irish-ra
   styleUrls: ['./stations-view.component.scss']
 })
 export class StationsViewComponent implements OnInit {
-  title = 'stations';
-
   public irishRailStationsList: IrishRailStation[];
   public irishRailStationJourneysList: IrishRailStationJourney[] = [];
-
-  public selectedStationCode: string;
+  public selectedStation: IrishRailStation;
   public loading: boolean;
   public error = null;
-
   public displayedColumns: string[] = ['destination', 'origin', 'scharrival', 'late', 'exparrival'];
-
 
   constructor(private irishRailService: IrishRailService) { }
 
@@ -27,9 +22,10 @@ export class StationsViewComponent implements OnInit {
     this.fetchIrishRailStations();
   }
 
-  fetchIrishRailStationJourneys(stationCode) {
+  public fetchIrishRailStationJourneys(station: IrishRailStation): void {
+    this.selectedStation = station;
     this.loading = true;
-    this.irishRailService.getAllJourneys(stationCode)
+    this.irishRailService.getAllJourneys(station.stationCode)
       .toPromise()
       .then((stationJourneys: IrishRailStationJourney[]) => {
         this.irishRailStationJourneysList = stationJourneys;
@@ -45,7 +41,7 @@ export class StationsViewComponent implements OnInit {
       });
   }
 
-  fetchIrishRailStations() {
+  private fetchIrishRailStations(): void {
     this.loading = true;
     this.irishRailService.getAllStations()
       .toPromise()
