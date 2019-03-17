@@ -17,6 +17,7 @@ import { ApiIrishRailModule } from '../../api/irish-rail/irish-rail.module';
 import { StationsRoutingModule } from './stations-routing.module';
 import { StationsViewComponent } from './stations-view.component';
 import { StationsSelectComponent } from './components/select/stations-select.component';
+import { JourneyListComponent } from './components/journey-list/Journey-list.component';
 
 // Libraries
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
@@ -40,7 +41,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
   ],
   declarations: [
     StationsViewComponent,
-    StationsSelectComponent
+    StationsSelectComponent,
+    JourneyListComponent
   ]
 })
 
