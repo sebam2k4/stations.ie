@@ -18,6 +18,7 @@ import { ApiIrishRailModule } from '../../api/Irish-rail/irish-rail.module';
 import { StationsSelectComponent } from './components/select/stations-select.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatInputModule, MatSelectModule } from '@angular/material';
+import { JourneyListComponent } from './components/journey-list/Journey-list.component';
 
 describe('StationsViewComponent', () => {
   let component: StationsViewComponent;
@@ -44,7 +45,8 @@ describe('StationsViewComponent', () => {
       ],
       declarations: [
         StationsViewComponent,
-        StationsSelectComponent
+        StationsSelectComponent,
+        JourneyListComponent
       ],
       providers: [
         IrishRailService,
