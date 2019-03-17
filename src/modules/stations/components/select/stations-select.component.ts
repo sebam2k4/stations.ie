@@ -39,17 +39,17 @@ export class StationsSelectComponent implements OnInit, OnDestroy {
     );
   }
 
-  @Input() set stationsList(value: IrishRailStation[]) {
-    this._stationsList.next(value);
+  @Input() set stationsList(stationsList: IrishRailStation[]) {
+    this._stationsList.next(stationsList);
   }
 
-  get stationsList() {
+  get stationsList(): IrishRailStation[] {
     return this._stationsList.getValue();
   }
 
   ngOnInit() {
     // Make sure async data from parent is available
-    this._stationsList.subscribe(stationsList => {
+    this._stationsList.subscribe((stationsList: IrishRailStation[]) => {
       if (stationsList) {
         // load the initial stations list
         this.filteredStations.next(stationsList.slice());

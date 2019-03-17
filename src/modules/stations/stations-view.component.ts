@@ -14,7 +14,6 @@ export class StationsViewComponent implements OnInit {
   public selectedStation: IrishRailStation;
   public loading: boolean;
   public error = null;
-  public displayedColumns: string[] = ['destination', 'origin', 'scharrival', 'late', 'exparrival'];
 
   constructor(private irishRailService: IrishRailService) { }
 
