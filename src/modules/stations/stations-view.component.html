@@ -58,9 +58,10 @@
     <p style="text-align:center;" *ngIf="irishRailStationJourneysList.length === 0">No Journeys found in the next 90 minutes</p>
   </mat-card>
 
-  <mat-card *ngIf="error" [class.loading-fix]="!loading">
+  <mat-card *ngIf="error">
     <mat-card-content>
-      {{ error }}
+      <p>{{ error.statusText }}</p>
+      <p>{{ error.status }}</p>
     </mat-card-content>
   </mat-card>
   
