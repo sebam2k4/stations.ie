@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry, retryWhen, delay, take, concat, map} from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map} from 'rxjs/operators';
 import { environment } from '../../core/environments/environment';
 import { IrishRailStation, IrishRailStationJourney } from './irish-rail.model';
 import { irishRailStationJourneyMapping, IrishRailStationMapping } from './irish-rail.mapping';
@@ -61,22 +61,4 @@ export class IrishRailService {
         ...{ [keysMap[key] || key]: obj[key] }
       }), {});
     }
-
-
-  // Error Handler
-  // returns an observable with a user-facing error message
-  // private handleError(error: HttpErrorResponse) {
-  //   if (error.error instanceof ErrorEvent) {
-  //     // A client-side or network error occurred
-  //     console.error('A client-side error occurred:', error.error.message);
-  //     return throwError(`Error: ${error.error.message}`);
-  //   } else {
-  //     // The backend returned an unsuccessful response code.
-  //     // can check against different error.status here
-  //     console.error("ERROR:", error);
-  //     return throwError(
-  //       `Error connecting to server: ${error.status}`);
-  //   }
-  // };
-
 }

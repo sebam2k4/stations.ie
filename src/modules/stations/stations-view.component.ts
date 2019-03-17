@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { IrishRailService } from '../../../api/irish-rail/irish-rail.service';
-import { IrishRailStation, IrishRailStationJourney } from '../../../api/irish-rail/irish-rail.model';
+import { IrishRailService } from '../../api/irish-rail/irish-rail.service';
+import { IrishRailStation, IrishRailStationJourney } from '../../api/irish-rail/irish-rail.model';
 
 @Component({
   selector: 'stations-view',

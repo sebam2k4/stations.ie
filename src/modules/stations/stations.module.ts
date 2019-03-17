@@ -14,8 +14,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 // Stations
 import { ApiIrishRailModule } from '../../api/irish-rail/irish-rail.module';
 import { StationsRoutingModule } from './stations-routing.module';
-import { StationsViewComponent } from './stations-view/stations-view.component';
-import { StationsSelectComponent } from './stations-view/select/stations-select.component';
+import { StationsViewComponent } from './stations-view.component';
+import { StationsSelectComponent } from './components/select/stations-select.component';
 import { MatFormFieldModule } from '@angular/material';
 
 // Libraries

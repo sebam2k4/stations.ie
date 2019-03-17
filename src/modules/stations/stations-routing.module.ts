@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { StationsViewComponent } from './stations-view/stations-view.component';
+import { StationsViewComponent } from './stations-view.component';
 
 
 // This is my case
