@@ -1,35 +1,35 @@
-# Stations
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1b1f26c8-1856-4d52-93ec-1f5501f08b7d/deploy-status)](https://app.netlify.com/sites/stations/deploys)
 
-### TODO:
-- [ ] Handle Trains departing origin stations - show expected departure time
-- [ ] Seperate rail stations into commuter+intercity and Dart.
-- [ ] Add expressway bus stations.
-- [ ] Cookie Consent - don't load cookies until user opts-in or do opt-out.
-- [ ] Add Privacy Policy.
+# Stations.ie
 
+Progressive Web App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
+Live public transport departure and arrival info for stations across Ireland
+
+Currently supports:
+- Irish Rail stations
+
+Planned Support:
+- Bus Éireann stations
+
+[Live Site (beta)](https://www.stations.ie/)
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `npm run start:mock` for a dev server that uses mock data. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+This project uses Netlify to build production app every time a PR is merged to master branch. Also, builds PR previews so changes can be checked before merging to master.
 
-## Running unit tests
+## Running tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `npm test` to execute the unit tests.
 
-## Running end-to-end tests
+Run `npm run test:coverage` to generate test coverage.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Run `npm run lint` to execute tslint.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Lint and unit tests run automatically on `git push` and all needs to pass before the branch is actually pushed to remote.
