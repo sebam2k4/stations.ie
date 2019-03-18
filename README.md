@@ -16,9 +16,11 @@ Planned Support:
 
 ## Development server
 
-Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1. Run `npm install` to install all dependencies.
+2. Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+3. Navigate to `src/flaskServer`, install Python packages `pip install -r requirements.txt`, and run the Flask server `python rail_server.py`.
 
-Run `npm run start:mock` for a dev server that uses mock data. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Alternatively, Run `npm run start:mock` for a dev server that uses mock data. Navigate to `http://localhost:4200/` (no need to run the Flask server).
 
 ## Build
 
