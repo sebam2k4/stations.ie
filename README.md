@@ -12,7 +12,7 @@ Currently supports:
 Planned Support:
 - Bus Éireann stations
 
-**[Live Site (beta)]**(https://www.stations.ie/)
+[Live Site (beta)](https://www.stations.ie/)
 
 ## Development server
 
