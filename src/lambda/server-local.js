@@ -9,4 +9,3 @@ app.listen(3000, '127.0.0.1', () => {
   console.log(`opening http://127.0.0.1:${config.localDevPort}/${config.lambdaPath}`);
   open(`http://127.0.0.1:${config.localDevPort}/${config.lambdaPath}`);
 });
-
