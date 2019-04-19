@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-const app = require('./src/index');
-const open = require('open');
 
+const app = require('./src/stations-express');
+const open = require('open');
 const config = require('./src/config/config');
 
 app.listen(3000, '127.0.0.1', () => {
