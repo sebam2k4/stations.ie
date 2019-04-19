@@ -3,15 +3,19 @@
   "version": "0.0.0",
   "scripts": {
     "build": "ng build",
+    "build:prod": "ng build --prod",
     "lint": "ng lint",
     "ng": "ng",
     "serve:mock-data": "json-server --watch ./mock/data/mock-data.json --routes ./mock/routes.json",
     "start": "ng serve",
     "start:mock": "concurrently --kill-others \"npm run serve:mock-data\" \"npm run start -- --configuration=mock\"",
+    "start:lambda:local": "node ./src/lambda/server-local.js",
     "test": "jest",
     "test:coverage": "npm test -- --coverage --silent",
     "test:watch": "npm test -- --watch",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:lambda": "netlify-lambda build ./src/lambda/src",
+    "start:lambda": "netlify-lambda serve ./src/lambda/src"
   },
   "husky": {
     "hooks": {
@@ -34,9 +38,15 @@
     "@angular/router": "^7.2.9",
     "@angular/service-worker": "^7.2.9",
     "core-js": "^2.5.4",
+    "netlify-lambda": "^1.4.5",
     "ngx-mat-select-search": "^1.6.0",
     "rxjs": "~6.4.0",
-    "zone.js": "~0.8.29"
+    "zone.js": "~0.8.29",
+    "express": "^4.16.4",
+    "node-fetch": "^2.3.0",
+    "open": "^6.1.0",
+    "serverless-http": "^1.9.1",
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.6",
@@ -54,7 +64,8 @@
     "json-server": "^0.14.2",
     "ts-node": "~8.0.3",
     "tslint": "~5.14.0",
-    "typescript": "~3.2.4"
+    "typescript": "~3.2.4",
+    "eslint": "^5.16.0"
   },
   "jest": {
     "transformIgnorePatterns": [
