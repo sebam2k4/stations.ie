@@ -1,4 +1,5 @@
 module.exports = {
-  lambdaPath: '.netlify/functions/server',
+  functionsPath: '.netlify/functions',
+  functionName: 'stations-function',
   localDevPort: 3000
 };

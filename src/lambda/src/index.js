@@ -90,8 +90,11 @@ router.get('/stations/:stationCode', async (req, res) => {
   res.send(railJourneyData);
 });
 
+// middleware
 app.use(bodyParser.json());
-app.use(`/${config.lambdaPath}`, router);
+
+const routerBasePath = `/${config.functionsPath}/${config.functionName}`;
+app.use(routerBasePath, router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
