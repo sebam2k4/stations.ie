@@ -1,5 +1,5 @@
 module.exports = {
   functionsPath: '.netlify/functions',
-  functionName: 'stations-function',
+  functionName: 'stations-express',
   localDevPort: 3000
 };
