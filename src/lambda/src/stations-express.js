@@ -6,6 +6,7 @@ const parseXmlBody = require('./utility/utils').parseXmlBody;
 const fetch = require('node-fetch').default;
 const serverless = require('serverless-http');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const rail = require('./utility/rail');
 const config = require('./config/config');
@@ -27,10 +28,6 @@ const checkStatus = (res) => {
     // send email
   }
 };
-
-router.get('/', (req, res) => {
-  res.send('Hello World');
-});
 
 router.get('/stations', async (req, res) => {
   const railStationsXmlApi = 'http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML_WithStationType?StationType=A';
@@ -92,6 +89,7 @@ router.get('/stations/:stationCode', async (req, res) => {
 
 // middleware
 app.use(bodyParser.json());
+app.use(cors());
 
 const routerBasePath = `/${config.functionsPath}/${config.functionName}`;
 app.use(routerBasePath, router);

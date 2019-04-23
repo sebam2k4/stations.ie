@@ -4,6 +4,5 @@
 
 export const environment = {
   production: false,
-  IrishRailAPI_Stations: 'http://127.0.0.1:5000/api/stations',
-  IrishRailAPI_StationData: 'http://127.0.0.1:5000/api/station-data',
+  IrishRailAPI_Stations: 'http://localhost:9000/.netlify/functions/stations-express/stations',
 };
