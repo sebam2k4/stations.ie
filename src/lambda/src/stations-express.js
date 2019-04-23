@@ -3,7 +3,7 @@
 /* eslint-disable no-console */
 const express = require('express');
 const parseXmlBody = require('./utility/utils').parseXmlBody;
-const fetch = require('node-fetch');
+const fetch = require('node-fetch').default;
 const serverless = require('serverless-http');
 const bodyParser = require('body-parser');
 
@@ -63,7 +63,7 @@ router.get('/stations', async (req, res) => {
   }
 
   // send rail stations data to web client
-  res.send(railStationData);
+  res.send({irishRailStations:railStationData});
 });
 
 router.get('/stations/:stationCode', async (req, res) => {
@@ -87,7 +87,7 @@ router.get('/stations/:stationCode', async (req, res) => {
   }
 
   // send rail station journey data to web client
-  res.send(railJourneyData);
+  res.send({irishRailStationJourneys: railJourneyData});
 });
 
 // middleware
@@ -98,9 +98,3 @@ app.use(routerBasePath, router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
-
-
-
-
-// [protocol]://[subdomain].[websiteName].[iId]:[port]/[path]?[query]=[string]#[hash]
-
