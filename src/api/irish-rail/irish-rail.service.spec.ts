@@ -4,10 +4,10 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { IrishRailService } from './irish-rail.service';
 import { IrishRailStation, IrishRailStationJourney } from './irish-rail.model';
 import {
-  mockIrishRailStationObject,
-  mockIrishRailStationConvertedList,
-  mockIrishRailStationJourneyObject,
-  mockIrishRailStationJourneyConvertedList
+  mockIrishRailStationsObject,
+  mockIrishRailStationsList,
+  mockIrishRailStationJourneysObject,
+  mockIrishRailStationJourneysList
 } from '../../../mock/data/irish-rail.mock';
 
 describe('IrishRailService', () => {
@@ -38,11 +38,11 @@ describe('IrishRailService', () => {
 
   describe('#getAllStations', () => {
     it('should return converted Observable<IrishRailStation[]> list of irish-rail stations', async(() => {
-      const mockResponseBody = mockIrishRailStationObject;
+      const mockResponseBody = mockIrishRailStationsObject;
 
       service.getAllStations().subscribe((stations: IrishRailStation[]) => {
         expect(Array.isArray(stations)).toBe(true);
-        expect(stations).toEqual(mockIrishRailStationConvertedList);
+        expect(stations).toEqual(mockIrishRailStationsList);
         stations.forEach(station => {
           expect(station instanceof IrishRailStation).toBe(true);
         });
@@ -60,12 +60,12 @@ describe('IrishRailService', () => {
 
   describe('#getAllJourneys', () => {
     it('should return converted Observable<IrishRailStationJourney[]> list of station\'s journeys', async(() => {
-      const mockResponseBody = mockIrishRailStationJourneyObject;
+      const mockResponseBody = mockIrishRailStationJourneysObject;
       const stationCode = 'CLBAR';
 
       service.getAllJourneys(stationCode).subscribe((journeys: IrishRailStationJourney[]) => {
         expect(Array.isArray(journeys)).toBe(true);
-        expect(journeys).toEqual(mockIrishRailStationJourneyConvertedList);
+        expect(journeys).toEqual(mockIrishRailStationJourneysList);
         journeys.forEach(journey => {
           expect(journey instanceof IrishRailStationJourney).toBe(true);
         });
