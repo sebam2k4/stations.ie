@@ -22,7 +22,6 @@ export interface ApiIrishRailStationJourneysList {
 export class IrishRailService {
 
   private readonly railStationsURL: string = environment.IrishRailAPI_Stations;
-  private readonly railStationURL: string = environment.IrishRailAPI_StationData;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -35,7 +34,7 @@ export class IrishRailService {
   }
 
   public getAllJourneys(stationCode): Observable<IrishRailStationJourney[]> {
-    return this.httpClient.get<ApiIrishRailStationJourneysList>(`${this.railStationURL}/${stationCode}`)
+    return this.httpClient.get<ApiIrishRailStationJourneysList>(`${this.railStationsURL}/${stationCode}`)
     .pipe(
       map(body => this.convertProperties(body.irishRailStationJourneys, irishRailStationJourneyMapping)),
       map(body => body.map(stationJourney => new IrishRailStationJourney(stationJourney)))
