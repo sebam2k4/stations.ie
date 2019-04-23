@@ -49,7 +49,7 @@ describe('IrishRailService', () => {
       });
 
       const mockRequest = httpMock.expectOne({
-        url: 'http://127.0.0.1:5000/api/stations',
+        url: 'http://localhost:9000/.netlify/functions/stations-express/stations',
       });
 
       expect(mockRequest.request.method).toBe('GET');
@@ -72,7 +72,7 @@ describe('IrishRailService', () => {
       });
 
       const mockRequest = httpMock.expectOne({
-        url: `http://127.0.0.1:5000/api/station-data/${stationCode}`,
+        url: `http://localhost:9000/.netlify/functions/stations-express/stations/${stationCode}`,
       });
 
       expect(mockRequest.request.method).toBe('GET');
