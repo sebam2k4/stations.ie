@@ -89,7 +89,7 @@ router.get('/stations/:stationCode', async (req, res) => {
 
 // middleware
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(config.corsOptions));
 
 const routerBasePath = `/${config.functionsPath}/${config.functionName}`;
 app.use(routerBasePath, router);
