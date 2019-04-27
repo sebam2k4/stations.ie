@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build:prod && npm run build:lambda"
+  command = "npm run build:prod"
   functions = "./functions"
   base = "./"
   publish = "dist"
