@@ -1,5 +1,5 @@
 const clientAppUrl = 'https://www.stations.ie';
-const localhostRegEx = /https?:\/\/localhost:\d{4}/;
+const localhostRegEx = 'http://localhost:2000';
 const netlifyDeployPreviewRegEx = /https:\/\/deploy-preview-\d{1,3}--stations.netlify.com/;
 const netlifyDeployPreviewShaRegEx = /https:\/\/[a-z0-9]{24}--stations.netlify.com/;
 
