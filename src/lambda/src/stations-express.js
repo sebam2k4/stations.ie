@@ -1,90 +1,43 @@
-'strict';
+'use strict';
 
 /* eslint-disable no-console */
 const express = require('express');
-const parseXmlBody = require('./utility/utils').parseXmlBody;
-const fetch = require('node-fetch').default;
 const serverless = require('serverless-http');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const rail = require('./utility/rail');
 const config = require('./config/config');
+const Rail = require('./stations/rail');
 
 const app = express();
 const router = express.Router();
-
-const checkStatus = (res) => {
-  console.log(res.status);
-  if (res.ok) {
-    return res;
-  } else {
-    return Promise.reject({
-      statusError: {
-        error: res.status,
-        message: res.statusText
-      }
-    });
-    // send email
-  }
-};
 
 router.get('/stations', async (req, res) => {
   const railStationsXmlApi = 'http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML_WithStationType?StationType=A';
   // const railStationsXmlApi = 'https://httpstat.us/405';
 
-  // get rail stations data
-  const railStationData = await fetch(railStationsXmlApi)
-    .then(checkStatus)
-    .then(response => response.text())
-    .then(xmlBody => parseXmlBody(xmlBody))
-    .then(jsBody => rail.processRailStationsBody(jsBody))
-    .catch(error => ({error}));
+  let railStationsData = await Rail.getRailStationsData(railStationsXmlApi);
 
-  
-  if (railStationData.error) {
-    const error = railStationData.error;
-    if (error.statusError) {
-      return res.status(502).send(error.statusError); // research what status codes appropriate here (invalid or error response from upstream server - bad gateway?)
-    }
-
-    if (error.parseError) {
-      return res.status(500).send(error.parseError);
-    }
-
-    if (error.type === 'system') {
-      return res.status(500).send(error);
-    }
-
-    return res.status(500).send(error);
+  if (railStationsData.error) {
+    let error = railStationsData.error;
+    return res.status(error.resStatus).send(error);
   }
 
-  // send rail stations data to web client
-  res.send({irishRailStations:railStationData});
+  res.send({irishRailStations: railStationsData});
 });
 
 router.get('/stations/:stationCode', async (req, res) => {
   const stationCode = req.params.stationCode;
   const railJourneysXmlApi = `http://api.irishrail.ie/realtime/realtime.asmx/getStationDataByCodeXML?StationCode=${stationCode}`;
 
-  // get rail station journeys data
-  const railJourneyData = await fetch(railJourneysXmlApi)
-    .then(checkStatus)
-    .then(response => response.text())
-    .then(xmlBody => parseXmlBody(xmlBody))
-    .then(jsBody => rail.processRailJourneysBody(jsBody))
-    .catch(error => error);
+  let railJourneysData = await Rail.getRailJourneysData(railJourneysXmlApi);
 
-  if (railJourneyData.statusError) {
-    return res.status(502).send(railJourneyData.error);
+  if (railJourneysData.error) {
+    let error = railJourneysData.error;
+    return res.status(error.resStatus).send(error);
   }
 
-  if (railJourneyData.parseError) {
-    return res.send(railJourneyData.parseError);
-  }
-
-  // send rail station journey data to web client
-  res.send({irishRailStationJourneys: railJourneyData});
+  res.send({irishRailStationJourneys: railJourneysData});
 });
 
 // middleware
