@@ -12,11 +12,14 @@ const Rail = require('./stations/rail');
 const app = express();
 const router = express.Router();
 
+const STATIONS = 'stations';
+const JOURNEYS = 'journeys';
+
 router.get('/stations', async (req, res) => {
   const railStationsXmlApi = 'http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML_WithStationType?StationType=A';
   // const railStationsXmlApi = 'https://httpstat.us/405';
 
-  let railStationsData = await Rail.getRailStationsData(railStationsXmlApi);
+  const railStationsData = await Rail.getRailData(railStationsXmlApi, STATIONS);
 
   if (railStationsData.error) {
     let error = railStationsData.error;
@@ -30,7 +33,7 @@ router.get('/stations/:stationCode', async (req, res) => {
   const stationCode = req.params.stationCode;
   const railJourneysXmlApi = `http://api.irishrail.ie/realtime/realtime.asmx/getStationDataByCodeXML?StationCode=${stationCode}`;
 
-  let railJourneysData = await Rail.getRailJourneysData(railJourneysXmlApi);
+  let railJourneysData = await Rail.getRailData(railJourneysXmlApi, JOURNEYS);
 
   if (railJourneysData.error) {
     let error = railJourneysData.error;
