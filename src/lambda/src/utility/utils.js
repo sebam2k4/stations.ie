@@ -68,10 +68,27 @@ const checkResponseStatus = (res) => {
   }
 };
 
+const sortByKey = (arrObj, key) => {
+  return arrObj.sort((a, b) => {
+    let valueA = a[key].toLowerCase();
+    let valueB = b[key].toLowerCase();
+    if (valueA < valueB) {
+      return -1;
+    }
+
+    if (valueA > valueB) {
+      return 1;
+    }
+
+    return 0;
+  });
+};
+
 module.exports = {
   getRequiredProps,
   filterByKey,
   renameKeys,
   parseXmlBody,
-  checkResponseStatus
+  checkResponseStatus,
+  sortByKey
 };

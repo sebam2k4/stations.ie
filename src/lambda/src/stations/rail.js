@@ -70,11 +70,16 @@ const RailJourneysKeysMap = {
   Traintype: 'trainType'
 };
 
+const STATION_FULL_NAME = 'stationFullName';
+const STATIONS = 'stations';
+const JOURNEYS = 'journeys';
+
 class Rail {
   static processRailStationsBody(railStations) {
     if (railStations.ArrayOfObjStation && railStations.ArrayOfObjStation.objStation) {
       const stationList = railStations.ArrayOfObjStation.objStation;
-      return Rail.processRailData(stationList, RailStationProperties, RailStationKeysMap);
+      const filteredStationsList = Rail.filterRailProperties(stationList, RailStationProperties, RailStationKeysMap);
+      return utils.sortByKey(filteredStationsList, STATION_FULL_NAME);
     }
   
     return [];
@@ -85,14 +90,14 @@ class Rail {
     if (railJourneys.ArrayOfObjStationData && railJourneys.ArrayOfObjStationData.objStationData) {
       const journeys = railJourneys.ArrayOfObjStationData.objStationData;
       const journeyList = Array.isArray(journeys) ? journeys : [journeys]; // single journey is returned as single object, not in an array
-      return Rail.processRailData(journeyList, RailJourneyProperties, RailJourneysKeysMap);
+      return Rail.filterRailProperties(journeyList, RailJourneyProperties, RailJourneysKeysMap);
     }
   
     return [];
     // return new Error; // ?
   }
   
-  static processRailData(dataList, propsFilter, keysMap) {
+  static filterRailProperties(dataList, propsFilter, keysMap) {
     const proccessedList = [];
     const filter = utils.getRequiredProps(propsFilter);
     
@@ -105,26 +110,22 @@ class Rail {
     return proccessedList;
   }
 
-  static async getRailStationsData(url) {
+  static async getRailData(url, type) {
     try {
       const response = await fetch(url);
       const okResponse = await utils.checkResponseStatus(response);
       const textResponse = await okResponse.text(okResponse);
       const parsedResponse = await utils.parseXmlBody(textResponse);
-      return Rail.processRailStationsBody(parsedResponse);
-    } catch(err) {
-      return {error: ErrorHandler.reqError(err)};
-      // send email
-    }
-  }
+      if (type === STATIONS) {
+        return Rail.processRailStationsBody(parsedResponse);
+      }
 
-  static async getRailJourneysData(url) {
-    try {
-      const response = await fetch(url);
-      const okResponse = await utils.checkResponseStatus(response);
-      const textResponse = await okResponse.text(okResponse);
-      const parsedResponse = await utils.parseXmlBody(textResponse);
-      return Rail.processRailJourneysBody(parsedResponse);
+      if (type === JOURNEYS) {
+        return Rail.processRailJourneysBody(parsedResponse);
+      }
+
+      return [];
+      
     } catch(err) {
       return {error: ErrorHandler.reqError(err)};
       // send email
