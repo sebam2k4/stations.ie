@@ -14,7 +14,6 @@ import { MatFormFieldModule } from '@angular/material';
 
 // Stations
 import { ApiIrishRailModule } from '../../api/irish-rail/irish-rail.module';
-import { StationsRoutingModule } from './stations-routing.module';
 import { StationsViewComponent } from './stations-view.component';
 import { StationsSelectComponent } from './components/select/stations-select.component';
 import { JourneyListComponent } from './components/journey-list/Journey-list.component';
@@ -34,7 +33,6 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     MatIconModule,
     MatProgressBarModule,
     ApiIrishRailModule,
-    StationsRoutingModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     NgxMatSelectSearchModule

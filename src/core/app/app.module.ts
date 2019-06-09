@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 // PWA
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { StationsModule } from 'src/modules/stations/stations.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     RouterModule,
     HttpClientModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    StationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
