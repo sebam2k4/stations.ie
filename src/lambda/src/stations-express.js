@@ -8,6 +8,7 @@ const cors = require('cors');
 
 const config = require('./config/config');
 const Rail = require('./stations/rail');
+console.log(Rail);
 
 const app = express();
 const router = express.Router();
@@ -15,9 +16,11 @@ const router = express.Router();
 const STATIONS = 'stations';
 const JOURNEYS = 'journeys';
 
+
+
 router.get('/stations', async (req, res) => {
   const railStationsXmlApi = 'http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML_WithStationType?StationType=A';
-  // const railStationsXmlApi = 'https://httpstat.us/405';
+  // const railStationsXmlApi = 'https://httpstat.us/500';
 
   const railStationsData = await Rail.getRailData(railStationsXmlApi, STATIONS);
 

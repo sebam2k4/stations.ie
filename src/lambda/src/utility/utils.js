@@ -19,16 +19,14 @@ const parseXmlBody = (xml) => {
           }
         });
       }
-
       resolve(result);
     });
   });
 };
 
-const getRequiredProps = (obj) => {
+const getPropsToFilter = (obj) => {
   let propsList = [];
-  const objectKeys = Object.keys(obj);
-  objectKeys.forEach(key => {
+  Object.keys(obj).forEach(key => {
     if (obj[key]) {
       propsList.push(key);
     }
@@ -36,7 +34,7 @@ const getRequiredProps = (obj) => {
   return propsList;
 };
 
-const filterByKey = (obj, filter) => {
+const filterByKeys = (obj, filter) => {
   return filter.reduce((acc, key) => ({ ...acc, [key]: obj[key]}), {});
   // return Object.keys(obj)
   //   .filter(key => filter.includes(key))
@@ -68,8 +66,8 @@ const checkResponseStatus = (res) => {
   }
 };
 
-const sortByKey = (arrObj, key) => {
-  return arrObj.sort((a, b) => {
+const sortObjectsByKey = (arrObjs, key) => {
+  return arrObjs.sort((a, b) => {
     let valueA = a[key].toLowerCase();
     let valueB = b[key].toLowerCase();
     if (valueA < valueB) {
@@ -85,10 +83,10 @@ const sortByKey = (arrObj, key) => {
 };
 
 module.exports = {
-  getRequiredProps,
-  filterByKey,
+  getPropsToFilter,
+  filterByKeys,
   renameKeys,
   parseXmlBody,
   checkResponseStatus,
-  sortByKey
+  sortObjectsByKey
 };
