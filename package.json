@@ -7,7 +7,7 @@
     "build:prod": "ng build --prod && npm run build:lambda",
     "lint": "ng lint",
     "ng": "ng",
-    "postinstall": "netlify-lambda install",
+    "postinstall": "netlify-lambda install ./src/lambda",
     "serve:mock-data": "json-server --watch ./mock/data/mock-data.json --routes ./mock/routes.json",
     "start": "concurrently \"npm run start:app\" \"npm run start:lambda\"",
     "start:app": "ng serve",
