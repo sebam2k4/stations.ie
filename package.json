@@ -4,7 +4,7 @@
   "scripts": {
     "build:app": "ng build",
     "build:lambda": "netlify-lambda build ./src/lambda/src",
-    "build:prod": "ng build:app --prod && npm run build:lambda",
+    "build:prod": "ng build --prod && npm run build:lambda",
     "lint": "ng lint",
     "ng": "ng",
     "postinstall": "netlify-lambda install",
