@@ -8,7 +8,7 @@
     "lint": "ng lint",
     "ng": "ng",
     "serve:mock-data": "json-server --watch ./mock/data/mock-data.json --routes ./mock/routes.json",
-    "start": "ng serve",
+    "start:local": "ng serve",
     "start:mock": "concurrently --kill-others \"npm run serve:mock-data\" \"npm run start -- --configuration=mock\"",
     "start:lambda": "netlify-lambda serve ./src/lambda/src",
     "start:lambda:local": "npx supervisor ./src/lambda/server-local.js",
@@ -36,6 +36,7 @@
     "@angular/pwa": "^0.13.6",
     "@angular/router": "^7.2.9",
     "@angular/service-worker": "^7.2.9",
+    "body-parser": "^1.19.0",
     "core-js": "^2.5.4",
     "cors": "^2.8.5",
     "express": "^4.16.4",
@@ -58,6 +59,7 @@
     "eslint": "^5.16.0",
     "husky": "~1.3.1",
     "jest": "~23.6.0",
+    "jest-fetch-mock": "^2.1.2",
     "jest-junit": "~5.2.0",
     "jest-preset-angular": "~6.0.2",
     "json-server": "^0.14.2",
@@ -82,7 +84,8 @@
     "collectCoverageFrom": [
       "src/api/**.ts",
       "src/core/**.ts",
-      "src/modules/**.ts"
+      "src/modules/**.ts",
+      "src/lambda/**.js"
     ],
     "roots": [
       "src"
