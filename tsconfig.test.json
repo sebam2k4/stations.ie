@@ -1,6 +1,15 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "target": "es6",
-  }
+    "outDir": "./out-tsc/spec",
+    "types": [
+      "jest",
+      "node"
+    ]
+  },
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.spec.js",
+    "src/**/*.d.ts"
+  ]
 }

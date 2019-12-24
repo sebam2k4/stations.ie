@@ -22,8 +22,8 @@ describe('IrishRailService', () => {
   });
 
   beforeEach(async(() => {
-    httpMock = TestBed.get(HttpTestingController);
-    service = TestBed.get(IrishRailService);
+    httpMock = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(IrishRailService);
   }));
 
   afterEach(() => {
