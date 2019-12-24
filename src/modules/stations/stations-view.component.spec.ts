@@ -58,7 +58,7 @@ describe('StationsViewComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(StationsViewComponent);
     component = fixture.componentInstance;
-    irishRailService = TestBed.get(IrishRailService);
+    irishRailService = TestBed.inject(IrishRailService);
   });
 
   describe('#constructor', () => {

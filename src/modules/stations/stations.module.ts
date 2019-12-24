@@ -10,7 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatFormFieldModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 // Stations
 import { ApiIrishRailModule } from '../../api/irish-rail/irish-rail.module';
