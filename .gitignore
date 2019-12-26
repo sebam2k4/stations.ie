@@ -37,6 +37,7 @@ yarn-error.log
 testem.log
 /typings
 junit.xml
+.bashrc
 
 # System Files
 .DS_Store
