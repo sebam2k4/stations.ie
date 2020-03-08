@@ -1,4 +1,4 @@
-const railStationProperties = {
+const RAIL_STATION_PROPS_TO_INCLUDE = {
   StationAlias: false,
   StationCode: true,
   StationDesc: true,
@@ -7,7 +7,7 @@ const railStationProperties = {
   StationLongitude: false
 };
 
-const railStationKeysMap = {
+const RAIL_STATION_PROPS_RENAME = {
   StationAlias: 'stationAlias',
   StationCode: 'stationCode',
   StationDesc: 'stationFullName',
@@ -16,7 +16,7 @@ const railStationKeysMap = {
   StationLongitude: 'stationLongitude'
 };
 
-const railJourneyProperties = {
+const RAIL_JOURNEY_PROPS_TO_INCLUDE = {
   Destination: true,
   Destinationtime: true,
   Direction: false,
@@ -40,7 +40,7 @@ const railJourneyProperties = {
   Traintype: false
 };
 
-const railJourneyKeysMap = {
+const RAIL_JOURNEY_PROPS_RENAME = {
   Destination: 'destination',
   Destinationtime: 'destinationTime',
   Direction: 'direction',
@@ -65,8 +65,8 @@ const railJourneyKeysMap = {
 };
 
 module.exports = {
-  railStationProperties,
-  railStationKeysMap,
-  railJourneyProperties,
-  railJourneyKeysMap
+  RAIL_STATION_PROPS_TO_INCLUDE,
+  RAIL_STATION_PROPS_RENAME,
+  RAIL_JOURNEY_PROPS_TO_INCLUDE,
+  RAIL_JOURNEY_PROPS_RENAME
 };

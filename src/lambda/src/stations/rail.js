@@ -2,70 +2,77 @@
 
 const utils = require('../utility/utils');
 const fetch = require('node-fetch').default;
-const ErrorHandler = require('../utility/errorHandlers');
 
-const settings = require('./rail-settings');
+const {
+  RAIL_STATION_PROPS_TO_INCLUDE,
+  RAIL_STATION_PROPS_RENAME,
+  RAIL_JOURNEY_PROPS_TO_INCLUDE,
+  RAIL_JOURNEY_PROPS_RENAME
+} = require('./rail-settings');
 
-const STATION_FULL_NAME = 'stationFullName';
-const STATIONS = 'stations';
-const JOURNEYS = 'journeys';
+const { RAIL_STATION_FULL_NAME_KEY } = require('./constants');
 
-class Rail {
-  static _processRailStationsBody(railStations) {
-    if (railStations.ArrayOfObjStation && railStations.ArrayOfObjStation.objStation) {
-      const stationList = railStations.ArrayOfObjStation.objStation;
-      const filteredStationsList = Rail._filterRailProperties(stationList, settings.railStationProperties, settings.railStationKeysMap);
-      // console.log(filteredStationsList)
-      return utils.sortObjectsByKey(filteredStationsList, STATION_FULL_NAME);
-    }
+const _formatRailProperties = (data, requiredProps, keysMap) => {
+  const filter = utils.getPropsToFilter(requiredProps);
+  return data.map(listItem => {
+    const filteredProps = utils.filterByKeys(listItem, filter);
+    return utils.renameKeys(filteredProps, keysMap);
+  });
+};
 
-    return [];
-    // return new Error; // ?
+const _processRailStationsBody = (railStationsJson) => {
+  if (railStationsJson.ArrayOfObjStation && railStationsJson.ArrayOfObjStation.objStation) {
+    const stationList = railStationsJson.ArrayOfObjStation.objStation;
+    const formattedRailStations = _formatRailProperties(
+      stationList,
+      RAIL_STATION_PROPS_TO_INCLUDE,
+      RAIL_STATION_PROPS_RENAME
+    );
+
+    const sortedRailStationsByName = utils.sortObjectsByKey(formattedRailStations, RAIL_STATION_FULL_NAME_KEY);
+    return sortedRailStationsByName;
   }
 
-  static _processRailJourneysBody(railJourneys) {
-    if (railJourneys.ArrayOfObjStationData && railJourneys.ArrayOfObjStationData.objStationData) {
-      const journeys = railJourneys.ArrayOfObjStationData.objStationData;
-      const journeyList = Array.isArray(journeys) ? journeys : [journeys]; // single journey is returned as object, not list
-      return Rail._filterRailProperties(journeyList, settings.railJourneyProperties, settings.railJourneyKeysMap);
-    }
+  return [];
+};
 
-    return [];
-    // return new Error; // ?
+const _processRailJourneysBody = (railJourneysJson) => {
+  if (railJourneysJson.ArrayOfObjStationData && railJourneysJson.ArrayOfObjStationData.objStationData) {
+    const journeys = railJourneysJson.ArrayOfObjStationData.objStationData;
+    const journeyList = Array.isArray(journeys) ? journeys : [journeys]; // single journey is returned as object, not list
+
+    const formattedStationjourneys =  _formatRailProperties(
+      journeyList,
+      RAIL_JOURNEY_PROPS_TO_INCLUDE,
+      RAIL_JOURNEY_PROPS_RENAME
+    );
+    
+    return formattedStationjourneys;
   }
 
-  static _filterRailProperties(dataList, requiredProps, keysMap) {
-    const filteredList = [];
-    const filter = utils.getPropsToFilter(requiredProps);
-    dataList.forEach(item => {
-      const filteredProps = utils.filterByKeys(item, filter);
-      const renamedProps = utils.renameKeys(filteredProps, keysMap);
-      filteredList.push(renamedProps);
-    });
-    return filteredList;
+  return [];
+};
+
+module.exports = class Rail {
+  static getRailStationData(url) {
+    return fetch(url)
+      .then(utils.checkFetchResponseStatus)
+      .then(res => res.text(res))
+      .then(data => utils.parseXmlBody(data))
+      .then(json => _processRailStationsBody(json))
+      .catch(err => {
+        return err;
+      });
   }
 
-  static async getRailData(url, type) {
-    try {
-      const response = await fetch(url);
-      const okResponse = await utils.checkResponseStatus(response);
-      const textResponse = await okResponse.text(okResponse);
-      const parsedResponse = await utils.parseXmlBody(textResponse);
-      if (type === STATIONS) {
-        return Rail._processRailStationsBody(parsedResponse);
-      }
-
-      if (type === JOURNEYS) {
-        return Rail._processRailJourneysBody(parsedResponse);
-      }
-
-      return [];
-
-    } catch(err) {
-      return {error: ErrorHandler.reqError(err)};
-      // send email
-    }
+  static getRailJourneyData(url) {
+    return fetch(url)
+      .then(utils.checkFetchResponseStatus)
+      .then(res => res.text(res))
+      .then(data => utils.parseXmlBody(data))
+      .then(json => _processRailJourneysBody(json))
+      .catch(err => {
+        return err;
+      });
   }
-}
-
-module.exports = Rail;
+};
