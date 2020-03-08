@@ -13,9 +13,9 @@ const parseXmlBody = (xml) => {
     parser.parseString(xml, (error, result) => {
       if (error) {
         reject({
-          xmlParseError: {
-            error: error,
-            message: 'xml parse error'
+          error: {
+            statusText: 'xml parse error',
+            details: error
           }
         });
       }
@@ -25,17 +25,19 @@ const parseXmlBody = (xml) => {
 };
 
 const getPropsToFilter = (obj) => {
-  let propsList = [];
-  Object.keys(obj).forEach(key => {
+  console.log(obj);
+  return Object.keys(obj).filter(key => {
     if (obj[key]) {
-      propsList.push(key);
+      return key;
     }
   });
-  return propsList;
 };
 
 const filterByKeys = (obj, filter) => {
-  return filter.reduce((acc, key) => ({ ...acc, [key]: obj[key]}), {});
+  return filter.reduce((acc, key) => ({
+    ...acc, [key]: obj[key]
+  }), {});
+
   // return Object.keys(obj)
   //   .filter(key => filter.includes(key))
   //   .reduce((acc, key) => ({
@@ -53,17 +55,49 @@ const renameKeys = (obj, keysMapping) => {
     }), {});
 };
 
-const checkResponseStatus = (res) => {
+const checkFetchResponseStatus = (res) => {
   if (res.ok) {
     return res;
   } else {
     return Promise.reject({
-      statusError: {
-        error: res.status,
-        message: res.statusText
+      error: {
+        statusCode: res.status,
+        statusText: res.statusText
       }
     });
   }
+};
+
+const checkRtpiApiResponseErrorCodes = (json) => { // for buseireann
+  // RTPI REST API error codes:
+  // 0 Success
+  // 1 No Results
+  // 2 Missing Parameter
+  // 3 Invalid Parameter
+  // 4 Scheduled Downtime
+  // 5 Unexpected System Error
+  if (json.errorcode == 0 || json.errorcode == 1) {
+    return json;
+  }
+
+  let statusCode;
+  if (json.errorcode == 2 || json.errorcode == 3) {
+    statusCode = 500;
+  } else {
+    statusCode = 502;
+  }
+
+  const details = {
+    rtpiErrorCode: json.errorcode,
+    rtpiErrorMessage: json.errormessage,
+  };
+
+  return Promise.reject({
+    error: {
+      statusCode,
+      details
+    }
+  });
 };
 
 const sortObjectsByKey = (arrObjs, key) => {
@@ -86,7 +120,8 @@ module.exports = {
   getPropsToFilter,
   filterByKeys,
   renameKeys,
-  parseXmlBody,
-  checkResponseStatus,
-  sortObjectsByKey
+  checkFetchResponseStatus,
+  checkRtpiApiResponseErrorCodes,
+  sortObjectsByKey,
+  parseXmlBody
 };

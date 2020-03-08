@@ -1,10 +1,4 @@
 const Utils = require ('./utils');
-// const xml2js = require('xml2js');
-// jest.mock('xml2js', () => {
-//   return {
-//     parseString: jest.fn().mockImplementation(() => 'parsedXml')
-//   };
-// });
 
 describe('Utils.js', () => {
   describe('#sortObjectsByKey', () => {
@@ -138,7 +132,7 @@ describe('Utils.js', () => {
     });
   });
 
-  describe('#checkResposeStatus', () => {
+  describe('#checkFetchResposeStatus', () => {
     it('should return response when response status is ok', () => {
       const mockResponse = {
         ok: true,
@@ -146,7 +140,7 @@ describe('Utils.js', () => {
         statusText: 'OK'
       };
 
-      const result = Utils.checkResponseStatus(mockResponse);
+      const result = Utils.checkFetchResponseStatus(mockResponse);
       expect(result).toBe(mockResponse);
     });
 
@@ -158,28 +152,16 @@ describe('Utils.js', () => {
       };
 
       const expectedError = {
-        statusError: {
-          error: mockResponse.status,
-          message: mockResponse.statusText
+        error: {
+          statusCode: mockResponse.status,
+          statusText: mockResponse.statusText
         }
       };
 
-      const result = Utils.checkResponseStatus(mockResponse);
+      const result = Utils.checkFetchResponseStatus(mockResponse);
       expect.assertions(1);
       return expect(result).rejects.toEqual(expectedError);
 
     });
   });
-
-  // describe('#parseXmlBody', () => {
-  //   it('should return parsed xml', () => {
-  //     // const xml = '<ok></ok>';
-  //     // new xml2js.parseString();
-  //     const spy = jest.spyOn(xml2js, 'parseString');
-  //     const xml = '<ok></ok>';
-  //     Utils.parseXmlBody(xml);
-  //     expect(spy).toHaveBeenCalled();
-
-  //   });
-  // });
 });

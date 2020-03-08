@@ -8,25 +8,21 @@ const cors = require('cors');
 
 const config = require('./config/config');
 const Rail = require('./stations/rail');
-console.log(Rail);
+const ApiErrorResponse = require('./utility/errorHandlers');
 
 const app = express();
 const router = express.Router();
 
-const STATIONS = 'stations';
-const JOURNEYS = 'journeys';
-
-
-
 router.get('/stations', async (req, res) => {
   const railStationsXmlApi = 'http://api.irishrail.ie/realtime/realtime.asmx/getAllStationsXML_WithStationType?StationType=A';
-  // const railStationsXmlApi = 'https://httpstat.us/500';
+  // const railStationsJsonApi = 'https://httpstat.us/502';
 
-  const railStationsData = await Rail.getRailData(railStationsXmlApi, STATIONS);
+  const railStationsData = await Rail.getRailStationData(railStationsXmlApi);
 
   if (railStationsData.error) {
-    let error = railStationsData.error;
-    return res.status(error.resStatus).send(error);
+    let error = new ApiErrorResponse(railStationsData.error);
+    res.status(error.statusCode).send(error);
+    return;
   }
 
   res.send({irishRailStations: railStationsData});
@@ -35,12 +31,14 @@ router.get('/stations', async (req, res) => {
 router.get('/stations/:stationCode', async (req, res) => {
   const stationCode = req.params.stationCode;
   const railJourneysXmlApi = `http://api.irishrail.ie/realtime/realtime.asmx/getStationDataByCodeXML?StationCode=${stationCode}`;
+  // const railJourneysXmlApi = 'https://httpstat.us/404';
 
-  let railJourneysData = await Rail.getRailData(railJourneysXmlApi, JOURNEYS);
+  let railJourneysData = await Rail.getRailJourneyData(railJourneysXmlApi);
 
   if (railJourneysData.error) {
-    let error = railJourneysData.error;
-    return res.status(error.resStatus).send(error);
+    let error = new ApiErrorResponse(railJourneysData.error);
+    res.status(error.statusCode).send(error);
+    return;
   }
 
   res.send({irishRailStationJourneys: railJourneysData});
