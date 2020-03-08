@@ -1,9 +1,9 @@
-const Rail = require('./rail');
-const utils = require('../utility/utils');
+// const Rail = require('./rail');
+// const utils = require('../utility/utils');
 // const fetch = require('node-fetch').default;
 // const ErrorHandler = require('../utility/errorHandlers');
 
-const settings = require('./rail-settings');
+// const settings = require('./rail-settings');
 
 describe('rail.js', () => {
 
