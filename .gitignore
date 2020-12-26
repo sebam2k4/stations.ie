@@ -10,6 +10,7 @@ functions
 
 # dependencies
 /node_modules
+/src/lambda/node_modules
 
 # IDEs and editors
 /.idea
