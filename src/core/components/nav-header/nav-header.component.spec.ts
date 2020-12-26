@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MatSlideToggleModule } from '@angular/material';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NavHeaderComponent } from './nav-header.component';
 import { ThemeService } from 'src/core/services/theme-service/theme.service';
 import { Subject, of } from 'rxjs';

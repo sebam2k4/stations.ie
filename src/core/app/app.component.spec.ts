@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, waitForAsync, ComponentFixture } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
@@ -13,7 +13,7 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let themeService: ThemeService;
 
-  beforeEach(async(() => {
+  beforeEach( waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
@@ -37,19 +37,19 @@ describe('AppComponent', () => {
   });
 
   describe('#constructor', () => {
-    it('should create the app', async(() => {
+    it('should create the app', () => {
       const app = fixture.debugElement.componentInstance;
       expect(app).toBeTruthy();
-    }));
+    });
   });
 
   describe('#onInit', () => {
-    it('should set initial state of isDarkTheme', async () => {
+    it('should set initial state of isDarkTheme', waitForAsync(async () => {
       jest.spyOn(themeService, 'isDarkTheme').mockReturnValue(true);
 
       await component.ngOnInit();
 
       expect(component.isDarkTheme).toBe(true);
-    });
+    }));
   });
 });

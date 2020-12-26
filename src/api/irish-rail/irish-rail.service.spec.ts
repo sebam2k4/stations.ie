@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { IrishRailService } from './irish-rail.service';
@@ -21,7 +21,7 @@ describe('IrishRailService', () => {
     });
   });
 
-  beforeEach(async(() => {
+  beforeEach( waitForAsync(() => {
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(IrishRailService);
   }));
@@ -37,7 +37,7 @@ describe('IrishRailService', () => {
   });
 
   describe('#getAllStations', () => {
-    it('should return converted Observable<IrishRailStation[]> list of irish-rail stations', async(() => {
+    it('should return converted Observable<IrishRailStation[]> list of irish-rail stations', waitForAsync(() => {
       const mockResponseBody = mockIrishRailStationsObject;
 
       service.getAllStations().subscribe((stations: IrishRailStation[]) => {
@@ -59,7 +59,7 @@ describe('IrishRailService', () => {
   });
 
   describe('#getAllJourneys', () => {
-    it('should return converted Observable<IrishRailStationJourney[]> list of station\'s journeys', async(() => {
+    it('should return converted Observable<IrishRailStationJourney[]> list of station\'s journeys', waitForAsync(() => {
       const mockResponseBody = mockIrishRailStationJourneysObject;
       const stationCode = 'CLBAR';
 
