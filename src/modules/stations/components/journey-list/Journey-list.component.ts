@@ -14,8 +14,6 @@ export class JourneyListComponent {
 
   public displayedColumns: string[] = ['destination', 'origin', 'scharrival', 'late', 'exparrival'];
 
-  constructor() { }
-
   public refresh(station: IrishRailStation): void {
     this.refreshJourneys.emit(station);
   }

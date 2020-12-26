@@ -37,7 +37,6 @@
     "@angular/platform-browser-dynamic": "^11.0.5",
     "@angular/router": "^11.0.5",
     "@angular/service-worker": "^11.0.5",
-    "core-js": "^2.5.4",
     "netlify-lambda": "^1.6.3",
     "ngx-mat-select-search": "^3.2.0",
     "rxjs": "~6.5.3",
@@ -52,20 +51,24 @@
     "@angular/cli": "~11.0.5",
     "@angular/compiler-cli": "^11.0.5",
     "@angular/language-service": "^11.0.5",
+    "@angular-eslint/builder": "0.8.0-beta.7",
+    "@angular-eslint/eslint-plugin": "0.8.0-beta.7",
+    "@angular-eslint/eslint-plugin-template": "0.8.0-beta.7",
+    "@angular-eslint/schematics": "^0.8.0-beta.7",
+    "@angular-eslint/template-parser": "0.8.0-beta.7",
     "@types/jest": "~26.0.19",
     "@types/node": "^12.11.1",
-    "codelyzer": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "4.3.0",
+    "@typescript-eslint/parser": "4.3.0",
     "concurrently": "^5.0.2",
-    "eslint": "^6.8.0",
+    "eslint": "^7.6.0",
     "husky": "~3.1.0",
     "jest": "~26.6.3",
-    "jest-junit": "~12.0.0",
     "jest-localstorage-mock": "^2.4.6",
     "jest-preset-angular": "~8.3.2",
     "json-server": "^0.15.1",
     "ts-jest": "^26.4.4",
     "ts-node": "~9.1.1",
-    "tslint": "~6.1.3",
     "typescript": "~4.0.5"
   },
   "jest": {
@@ -78,8 +81,7 @@
       "html"
     ],
     "reporters": [
-      "default",
-      "jest-junit"
+      "default"
     ],
     "collectCoverageFrom": [
       "src/api/**/**.ts",
@@ -114,8 +116,5 @@
         ]
       }
     }
-  },
-  "jest-junit": {
-    "output": "./coverage/junit-report.xml"
   }
 }

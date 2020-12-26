@@ -2,9 +2,9 @@ export class IrishRailStation {
   public stationCode: string;
   public stationFullName: string;
 
-  constructor(IrishRailStation: any) {
-  this.stationCode = IrishRailStation.stationCode;
-  this.stationFullName = IrishRailStation.stationFullName;
+  constructor(irishRailStation: IrishRailStation) {
+  this.stationCode = irishRailStation.stationCode;
+  this.stationFullName = irishRailStation.stationFullName;
   }
 }
 
@@ -22,26 +22,26 @@ export class IrishRailStationJourney {
   public stationCode: string;
   public stationFullName: string;
 
-  constructor(IrishRailStationJourney: any) {
-    this.destination = IrishRailStationJourney.destination;
-    this.destinationTime = IrishRailStationJourney.destinationTime;
-    this.dueIn = IrishRailStationJourney.dueIn;
-    this.expectedArrival = IrishRailStationJourney.expectedArrival;
-    this.expectedDeparture = IrishRailStationJourney.expectedDeparture;
-    this.late = IrishRailStationJourney.late;
-    this.origin = IrishRailStationJourney.origin;
-    this.originTime = IrishRailStationJourney.originTime;
-    this.scheduledArrival = IrishRailStationJourney.scheduledArrival;
-    this.scheduledDeparture = IrishRailStationJourney.scheduledDeparture;
-    this.stationCode = IrishRailStationJourney.stationCode;
-    this.stationFullName = IrishRailStationJourney.stationFullName;
+  constructor(irishRailStationJourney: IrishRailStationJourney) {
+    this.destination = irishRailStationJourney.destination;
+    this.destinationTime = irishRailStationJourney.destinationTime;
+    this.dueIn = irishRailStationJourney.dueIn;
+    this.expectedArrival = irishRailStationJourney.expectedArrival;
+    this.expectedDeparture = irishRailStationJourney.expectedDeparture;
+    this.late = irishRailStationJourney.late;
+    this.origin = irishRailStationJourney.origin;
+    this.originTime = irishRailStationJourney.originTime;
+    this.scheduledArrival = irishRailStationJourney.scheduledArrival;
+    this.scheduledDeparture = irishRailStationJourney.scheduledDeparture;
+    this.stationCode = irishRailStationJourney.stationCode;
+    this.stationFullName = irishRailStationJourney.stationFullName;
   }
 }
 
-export interface ApiIrishRailStationsList {
+export interface ApiirishRailStationsList {
   irishRailStations: IrishRailStation[];
 }
 
-export interface ApiIrishRailStationJourneysList {
+export interface ApiirishRailStationJourneysList {
   irishRailStationJourneys: IrishRailStationJourney[];
 }

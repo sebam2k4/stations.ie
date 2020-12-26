@@ -17,7 +17,7 @@ export class StationsViewComponent implements OnInit {
 
   constructor(private irishRailService: IrishRailService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.fetchIrishRailStations();
   }
 

@@ -60,7 +60,7 @@ describe('IrishRailService', () => {
 
   describe('#getAllJourneys', () => {
     it('should return converted Observable<IrishRailStationJourney[]> list of station\'s journeys', waitForAsync(() => {
-      const mockResponseBody = mockIrishRailStationJourneysObject;
+        const mockResponseBody = mockIrishRailStationJourneysObject;
       const stationCode = 'CLBAR';
 
       service.getAllJourneys(stationCode).subscribe((journeys: IrishRailStationJourney[]) => {

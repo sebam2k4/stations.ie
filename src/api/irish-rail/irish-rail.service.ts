@@ -30,7 +30,7 @@ export class IrishRailService {
     );
   }
 
-  public getAllJourneys(stationCode): Observable<IrishRailStationJourney[]> {
+  public getAllJourneys(stationCode: string): Observable<IrishRailStationJourney[]> {
     return this.httpClient.get<ApiIrishRailStationJourneysList>(`${this.railStationsURL}/${stationCode}`)
     .pipe(
       map(body => body.irishRailStationJourneys.map(stationJourney => new IrishRailStationJourney(stationJourney)))
