@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Angular Material
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -13,7 +12,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 // Stations
-import { ApiIrishRailModule } from '../../api/irish-rail/irish-rail.module';
+import { ApiIrishRailModule } from '../../api/irish-rail/irish-rail.service.module';
 import { StationsViewComponent } from './stations-view.component';
 import { StationsSelectComponent } from './components/select/stations-select.component';
 import { JourneyListComponent } from './components/journey-list/Journey-list.component';
@@ -25,7 +24,6 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
   imports: [
     CommonModule,
     FormsModule,
-    MatToolbarModule,
     MatCardModule,
     MatButtonModule,
     MatSelectModule,

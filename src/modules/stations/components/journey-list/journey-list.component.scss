@@ -29,3 +29,11 @@ td.mat-cell:nth-of-type(odd) {
   margin: 1.5rem auto;
   text-align: center;
 }
+
+@mixin stations-list-theme($theme) {
+  th.mat-header-cell:nth-of-type(odd),
+  td.mat-cell:nth-of-type(odd) {
+    background-color: red;
+  }
+
+}

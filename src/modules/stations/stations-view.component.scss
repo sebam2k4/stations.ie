@@ -1,19 +1,21 @@
+// @import '~@angular/material/theming';
+
 header {
   margin-top: 17%;
   padding: 0 2rem;
   text-align: center;
-}
 
-header h1 {
-  margin-left: 26px;
-  font-weight: 300;
-}
+  h1 {
+    margin-left: 26px;
+    font-weight: 300;
 
-header h1::after {
-  content: " beta";
-  color: #aaa;
-  font-style: italic;
-  font-size: .825rem;
+    &::after {
+      content: " beta";
+      color: #aaa;
+      font-style: italic;
+      font-size: .825rem;
+    }
+  }
 }
 
 .station-selects {
@@ -24,4 +26,7 @@ header h1::after {
 
 .loading-fix {
   margin-top: 9px;
+}
+
+@mixin stations-view-theme($theme) {
 }

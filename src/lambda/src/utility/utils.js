@@ -25,7 +25,6 @@ const parseXmlBody = (xml) => {
 };
 
 const getPropsToFilter = (obj) => {
-  console.log(obj);
   return Object.keys(obj).filter(key => {
     if (obj[key]) {
       return key;

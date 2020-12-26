@@ -1,11 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@import '../sass/material-theme';
 
-html, body {
+$background: map-get($mat-light-theme, background);
+$foreground: map-get($mat-light-theme, foreground);
+
+html {
   height: 100%;
-  color: #444;
+  background-color: mat-color($background, background);
+  color: mat-color($foreground, text);
 }
+
 body {
+  min-height: 100%;
+  background-color: mat-color($background, background);
+  color: mat-color($foreground, text);
   margin: 0;
-  background-color: rgb(240, 240, 240);
   font-family:'Roboto', sans-serif;
 }
+
+
+// https://medium.com/@tomastrajan/the-complete-guide-to-angular-material-themes-4d165a9d24d1

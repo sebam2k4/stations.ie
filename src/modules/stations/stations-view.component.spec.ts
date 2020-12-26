@@ -5,7 +5,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Angular Material
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
@@ -13,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { StationsViewComponent } from './stations-view.component';
 import { IrishRailService } from '../../api/irish-rail/irish-rail.service';
-import { ApiIrishRailModule } from '../../api/irish-rail/irish-rail.module';
+import { ApiIrishRailModule } from '../../api/irish-rail/irish-rail.service.module';
 
 import { StationsSelectComponent } from './components/select/stations-select.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
@@ -29,7 +28,6 @@ describe('StationsViewComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        MatToolbarModule,
         MatCardModule,
         MatButtonModule,
         MatTableModule,

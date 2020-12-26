@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-
-
+import { Component, OnInit } from '@angular/core';
+import { ThemeService } from '../services/theme-service/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -8,18 +7,15 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  public isDarkTheme: boolean;
 
+  constructor(private themeService: ThemeService) { }
 
-  constructor() {
+  async ngOnInit(): Promise<void> {
+    this.isDarkTheme = this.themeService.isDarkTheme();
 
-   }
-
-  ngOnInit() {
-  }
-
-
-
-  OnDestroy() {
-
+    this.themeService.themeChange.subscribe(value => {
+      this.isDarkTheme = value;
+    });
   }
 }

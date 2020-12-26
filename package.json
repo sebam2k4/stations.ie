@@ -16,7 +16,7 @@
     "start:mock": "concurrently --kill-others \"npm run serve:mock-data\" \"npm run start:app -- --configuration=mock\"",
     "start:lambda": "netlify-lambda serve ./src/lambda/src",
     "test": "jest",
-    "test:coverage": "npm test -- --coverage --silent",
+    "test:coverage": "npm test -- --coverage",
     "test:watch": "npm test -- --watch"
   },
   "husky": {
@@ -61,6 +61,7 @@
     "husky": "~3.1.0",
     "jest": "~24.9.0",
     "jest-junit": "~10.0.0",
+    "jest-localstorage-mock": "^2.4.0",
     "jest-preset-angular": "~8.0.0",
     "json-server": "^0.15.1",
     "ts-jest": "^24.2.0",
@@ -82,10 +83,16 @@
       "jest-junit"
     ],
     "collectCoverageFrom": [
-      "src/api/**.ts",
-      "src/core/**.ts",
-      "src/modules/**.ts",
-      "src/lambda/**.js"
+      "src/api/**/**.ts",
+      "src/core/**/**.ts",
+      "src/modules/**/**.ts",
+      "src/lambda/**/**.js",
+      "!**.*.d.ts",
+      "!src/**/*.module.ts",
+      "!src/core/**/*-routing.module.ts",
+      "!src/lambda/**/config.js",
+      "!src/lambda/**/constants.js",
+      "!src/lambda/**/*-constants.js"
     ],
     "roots": [
       "src"
@@ -93,6 +100,9 @@
     "preset": "jest-preset-angular",
     "setupFilesAfterEnv": [
       "./jest.config.ts"
+    ],
+    "setupFiles": [
+      "jest-localstorage-mock"
     ],
     "globals": {
       "ts-jest": {

@@ -1,13 +1,20 @@
-.footer-info {
-  margin-top: 3rem;
-  padding: 1rem;
-  color: #aaa;
-  font-style: italic;
-  font-size: .825rem;
-  text-align: center;
+.content {
+  min-height: 100vh;
+}
 
-  .policy {
-    padding-right: .5rem;
-    padding-left: .5rem;
-  }
+@mixin app-component-theme($theme) {
+  // $a: map-get($theme, foreground);
+
+  // footer {
+  //   color: $a;
+  //   a {
+  //     color: $a;
+  //     &:link, &:hover, &:visited, &:active {
+  //       color: $a;
+  //     }
+  //   }
+  // }
+  // header h1 {
+  //   // color: $color;
+  // }
 }
