@@ -5,13 +5,11 @@
     [disabled]="!stationsList || !stationsList.length"
     [formControl]="stationFormCtrl"
     #singleSelect>
-
     <mat-option>
       <ngx-mat-select-search
         [formControl]="stationFilterCtrl"
         [placeholderLabel]="'Search'"
         [noEntriesFoundLabel]="'No stations found'">
-
       </ngx-mat-select-search>
     </mat-option>
     <mat-option *ngFor="let station of filteredStations | async" [value]="station">
@@ -19,6 +17,6 @@
     </mat-option>
   </mat-select>
   <mat-label style="position:relative;top:-20px;">
-    <mat-icon svgIcon={{icon}} style="font-size: 2.25rem;position:relative;top:13px;"></mat-icon>&nbsp;&nbsp;<i>{{title}}</i>
+    <mat-icon class="icon" svgIcon={{icon}} style="font-size:2.25rem;position:relative;top:13px;"></mat-icon>&nbsp;&nbsp;<i>{{title}}</i>
   </mat-label>
 </mat-form-field>

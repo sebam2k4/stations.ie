@@ -24,10 +24,8 @@
               "src/assets/manifest.json"
             ],
             "styles": [
-              {
-                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
-              },
-              "src/core/styles.scss"
+              "src/core/styles.scss",
+              "src/sass/_material-theme.scss"
             ],
             "scripts": []
           },
