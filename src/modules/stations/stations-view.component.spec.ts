@@ -10,13 +10,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
 import { StationsViewComponent } from './stations-view.component';
 import { IrishRailService } from '../../api/irish-rail/irish-rail.service';
 import { ApiIrishRailModule } from '../../api/irish-rail/irish-rail.service.module';
 
 import { StationsSelectComponent } from './components/select/stations-select.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-import { MatInputModule, MatSelectModule } from '@angular/material';
 import { JourneyListComponent } from './components/journey-list/Journey-list.component';
 
 describe('StationsViewComponent', () => {
@@ -38,8 +38,7 @@ describe('StationsViewComponent', () => {
         RouterTestingModule,
         NgxMatSelectSearchModule,
         ReactiveFormsModule,
-        MatSelectModule,
-        MatInputModule
+        MatSelectModule
       ],
       declarations: [
         StationsViewComponent,

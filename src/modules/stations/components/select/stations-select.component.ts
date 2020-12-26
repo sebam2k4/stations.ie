@@ -47,7 +47,7 @@ export class StationsSelectComponent implements OnInit, OnDestroy {
     return this._stationsList.getValue();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     // Make sure async data from parent is available
     this._stationsList.subscribe((stationsList: IrishRailStation[]) => {
       if (stationsList) {
@@ -64,7 +64,16 @@ export class StationsSelectComponent implements OnInit, OnDestroy {
     });
   }
 
-  protected filterStations() {
+  ngOnDestroy(): void {
+    this._onDestroy.next();
+    this._onDestroy.complete();
+  }
+
+  public getStation(station: IrishRailStation): void {
+    this.changeStation.emit(station);
+  }
+
+  private filterStations() {
     if (!this.stationsList) {
       return;
     }
@@ -82,14 +91,5 @@ export class StationsSelectComponent implements OnInit, OnDestroy {
     this.filteredStations.next(
       this.stationsList.filter(station => station.stationFullName.toLowerCase().indexOf(search) > -1)
     );
-  }
-
-  ngOnDestroy() {
-    this._onDestroy.next();
-    this._onDestroy.complete();
-  }
-
-  public getStation(station: IrishRailStation): void {
-    this.changeStation.emit(station);
   }
 }

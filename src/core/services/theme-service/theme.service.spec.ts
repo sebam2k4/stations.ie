@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ThemeService } from './theme.service';
 import { storageKey } from './theme.service.constants';
@@ -13,7 +13,7 @@ describe(ThemeService.name, () => {
     });
   });
 
-  beforeEach(async(() => {
+  beforeEach( waitForAsync(() => {
     themeService = TestBed.inject(ThemeService);
   }));
 
