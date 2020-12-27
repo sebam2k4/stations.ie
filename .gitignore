@@ -9,8 +9,7 @@ functions
 /out-tsc
 
 # dependencies
-/node_modules
-/src/lambda/node_modules
+**/node_modules
 
 # IDEs and editors
 /.idea
