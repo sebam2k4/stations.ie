@@ -2,7 +2,7 @@ import express from 'express';
 import serverless from 'serverless-http';
 import { Context, APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyStructuredResultV2 } from 'aws-lambda';
 
-import { expressApp } from './common/app';
+import { expressApp } from './app/app';
 
 let cachedHandler: serverless.Handler;
 

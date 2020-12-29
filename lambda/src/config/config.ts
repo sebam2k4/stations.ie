@@ -6,7 +6,7 @@ const localhostUrls = /https?:\/\/localhost:\d{4}/;
 const netlifyDeployPreviewUrls = /\-\-stations\.netlify\.app$/;
 // https://regexr.com/5jblc
 const corsWhiteList = [
-  clientAppUrl, // works, the rest don't :(
+  clientAppUrl,
   clientAppNetlifyUrl,
   localhostUrls,
   netlifyDeployPreviewUrls

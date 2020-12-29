@@ -2,8 +2,8 @@ import express from 'express';
 import bodyparser from 'body-parser';
 import cors from 'cors';
 
-import { CommonRoutesConfig } from './common.routes.config';
-import { IrishRailRoutes } from '../irish-rail/irish-rail.routes.config';
+import { CommonRoutesConfig } from '../routes/base.routes';
+import { IrishRailRoutes } from '../routes/irish-rail/irish-rail.routes';
 import { config } from '../config/config';
 
 const expressApp: express.Application = express();
