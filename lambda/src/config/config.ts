@@ -1,18 +1,21 @@
-const clientAppUrl = 'https://www.stations.ie';
-const clientAppNetlifyUrl = 'https://stations.netlify.app/';
-const localhostUrls = /https?:\/\/localhost:\d{4}/;
-const netlifyDeployPreviewUrls = /^https:\/\/[a-zA-Z0-9-]*--stations\.netlify\.app\/$/;
+import cors from 'cors';
 
+const clientAppUrl = 'https://www.stations.ie';
+const clientAppNetlifyUrl = 'https://stations.netlify.app';
+const localhostUrls = /https?:\/\/localhost:\d{4}/;
+const netlifyDeployPreviewUrls = /\-\-stations\.netlify\.app$/;
+// https://regexr.com/5jblc
 const corsWhiteList = [
-  clientAppUrl,
+  clientAppUrl, // works, the rest don't :(
   clientAppNetlifyUrl,
   localhostUrls,
   netlifyDeployPreviewUrls
 ];
 
-const corsOptions = {
+const corsOptions: cors.CorsOptions = {
   origin: corsWhiteList
 }
+
 const functionsPath = '.netlify/functions';
 const functionName = 'stations';
 
