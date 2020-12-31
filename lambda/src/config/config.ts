@@ -5,6 +5,7 @@ const clientAppNetlifyUrl = 'https://stations.netlify.app';
 const localhostUrls = /https?:\/\/localhost:\d{4}/;
 const netlifyDeployPreviewUrls = /\-\-stations\.netlify\.app$/;
 // https://regexr.com/5jblc
+
 const corsWhiteList = [
   clientAppUrl,
   clientAppNetlifyUrl,
@@ -18,9 +19,9 @@ const corsOptions: cors.CorsOptions = {
 
 const functionsPath = '.netlify/functions';
 const functionName = 'stations';
+const apiPrefix = `/${functionsPath}/${functionName}`;
 
-export const config = {
+export default {
   corsOptions,
-  functionsPath,
-  functionName
+  apiPrefix
 }
