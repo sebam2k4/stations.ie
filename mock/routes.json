@@ -1,7 +1,7 @@
 {
-  "/.netlify/functions/stations-express/stations": "/stations",
-  "/.netlify/functions/stations-express/stations/CLBAR": "/CLBAR",
-  "/.netlify/functions/stations-express/stations/HSTON": "/HSTON",
-  "/.netlify/functions/stations-express/stations/GALWY": "/GALWY",
-  "/.netlify/functions/stations-express/stations/EMPTY": "/EMPTY"
+  "/.netlify/functions/stations/irishrail": "/stations",
+  "/.netlify/functions/stations/irishrail/CLBAR": "/CLBAR",
+  "/.netlify/functions/stations/irishrail/HSTON": "/HSTON",
+  "/.netlify/functions/stations/irishrail/GALWY": "/GALWY",
+  "/.netlify/functions/stations/irishrail/EMPTY": "/EMPTY"
 }

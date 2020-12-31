@@ -1,13 +1,4 @@
-const RAIL_STATION_PROPS_TO_INCLUDE = {
-  StationAlias: false,
-  StationCode: true,
-  StationDesc: true,
-  StationId: false,
-  StationLatitude: false,
-  StationLongitude: false
-};
-
-const RAIL_STATION_PROPS_RENAME = {
+const RAIL_STATION_PROPS_RENAME: Record<string, string> = {
   StationAlias: 'stationAlias',
   StationCode: 'stationCode',
   StationDesc: 'stationFullName',
@@ -16,31 +7,7 @@ const RAIL_STATION_PROPS_RENAME = {
   StationLongitude: 'stationLongitude'
 };
 
-const RAIL_JOURNEY_PROPS_TO_INCLUDE = {
-  Destination: true,
-  Destinationtime: true,
-  Direction: false,
-  Duein: true,
-  Exparrival: true,
-  Expdepart: true,
-  Lastlocation: false,
-  Late: true,
-  Locationtype: false,
-  Origin: true,
-  Origintime: true,
-  Querytime: false,
-  Scharrival: true,
-  Schdepart: true,
-  Servertime: false,
-  Stationcode: true,
-  Stationfullname: true,
-  Status: false,
-  Traincode: false,
-  Traindate: false,
-  Traintype: false
-};
-
-const RAIL_JOURNEY_PROPS_RENAME = {
+const RAIL_JOURNEY_PROPS_RENAME: Record<string, string> = {
   Destination: 'destination',
   Destinationtime: 'destinationTime',
   Direction: 'direction',
@@ -64,9 +31,7 @@ const RAIL_JOURNEY_PROPS_RENAME = {
   Traintype: 'trainType'
 };
 
-module.exports = {
-  RAIL_STATION_PROPS_TO_INCLUDE,
+export const constants = {
   RAIL_STATION_PROPS_RENAME,
-  RAIL_JOURNEY_PROPS_TO_INCLUDE,
   RAIL_JOURNEY_PROPS_RENAME
 };
