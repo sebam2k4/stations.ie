@@ -13,7 +13,7 @@ export abstract class CommonRoutesConfig {
     this.configureRoutes();
   }
 
-  public getApiPath() {
+  public getApiPath(): string {
     return this.apiPath;
   }
 

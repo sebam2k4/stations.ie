@@ -2,7 +2,7 @@ import xml2js, { ParserOptions } from 'xml2js';
 import { Response as fetchResponse } from 'node-fetch';
 import { parseNumbers } from 'xml2js/lib/processors';
 
-import { BaseStationsService } from "./base.service";
+import { BaseStationsService } from './base.service';
 import { Journey, Station } from '../interfaces/common.interfaces';
 import {
   ParsedIrishRailStationXMLEntity,

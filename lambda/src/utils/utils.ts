@@ -34,8 +34,8 @@ const renameKeys = (obj: any, keysMapping: Record<string, string>) => {
 
 const sortObjectsByKey = (arrObjs: any[], key: string) => {
   return arrObjs.sort((a, b) => {
-    let valueA = a[key].toLowerCase();
-    let valueB = b[key].toLowerCase();
+    const valueA = a[key].toLowerCase();
+    const valueB = b[key].toLowerCase();
     if (valueA < valueB) {
       return -1;
     }
