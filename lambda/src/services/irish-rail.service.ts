@@ -74,9 +74,8 @@ export class IrishRailService extends BaseStationsService {
     return [];
   }
 
-
   private async parseXmlResponse(xmlResponse: fetchResponse): 
-    Promise<ParsedIrishRailStationsXMLResponse | ParsedIrishRailStationJourneysXMLResponse> {
+      Promise<ParsedIrishRailStationsXMLResponse | ParsedIrishRailStationJourneysXMLResponse> {
     // add some xml validation or property validation?
     const xmlBody = await xmlResponse.text();
     const jsBody = await parser.parseStringPromise(xmlBody);

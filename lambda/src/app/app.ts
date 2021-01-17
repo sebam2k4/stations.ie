@@ -5,7 +5,6 @@ import cors from 'cors';
 import { CommonRoutesConfig } from '../routes/base.routes';
 import { IrishRailRoutes } from '../routes/irish-rail.routes';
 import config from '../config/config';
-import { IrishRailService } from '../services/irish-rail.service';
 
 const expressApp: express.Application = express();
 const expressRouter: express.Router = Router();
@@ -16,7 +15,7 @@ expressApp.use(bodyparser.json());
 expressRouter.use(cors(config.corsOptions));
 
 routes.push(
-  new IrishRailRoutes(expressRouter, new IrishRailService())
+  new IrishRailRoutes(expressRouter)
 ); // not using routes array
 
 routes.forEach((route) => {
@@ -29,7 +28,7 @@ expressApp.use((req: Request, res: Response, next: NextFunction) => {
   next(err);
 });
 
-/// error handlers
+// error handlers
 
 expressApp.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.log('here')

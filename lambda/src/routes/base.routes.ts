@@ -10,12 +10,12 @@ export abstract class CommonRoutesConfig {
   constructor(public router: Router, public apiPath: string, public service: BaseStationsService) {
     this.route = Router();
     this.router.use(`/${this.apiPath}`, this.route);
-    this.configureRoutes();
+    this.configureRoutes(service);
   }
 
   public getApiPath(): string {
     return this.apiPath;
   }
 
-  abstract configureRoutes(): void;
+  abstract configureRoutes(service: BaseStationsService): void;
 }
