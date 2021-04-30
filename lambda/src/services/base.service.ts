@@ -1,24 +1,6 @@
 import fetch, { RequestInit, Response as fetchResponse } from 'node-fetch';
 
 import { Journey, Station } from '../interfaces/common.interfaces';
-import utils from '../utils/utils';
-
-
-const REQUIRED_STATION_PROPS = ['stationCode', 'stationFullName'];
-const REQUIRED_JOURNEY_PROPS = [
-  'destination',
-  'destinationTime',
-  'dueIn',
-  'expectedArrival',
-  'expectedDeparture',
-  'late',
-  'origin',
-  'originTime',
-  'scheduledArrival',
-  'scheduledDeparture',
-  'stationCode',
-  'stationFullName',
-];
 
 export abstract class BaseStationsService {
   constructor() {
@@ -37,14 +19,6 @@ export abstract class BaseStationsService {
       err['status'] = 502 ;
       throw err;
     }
-  }
-
-  protected filterEntityPropsForStation<T>(responseEntity: T): Station {
-    return utils.filterByKeys(responseEntity, REQUIRED_STATION_PROPS)
-  }
-
-  protected filterEntityPropsForJourney<T>(responseEntity: T): Journey {
-    return utils.filterByKeys(responseEntity, REQUIRED_JOURNEY_PROPS)
   }
 
   public abstract getStations(): Promise<Station[]>;
