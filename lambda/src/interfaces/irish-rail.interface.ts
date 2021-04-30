@@ -1,5 +1,5 @@
 export interface ParsedIrishRailStationsXMLResponse {
-  objStation: ParsedIrishRailStationXMLEntity[]
+  objStation?: ParsedIrishRailStationXMLEntity[]
 }
 
 export interface ParsedIrishRailStationXMLEntity {
@@ -12,7 +12,7 @@ export interface ParsedIrishRailStationXMLEntity {
 }
 
 export interface ParsedIrishRailStationJourneysXMLResponse {
-  objStationData: ParsedIrishRailStationJourneyXMLEntity[];
+  objStationData?: ParsedIrishRailStationJourneyXMLEntity[];
 }
 
 export interface ParsedIrishRailStationJourneyXMLEntity {

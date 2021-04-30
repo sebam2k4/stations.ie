@@ -5,20 +5,17 @@ import { parseNumbers } from 'xml2js/lib/processors';
 import { BaseStationsService } from './base.service';
 import { Journey, Station } from '../interfaces/common.interfaces';
 import {
-  ParsedIrishRailStationXMLEntity,
   ParsedIrishRailStationsXMLResponse,
-  ParsedIrishRailStationJourneyXMLEntity,
   ParsedIrishRailStationJourneysXMLResponse
 } from '../interfaces/irish-rail.interface';
 import utils from '../utils/utils';
-import { constants } from '../constants/irish-rail.constants';
 
 
 const irishRailApi = 'http://api.irishrail.ie/realtime/realtime.asmx';
 const getStationsPath = '/getAllStationsXML_WithStationType';
 const getStationsQueryParam = '?StationType=A';
-const getJourneysPath = '/getStationDataByCodeXML'
-const getJourneysQueryParam = '?StationCode='
+const getJourneysPath = '/getStationDataByCodeXML';
+const getJourneysQueryParam = '?StationCode=';
 
 const irishRailStationsApiUri = `${irishRailApi}${getStationsPath}${getStationsQueryParam}`;
 const irishRailJourneysApiUri = `${irishRailApi}${getJourneysPath}${getJourneysQueryParam}`;
@@ -45,41 +42,57 @@ export class IrishRailService extends BaseStationsService {
   }
 
   public async getStations(): Promise<Station[]> {
-    const response = await this.getResponseFromThirdParty(this.railStationsXmlUri, fetchMethod);
-    const parsedBody = await this.parseXmlResponse(response) as ParsedIrishRailStationsXMLResponse;
+    const xmlResponse = await this.getResponseFromThirdParty(this.railStationsXmlUri, fetchMethod);
+    const parsedResponse = await this.parseXmlResponse(xmlResponse) as ParsedIrishRailStationsXMLResponse;
+    const stations: Station[] = [];
 
-    const processedEntities = parsedBody.objStation.map((entity: ParsedIrishRailStationXMLEntity) => {
-      const renamed = utils.renameKeys(entity, constants.RAIL_STATION_PROPS_RENAME);
-      return this.filterEntityPropsForStation(renamed);
-    });
+    if (parsedResponse.objStation) {
+      const entities = parsedResponse.objStation;
+      entities.forEach(entity => {
+        stations.push(new Station({stationCode: entity.StationCode, stationFullName: entity.StationDesc}));
+      });
 
-    return utils.sortObjectsByKey(processedEntities, 'stationFullName');
+      utils.sortObjectsByKeyNameAscending(stations, 'stationFullName');
+    }
+
+    return stations;
   }
 
   public async getJourneysByStationCode(code: string): Promise<Journey[]> {
-    const response = await this.getResponseFromThirdParty(`${this.railJourneysXmlUri}${code}`, fetchMethod);
-    const parsedBody = await this.parseXmlResponse(response) as ParsedIrishRailStationJourneysXMLResponse;
+    const xmlResponse = await this.getResponseFromThirdParty(`${this.railJourneysXmlUri}${code}`, fetchMethod);
+    const parsedResponse = await this.parseXmlResponse(xmlResponse) as ParsedIrishRailStationJourneysXMLResponse;
+    const journeys: Journey[] = [];
 
-    if (parsedBody.objStationData) {
+    if (parsedResponse.objStationData) {
       // single journey is returned as object, not list. convert to a list in this case
-      const entities = Array.isArray(parsedBody.objStationData) ? parsedBody.objStationData : [parsedBody.objStationData];
-      const processedEntities = entities.map((entity: ParsedIrishRailStationJourneyXMLEntity) => {
-        const renamed = utils.renameKeys(entity, constants.RAIL_JOURNEY_PROPS_RENAME);
-        return this.filterEntityPropsForJourney(renamed);
-      });
+      const entities = Array.isArray(parsedResponse.objStationData) ? parsedResponse.objStationData : [parsedResponse.objStationData];
 
-      return processedEntities;
+      entities.forEach(entity => {
+        journeys.push(new Journey({
+          destination: entity.Destination,
+          destinationTime: entity.Destinationtime,
+          dueIn: entity.Duein,
+          expectedArrival: entity.Exparrival,
+          expectedDeparture: entity.Expdepart,
+          late: entity.Late,
+          origin: entity.Origin,
+          originTime: entity.Origintime,
+          scheduledArrival: entity.Scharrival,
+          scheduledDeparture: entity.Schdepart,
+          stationCode: entity.Stationcode,
+          stationFullName: entity.Stationfullname,
+        }));
+      });
     }
-    
-    return [];
+
+    return journeys;
   }
 
   private async parseXmlResponse(xmlResponse: fetchResponse): 
       Promise<ParsedIrishRailStationsXMLResponse | ParsedIrishRailStationJourneysXMLResponse> {
-    // add some xml validation or property validation?
     const xmlBody = await xmlResponse.text();
-    const jsBody = await parser.parseStringPromise(xmlBody);
+    const jsBody = await parser.parseStringPromise(xmlBody); // returns empty string if no results
 
-    return jsBody;
+    return jsBody ? jsBody : {};
   }
 }
