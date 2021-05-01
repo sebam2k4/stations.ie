@@ -1,5 +1,4 @@
 import express, { NextFunction, Response, Request, Router } from 'express';
-import bodyparser from 'body-parser';
 import cors from 'cors';
 
 import { CommonRoutesConfig } from '../routes/base.routes';
@@ -11,7 +10,7 @@ const expressRouter: express.Router = Router();
 const routes: Array<CommonRoutesConfig> = [];
 
 expressApp.use(config.apiPrefix, expressRouter);
-expressApp.use(bodyparser.json());
+expressApp.use(express.json());
 expressRouter.use(cors(config.corsOptions));
 
 routes.push(
