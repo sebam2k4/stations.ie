@@ -9,7 +9,7 @@
     "build:lambda": "npm run build:lambda:compile && netlify-lambda build ./lambda/dist",
     "build:lambda:compile": "tsc -p ./lambda/tsconfig.json",
     "build:lambda:compile:watch": "npm run build:lambda:compile -- -w --preserveWatchOutput",
-    "build:prod": "ng build --prod && npm run build:lambda",
+    "build:prod": "NODE_ENV=production ng build --prod && npm run build:lambda",
     "lint:app": "ng lint",
     "lint:lambda": "eslint ./lambda/src/**/*.ts",
     "lint": "npm run lint:app && npm run lint:lambda",
