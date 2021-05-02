@@ -1,5 +1,3 @@
-@import '~@angular/material/theming';
-
 th.mat-header-cell,
 td.mat-cell,
 td.mat-cell:first-of-type,
@@ -18,13 +16,6 @@ mat-card-content {
   align-items: center;
   border: solid 1px #eee;
   margin: 2rem 1rem;
-  background-color: #3f51b5;
-  color: #eee;
-}
-
-th.mat-header-cell:nth-of-type(odd),
-td.mat-cell:nth-of-type(odd) {
-  background-color: #eee;
 }
 
 .mat-card.tables {
@@ -46,12 +37,5 @@ td.mat-cell:nth-of-type(odd) {
   margin: 1rem;
   .destination {
     font-weight: 500;
-  }
-}
-
-@mixin stations-list-theme($theme) {
-  th.mat-header-cell:nth-of-type(odd),
-  td.mat-cell:nth-of-type(odd) {
-    background-color: red;
   }
 }

@@ -38,6 +38,7 @@ testem.log
 /typings
 junit.xml
 .bashrc
+/.wip
 
 # System Files
 .DS_Store

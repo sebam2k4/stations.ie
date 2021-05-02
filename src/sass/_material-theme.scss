@@ -1,40 +1,41 @@
 @import '~@angular/material/theming';
 @import './component-themes';
 
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// **Be sure that you only ever include this mixin once!**
 @include mat-core();
 
-$mat-light-primary: mat-palette($mat-indigo);
-$mat-light-accent: mat-palette($mat-light-blue, A200, A100, A400);
-$mat-light-warn: mat-palette($mat-deep-orange, A200);
+// Define the default theme
+$stations-app-primary: mat-palette($mat-indigo);
+$stations-app-secondary: mat-palette($mat-indigo, 100);
+$stations-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$stations-app-theme:   mat-light-theme((
+  color: (
+    primary: $stations-app-primary,
+    accent: $stations-app-accent,
+  )
+));
 
-$mat-light-theme: mat-light-theme(
-  $mat-light-primary,
-  $mat-light-accent,
-  $mat-light-warn
-);
+// Include the default theme styles (color and default density)
+@include angular-material-theme($stations-app-theme);
+@include component-themes($stations-app-theme);
 
-// $light-custom: (color: red, font-size: 1rem, background: black);
-// $light-theme-custom: map-merge($light-theme, $light-custom);
+// Define an alternate dark theme
+$dark-primary: mat-palette($mat-indigo);
+$dark-secondary: mat-palette($mat-indigo, 100);
+$dark-accent:  mat-palette($mat-green, 200, 400);
+$dark-warn:    mat-palette($mat-deep-orange);
+$dark-theme:   mat-dark-theme((
+  color: (
+    primary: $dark-primary,
+    accent: $dark-accent,
+    warn: $dark-warn,
+  )
+));
 
-@include angular-material-theme($mat-light-theme);
-@include component-themes($mat-light-theme);
-
+// Include the dark color styles inside of a block with a CSS class
 .dark-theme {
-  $dark-primary: mat-palette($mat-amber);
-  $dark-accent: mat-palette($mat-yellow, A400, A100, A700);
-  $dark-warn: mat-palette($mat-red);
-  $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
-
-  $dark-custom: (color: blue, font-size: 2rem);
-  $dark-theme-custom: map-merge($dark-theme, $dark-custom);
-
-  $background: map-get($dark-theme, background);
-  $foreground: map-get($dark-theme, foreground);
-
-  color: mat-color($foreground, text);
-  background-color: mat-color($background, background); // use this to use material themes in everything
-  // https://medium.com/@tomastrajan/the-complete-guide-to-angular-material-themes-4d165a9d24d1
-
-  @include angular-material-theme($dark-theme-custom);
-  @include component-themes($dark-theme-custom);
+  @include angular-material-color($dark-theme);
+  @include component-themes($dark-theme);
 }
