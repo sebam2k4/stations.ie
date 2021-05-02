@@ -4,32 +4,36 @@
     Refresh
   </button>
 </div>
-<mat-card-content *ngIf="journeysList && journeysList.length > 0">
-  <table  mat-table [dataSource]="journeysList">
-    <ng-container matColumnDef="destination">
-      <th mat-header-cell *matHeaderCellDef> DEST </th>
-      <td mat-cell *matCellDef="let row">{{row.destination}}</td>
-    </ng-container>
-    <ng-container matColumnDef="origin">
-      <th mat-header-cell *matHeaderCellDef> ORIGIN </th>
-      <td mat-cell *matCellDef="let row">{{row.origin}}</td>
-    </ng-container>
-    <ng-container matColumnDef="scheduled">
-      <th mat-header-cell *matHeaderCellDef> SCHEDULED </th>
-      <td mat-cell *matCellDef="let row">{{ getScheduledTime(row) }}</td>
-    </ng-container>
-    <ng-container matColumnDef="late">
-      <th mat-header-cell *matHeaderCellDef> LATE </th>
-      <td mat-cell *matCellDef="let row">{{row.late}} min.</td>
-    </ng-container>
-    <ng-container matColumnDef="expected">
-      <th mat-header-cell *matHeaderCellDef> EXPECTED </th>
-      <td mat-cell *matCellDef="let row">{{ getExpectedTime(row) }}</td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-</mat-card-content>
+<div *ngIf="journeysList && journeysList.length > 0">
+  <mat-card-content *ngFor="let dest of journeyByDestination | keyvalue">
+    <div class="destination-text-container">Destination: <span class="destination">{{dest.key}}</span></div>
+    <table  mat-table [dataSource]="dest.value">
+      <ng-container matColumnDef="destination">
+        <th mat-header-cell *matHeaderCellDef> DEST </th>
+        <td mat-cell *matCellDef="let row">{{row.destination}}</td>
+      </ng-container>
+      <ng-container matColumnDef="origin">
+        <th mat-header-cell *matHeaderCellDef> ORIGIN </th>
+        <td mat-cell *matCellDef="let row">{{row.origin}}</td>
+      </ng-container>
+      <ng-container matColumnDef="scheduled">
+        <th mat-header-cell *matHeaderCellDef> SCHEDULED </th>
+        <td mat-cell *matCellDef="let row">{{ getScheduledTime(row) }}</td>
+      </ng-container>
+      <ng-container matColumnDef="late">
+        <th mat-header-cell *matHeaderCellDef> LATE </th>
+        <td mat-cell *matCellDef="let row">{{row.late}} min.</td>
+      </ng-container>
+      <ng-container matColumnDef="expected">
+        <th mat-header-cell *matHeaderCellDef> EXPECTED </th>
+        <td mat-cell *matCellDef="let row">{{ getExpectedTime(row) }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card-content>
+</div>
+
 <p style="text-align:center;" *ngIf="journeysList.length === 0">No Journeys found in the next 90 minutes</p>
 
 
