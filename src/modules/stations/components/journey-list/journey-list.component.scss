@@ -1,3 +1,5 @@
+@import '~@angular/material/theming';
+
 th.mat-header-cell,
 td.mat-cell,
 td.mat-cell:first-of-type,
@@ -8,6 +10,16 @@ td.mat-footer-cell:last-of-type,
 th.mat-header-cell:last-of-type {
   padding-left: .5rem;
   padding-right: .5rem;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid 1px #eee;
+  margin: 2rem 1rem;
+  background-color: #3f51b5;
+  color: #eee;
 }
 
 th.mat-header-cell:nth-of-type(odd),
@@ -21,7 +33,7 @@ td.mat-cell:nth-of-type(odd) {
 }
 
 .mat-table {
-  margin: auto;
+  width: 100%;
 }
 
 .card-header {
@@ -30,10 +42,16 @@ td.mat-cell:nth-of-type(odd) {
   text-align: center;
 }
 
+.destination-text-container {
+  margin: 1rem;
+  .destination {
+    font-weight: 500;
+  }
+}
+
 @mixin stations-list-theme($theme) {
   th.mat-header-cell:nth-of-type(odd),
   td.mat-cell:nth-of-type(odd) {
     background-color: red;
   }
-
 }

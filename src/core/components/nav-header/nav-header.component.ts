@@ -22,19 +22,17 @@ export class NavHeaderComponent implements OnInit {
 
   public onLightIconClicked(): void {
     if (this.isDarkTheme) {
-      this.isDarkTheme = false;
-      this.toggleTheme(false);
+      this.setDarkThemeState(false);
     }
   }
 
   public onDarkIconClicked(): void {
     if (!this.isDarkTheme) {
-      this.isDarkTheme = true;
-      this.toggleTheme(true);
+      this.setDarkThemeState(true);
     }
   }
 
-  public toggleTheme(checked: boolean): void {
-    this.themeService.toggleDarkTheme(checked);
+  public setDarkThemeState(state: boolean): void {
+    this.themeService.toggleDarkTheme(state);
   }
 }

@@ -1,5 +1,5 @@
 <div class="container">
   <div class="light" (click)="onLightIconClicked()">Light</div>
-    <mat-slide-toggle [(checked)]="isDarkTheme" (change)="toggleTheme($event.checked)"></mat-slide-toggle>
+    <mat-slide-toggle [(checked)]="isDarkTheme" (change)="setDarkThemeState($event.checked)"></mat-slide-toggle>
   <div class="dark" (click)="onDarkIconClicked()">Dark</div>
 </div>

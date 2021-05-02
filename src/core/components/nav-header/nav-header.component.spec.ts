@@ -42,7 +42,7 @@ describe(NavHeaderComponent.name, () => {
   });
 
   describe('#onInit', () => {
-    it('should set initial state of isDarkTheme', async () => {
+    it('should set initial state of "isDarkTheme"', async () => {
       jest.spyOn(themeService, 'isDarkTheme').mockReturnValue(true);
 
       await component.ngOnInit();
@@ -53,67 +53,69 @@ describe(NavHeaderComponent.name, () => {
 
   describe('#onLightIconClicked', () => {
     beforeEach(() => {
-      jest.spyOn(component, 'toggleTheme');
+      jest.spyOn(component, 'setDarkThemeState');
+      component.ngOnInit();
     });
 
-    it('should change state of isDarkTheme to false', () => {
+    it('should change state of dark theme to false', () => {
       component.isDarkTheme = true;
 
       component.onLightIconClicked();
 
+      expect(component.setDarkThemeState).toHaveBeenCalledWith(false);
       expect(component.isDarkTheme).toBe(false);
-      expect(component.toggleTheme).toHaveBeenCalledWith(false);
     });
 
-    it('should not change state of isDarkTheme', () => {
+    it('should not change state of dark theme', () => {
       component.isDarkTheme = false;
 
       component.onLightIconClicked();
 
+      expect(component.setDarkThemeState).not.toHaveBeenCalled();
       expect(component.isDarkTheme).toBe(false);
-      expect(component.toggleTheme).not.toHaveBeenCalled();
     });
   });
 
   describe('#onDarkIconClicked', () => {
     beforeEach(() => {
-      jest.spyOn(component, 'toggleTheme');
+      jest.spyOn(component, 'setDarkThemeState');
+      component.ngOnInit();
     });
 
-    it('should change state of isDarkTheme to true', () => {
+    it('should change state of dark theme to true', () => {
       component.isDarkTheme = false;
 
       component.onDarkIconClicked();
 
+      expect(component.setDarkThemeState).toHaveBeenCalledWith(true);
       expect(component.isDarkTheme).toBe(true);
-      expect(component.toggleTheme).toHaveBeenCalledWith(true);
     });
 
-    it('should not change state of isDarkTheme', () => {
+    it('should not change state of dark theme', () => {
       component.isDarkTheme = true;
 
       component.onDarkIconClicked();
 
+      expect(component.setDarkThemeState).not.toHaveBeenCalled();
       expect(component.isDarkTheme).toBe(true);
-      expect(component.toggleTheme).not.toHaveBeenCalled();
     });
   });
 
-  describe('#toggleTheme', () => {
+  describe('#setDarkThemeState', () => {
     let toggleDarkThemeSpy;
 
     beforeEach(() => {
       toggleDarkThemeSpy = jest.spyOn(themeService, 'toggleDarkTheme');
     });
 
-    it('should call themeService.toggleDarkTheme with true', () => {
-      component.toggleTheme(true);
+    it('should call "themeService.toggleDarkTheme" with true', () => {
+      component.setDarkThemeState(true);
 
       expect(toggleDarkThemeSpy).toHaveBeenLastCalledWith(true);
     });
 
-    it('should call themeService.toggleDarkTheme with false', () => {
-      component.toggleTheme(false);
+    it('should call "themeService.toggleDarkTheme" with false', () => {
+      component.setDarkThemeState(false);
 
       expect(toggleDarkThemeSpy).toHaveBeenLastCalledWith(false);
     });
