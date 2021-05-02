@@ -1,13 +1,3 @@
 mat-form-field {
   display: block;
 }
-
-@import '~@angular/material/theming';
-
-@mixin stations-select-theme($theme) {
-  $color: map-get($theme, 'color');
-  
-  // .mat-icon {
-  //   color: $color;
-  // }
-}

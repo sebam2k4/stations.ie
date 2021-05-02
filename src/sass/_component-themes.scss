@@ -1,17 +1,6 @@
-@import '../core/app/app.component.scss';
+@import '../modules/stations/components/journey-list/journey-list.component.theme.scss';
 
-@import '../modules/stations/components/select/stations-select.component.scss';
-@import '../modules/stations/components/journey-list/journey-list.component.scss';
-@import '../modules/stations/stations-view.component.scss';
-
-@import '../core/components/nav-header/nav-header.component.scss';
-
+// themes for custom components
 @mixin component-themes($theme) {
-  @include app-component-theme($theme);
-
-  @include stations-list-theme($theme);
-  @include stations-select-theme($theme);
-  @include stations-view-theme($theme);
-
-  @include nav-header-theme($theme);
+  @include journey-list-theme($theme);
 }

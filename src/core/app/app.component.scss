@@ -1,20 +1,3 @@
 .content {
   min-height: 100vh;
 }
-
-@mixin app-component-theme($theme) {
-  // $a: map-get($theme, foreground);
-
-  // footer {
-  //   color: $a;
-  //   a {
-  //     color: $a;
-  //     &:link, &:hover, &:visited, &:active {
-  //       color: $a;
-  //     }
-  //   }
-  // }
-  // header h1 {
-  //   // color: $color;
-  // }
-}

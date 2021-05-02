@@ -1,0 +1,38 @@
+@import '~@angular/material/theming';
+
+@mixin journey-list-color($config-or-theme) {
+  // Extract the color configuration in case a theme has been passed.
+  // This allows consumers to either pass a theme object or a color configuration.
+  $config: mat-get-color-config($config-or-theme);
+  // Extract the palettes you need from the theme definition.
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+  $foreground: map-get($config, foreground);
+  $background: map-get($config, background);
+  
+  // Define any styles affected by the theme.
+  mat-card-content {
+    background-color: mat-color($primary, lighter)
+  }
+
+  th.mat-header-cell:nth-of-type(odd),
+  td:nth-of-type(odd) {
+    background-color: mat-color($primary, lighter);
+
+  }
+}
+
+@mixin journey-list-theme($theme) {
+  // Extracts the color and typography configurations from the theme.
+  $color: mat-get-color-config($theme);
+  // $typography: mat-get-typography-config($theme);
+
+  // Do not generate styles if configurations for individual theming
+  // systems have been explicitly set to `null`.
+  @if $color != null {
+    @include journey-list-color($color);
+  }
+  // @if $typography != null {
+  //   @include journey-list-typography($typography);
+  // }
+}

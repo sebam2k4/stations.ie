@@ -1,21 +1,9 @@
-@import '../sass/material-theme';
-
-$background: map-get($mat-light-theme, background);
-$foreground: map-get($mat-light-theme, foreground);
-
 html {
   height: 100%;
-  background-color: mat-color($background, background);
-  color: mat-color($foreground, text);
 }
 
 body {
   min-height: 100%;
-  background-color: mat-color($background, background);
-  color: mat-color($foreground, text);
   margin: 0;
   font-family:'Roboto', sans-serif;
 }
-
-
-// https://medium.com/@tomastrajan/the-complete-guide-to-angular-material-themes-4d165a9d24d1

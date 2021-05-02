@@ -1,4 +1,4 @@
-<div class="content" [ngClass]="isDarkTheme ? 'dark-theme': 'light-theme'">
+<div class="content mat-app-background" [ngClass]="{'dark-theme': isDarkTheme}">
   <nav-header></nav-header>
   <main>
     <router-outlet></router-outlet>
