@@ -4,7 +4,7 @@ import { Journey, Station } from '../interfaces/common.interfaces';
 
 export abstract class BaseStationsService {
   constructor() {
-    console.log('service');
+    console.log('base service');
   }
 
   protected async getResponseFromThirdParty(apiUri: string, method: string): Promise<fetchResponse> {
@@ -22,5 +22,5 @@ export abstract class BaseStationsService {
   }
 
   public abstract getStations(): Promise<Station[]>;
-  public abstract getJourneysByStationCode(code: string): Promise<Journey[]>;
+  public abstract getJourneysByStationId(id: string, selectedStation?: Station): Promise<Journey[]>;
 }

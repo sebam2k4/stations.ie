@@ -22,9 +22,9 @@ export class IrishRailRoutes extends CommonRoutesConfig {
       });
 
     this.route
-      .get('/:stationCode', async (req: Request, res: Response, next: NextFunction) => {
+      .get('/:stationId', async (req: Request, res: Response, next: NextFunction) => {
         try {
-          this.stationJourneys = await irishRailService.getJourneysByStationCode(req.params.stationCode);
+          this.stationJourneys = await irishRailService.getJourneysByStationId(req.params.stationId);
           res.status(200).send({irishRailStationJourneys: this.stationJourneys});
         } catch (err) {
           console.log('SEB ERROR:', err);
