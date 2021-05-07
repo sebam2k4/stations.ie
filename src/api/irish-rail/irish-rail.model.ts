@@ -1,14 +1,17 @@
 export class IrishRailStation {
-  public stationCode: string;
-  public stationFullName: string;
+  public id: string;
+  public code: string;
+  public fullName: string;
 
   constructor(irishRailStation: IrishRailStation) {
-  this.stationCode = irishRailStation.stationCode;
-  this.stationFullName = irishRailStation.stationFullName;
+  this.id = irishRailStation.id;
+  this.code = irishRailStation.code;
+  this.fullName = irishRailStation.fullName;
   }
 }
 
 export class IrishRailStationJourney {
+  public id: string;
   public destination: string;
   public destinationTime: string;
   public dueIn: string;
@@ -19,10 +22,11 @@ export class IrishRailStationJourney {
   public originTime: string;
   public scheduledArrival: string;
   public scheduledDeparture: string;
-  public stationCode: string;
-  public stationFullName: string;
+  public code: string;
+  public fullName: string;
 
   constructor(irishRailStationJourney: IrishRailStationJourney) {
+    this.id = irishRailStationJourney.id
     this.destination = irishRailStationJourney.destination;
     this.destinationTime = irishRailStationJourney.destinationTime;
     this.dueIn = irishRailStationJourney.dueIn;
@@ -33,8 +37,8 @@ export class IrishRailStationJourney {
     this.originTime = irishRailStationJourney.originTime;
     this.scheduledArrival = irishRailStationJourney.scheduledArrival;
     this.scheduledDeparture = irishRailStationJourney.scheduledDeparture;
-    this.stationCode = irishRailStationJourney.stationCode;
-    this.stationFullName = irishRailStationJourney.stationFullName;
+    this.code = irishRailStationJourney.code;
+    this.fullName = irishRailStationJourney.fullName;
   }
 }
 

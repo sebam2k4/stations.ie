@@ -1,30 +1,35 @@
 export const mockIrishRailStationsObject = {
   irishRailStations: [
     {
-      stationCode: 'CLBAR',
-      stationFullName: 'Castlebar',
+      id: 'CLBAR',
+      code: 'CLBAR',
+      fullName: 'Castlebar',
     },
     {
-      stationCode: 'GALWY',
-      stationFullName: 'Galway',
+      id: 'GALWY',
+      code: 'GALWY',
+      fullName: 'Galway',
     }
   ]
 };
 
 export const mockIrishRailStationsList = [
   {
-    stationCode: 'CLBAR',
-    stationFullName: 'Castlebar',
+    id: 'CLBAR',
+    code: 'CLBAR',
+    fullName: 'Castlebar',
   },
   {
-    stationCode: 'GALWY',
-    stationFullName: 'Galway',
+    id: 'GALWY',
+    code: 'GALWY',
+    fullName: 'Galway',
   }
 ];
 
 export const mockIrishRailStationJourneysObject = {
   irishRailStationJourneys: [
     {
+      id: 'ADMTN',
       destination: 'Newbridge',
       destinationTime: '19:36',
       dueIn: '21',
@@ -35,14 +40,15 @@ export const mockIrishRailStationJourneysObject = {
       originTime: '18:55',
       scheduledArrival: '19:12',
       scheduledDeparture: '19:13',
-      stationCode: 'ADMTN',
-      stationFullName: 'Adamstown',
+      code: 'ADMTN',
+      fullName: 'Adamstown',
     }
   ]
 };
 
 export const mockIrishRailStationJourneysList = [
   {
+    id: 'ADMTN',
     destination: 'Newbridge',
     destinationTime: '19:36',
     dueIn: '21',
@@ -53,7 +59,7 @@ export const mockIrishRailStationJourneysList = [
     originTime: '18:55',
     scheduledArrival: '19:12',
     scheduledDeparture: '19:13',
-    stationCode: 'ADMTN',
-    stationFullName: 'Adamstown',
+    code: 'ADMTN',
+    fullName: 'Adamstown',
   }
 ];
