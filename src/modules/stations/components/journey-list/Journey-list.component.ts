@@ -25,11 +25,11 @@ export class JourneyListComponent implements OnChanges {
   }
 
   private isOrigin(row: IrishRailStationJourney): boolean {
-    return row.origin === row.stationFullName;
+    return row.origin === row.fullName;
   }
 
   private isDestination(row: IrishRailStationJourney): boolean {
-    return row.destination === row.stationFullName;
+    return row.destination === row.fullName;
   }
 
   public getExpectedTime(row: IrishRailStationJourney): string {

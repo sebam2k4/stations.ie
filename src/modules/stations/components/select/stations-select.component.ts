@@ -89,7 +89,7 @@ export class StationsSelectComponent implements OnInit, OnDestroy {
 
     // filter the stations
     this.filteredStations.next(
-      this.stationsList.filter(station => station.stationFullName.toLowerCase().indexOf(search) > -1)
+      this.stationsList.filter(station => station.fullName.toLowerCase().indexOf(search) > -1)
     );
   }
 }

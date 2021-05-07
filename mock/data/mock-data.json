@@ -2,20 +2,24 @@
   "stations": {
     "irishRailStations": [
       {
-        "stationCode": "CLBAR", 
-        "stationFullName": "Castlebar"
+        "id": "CLBAR",
+        "code": "CLBAR", 
+        "fullName": "Castlebar"
       },
       {
-        "stationCode": "GALWY", 
-        "stationFullName": "Galway"
+        "id": "GALWY",
+        "code": "GALWY", 
+        "fullName": "Galway"
       },
       {
-        "stationCode": "HSTON", 
-        "stationFullName": "Dublin Heuston"
+        "id": "HSTON",
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       },
       {
-        "stationCode": "EMPTY", 
-        "stationFullName": "Empty"
+        "id": "EMPTY",
+        "code": "EMPTY", 
+        "fullName": "Empty"
       }
     ]
   },
@@ -25,6 +29,7 @@
   "CLBAR": {
     "irishRailStationJourneys": [
       {
+        "id": "CLBAR",
         "destination": "Dublin Heuston", 
         "destinationTime": "21:29", 
         "dueIn": "85", 
@@ -35,14 +40,15 @@
         "origintime": "18:15", 
         "scheduledArrival": "18:27", 
         "scheduledDeparture": "18:28", 
-        "stationCode": "CLBAR", 
-        "stationfullname": "Castlebar"
+        "code": "CLBAR", 
+        "fullName": "Castlebar"
       }
     ]
   },
   "HSTON": {
     "irishRailStationJourneys": [
       {
+        "id": "HSTON",
         "destination": "Athlone", 
         "destinationTime": "18:45", 
         "dueIn": "7", 
@@ -53,10 +59,11 @@
         "origintime": "17:10", 
         "scheduledArrival": "00:00", 
         "scheduledDeparture": "17:10", 
-        "stationCode": "HSTON", 
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       }, 
       {
+        "id": "HSTON",
         "destination": "Cork",
         "destinationTime": "20:30",
         "dueIn": "57",
@@ -67,10 +74,11 @@
         "origintime": "18:00",
         "scheduledArrival": "00:00",
         "scheduledDeparture": "18:00",
-        "stationCode": "HSTON",
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON",
+        "fullName": "Dublin Heuston"
       }, 
       {
+        "id": "HSTON",
         "destination": "Dublin Heuston", 
         "destinationTime": "17:07", 
         "dueIn": "4", 
@@ -81,10 +89,11 @@
         "origintime": "14:50", 
         "scheduledArrival": "17:07", 
         "scheduledDeparture": "00:00", 
-        "stationCode": "HSTON", 
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       }, 
       {
+        "id": "HSTON",
         "destination": "Dublin Heuston", 
         "destinationTime": "17:34", 
         "dueIn": "33", 
@@ -95,10 +104,11 @@
         "origintime": "16:25", 
         "scheduledArrival": "17:34", 
         "scheduledDeparture": "00:00", 
-        "stationCode": "HSTON", 
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       }, 
       {
+        "id": "HSTON",
         "destination": "Dublin Heuston", 
         "destinationTime": "17:38", 
         "dueIn": "36", 
@@ -109,10 +119,11 @@
         "origintime": "15:05",  
         "scheduledArrival": "17:38", 
         "scheduledDeparture": "00:00", 
-        "stationCode": "HSTON", 
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       }, 
       {
+        "id": "HSTON",
         "destination": "Dublin Heuston", 
         "destinationTime": "17:51", 
         "dueIn": "48", 
@@ -123,10 +134,11 @@
         "origintime": "16:00", 
         "scheduledArrival": "17:51", 
         "scheduledDeparture": "00:00", 
-        "stationCode": "HSTON", 
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       }, 
       {
+        "id": "HSTON",
         "destination": "Dublin Heuston", 
         "destinationTime": "17:57", 
         "dueIn": "49", 
@@ -137,10 +149,11 @@
         "origintime": "15:25", 
         "scheduledArrival": "17:57", 
         "scheduledDeparture": "00:00", 
-        "stationCode": "HSTON", 
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       }, 
       {
+        "id": "HSTON",
         "destination": "Dublin Heuston", 
         "destinationTime": "18:33", 
         "dueIn": "90", 
@@ -151,10 +164,11 @@
         "origintime": "17:25", 
         "scheduledArrival": "18:33", 
         "scheduledDeparture": "00:00", 
-        "stationCode": "HSTON", 
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       }, 
       {
+        "id": "HSTON",
         "destination": "Galway", 
         "destinationTime": "19:57",
         "dueIn": "27", 
@@ -165,10 +179,11 @@
         "origintime": "17:30", 
         "scheduledArrival": "00:00", 
         "scheduledDeparture": "17:30", 
-        "stationCode": "HSTON", 
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       }, 
       {
+        "id": "HSTON",
         "destination": "Galway", 
         "destinationTime": "20:50", 
         "dueIn": "87", 
@@ -179,10 +194,11 @@
         "origintime": "18:30",  
         "scheduledArrival": "00:00", 
         "scheduledDeparture": "18:30",  
-        "stationCode": "HSTON", 
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       }, 
       {
+        "id": "HSTON",
         "destination": "Limerick", 
         "destinationTime": "19:40", 
         "dueIn": "22", 
@@ -193,10 +209,11 @@
         "origintime": "17:25",  
         "scheduledArrival": "00:00", 
         "scheduledDeparture": "17:25",  
-        "stationCode": "HSTON", 
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       }, 
       {
+        "id": "HSTON",
         "destination": "Portlaoise", 
         "destinationTime": "18:38", 
         "dueIn": "29", 
@@ -207,10 +224,11 @@
         "origintime": "17:32",  
         "scheduledArrival": "00:00", 
         "scheduledDeparture": "17:32",  
-        "stationCode": "HSTON", 
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       }, 
       {
+        "id": "HSTON",
         "destination": "Portlaoise", 
         "destinationTime": "19:37", 
         "dueIn": "82", 
@@ -221,10 +239,11 @@
         "origintime": "18:25",  
         "scheduledArrival": "00:00", 
         "scheduledDeparture": "18:25",  
-        "stationCode": "HSTON", 
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       }, 
       {
+        "id": "HSTON",
         "destination": "Tralee", 
         "destinationTime": "20:58", 
         "dueIn": "2", 
@@ -235,10 +254,11 @@
         "origintime": "17:05",  
         "scheduledArrival": "00:00", 
         "scheduledDeparture": "17:05",  
-        "stationCode": "HSTON", 
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       }, 
       {
+        "id": "HSTON",
         "destination": "Waterford", 
         "destinationTime": "19:44", 
         "dueIn": "32", 
@@ -249,10 +269,11 @@
         "origintime": "17:35",  
         "scheduledArrival": "00:00", 
         "scheduledDeparture": "17:35",  
-        "stationCode": "HSTON", 
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       }, 
       {
+        "id": "HSTON",
         "destination": "Westport", 
         "destinationTime": "21:21", 
         "dueIn": "72", 
@@ -263,14 +284,15 @@
         "origintime": "18:15",  
         "scheduledArrival": "00:00", 
         "scheduledDeparture": "18:15",  
-        "stationCode": "HSTON", 
-        "stationfullname": "Dublin Heuston"
+        "code": "HSTON", 
+        "fullName": "Dublin Heuston"
       }
     ]
   },
   "GALWY": {
     "irishRailStationJourneys": [
       {
+        "id": "GALWY",
         "destination": "Athlone", 
         "destinationTime": "19:39", 
         "dueIn": "65", 
@@ -281,10 +303,11 @@
         "origintime": "18:10",  
         "scheduledArrival": "00:00", 
         "scheduledDeparture": "18:10",  
-        "stationCode": "GALWY", 
-        "stationfullname": "Galway"
+        "code": "GALWY", 
+        "fullName": "Galway"
       }, 
       {
+        "id": "GALWY",
         "destination": "Dublin Heuston", 
         "destinationTime": "19:54", 
         "dueIn": "15", 
@@ -295,10 +318,11 @@
         "origintime": "17:20",  
         "scheduledArrival": "00:00", 
         "scheduledDeparture": "17:20",  
-        "stationCode": "GALWY", 
-        "stationfullname": "Galway"
+        "code": "GALWY", 
+        "fullName": "Galway"
       }, 
       {
+        "id": "GALWY",
         "destination": "Galway", 
         "destinationTime": "17:15", 
         "dueIn": "10", 
@@ -309,10 +333,11 @@
         "origintime": "16:55",  
         "scheduledArrival": "17:15", 
         "scheduledDeparture": "00:00",  
-        "stationCode": "GALWY", 
-        "stationfullname": "Galway"
+        "code": "GALWY", 
+        "fullName": "Galway"
       }, 
       {
+        "id": "GALWY",
         "destination": "Galway", 
         "destinationTime": "17:58", 
         "dueIn": "53", 
@@ -323,10 +348,11 @@
         "origintime": "15:35",  
         "scheduledArrival": "17:58", 
         "scheduledDeparture": "00:00",  
-        "stationCode": "GALWY", 
-        "stationfullname": "Galway"
+        "code": "GALWY", 
+        "fullName": "Galway"
       }, 
       {
+        "id": "GALWY",
         "destination": "Limerick Junction", 
         "destinationTime": "20:23", 
         "dueIn": "45", 
@@ -337,8 +363,8 @@
         "origintime": "17:50",  
         "scheduledArrival": "00:00", 
         "scheduledDeparture": "17:50",  
-        "stationCode": "GALWY", 
-        "stationfullname": "Galway"
+        "code": "GALWY", 
+        "fullName": "Galway"
       }
     ]   
   }

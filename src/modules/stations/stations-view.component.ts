@@ -24,7 +24,7 @@ export class StationsViewComponent implements OnInit {
   public fetchIrishRailStationJourneys(station: IrishRailStation): void {
     this.selectedStation = station;
     this.loading = true;
-    this.irishRailService.getAllJourneys(station.stationCode)
+    this.irishRailService.getAllJourneys(station.code)
       .toPromise()
       .then((stationJourneys: IrishRailStationJourney[]) => {
         this.irishRailStationJourneysList = stationJourneys;
